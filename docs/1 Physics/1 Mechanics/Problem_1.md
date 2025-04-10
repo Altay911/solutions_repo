@@ -48,6 +48,8 @@ plt.legend()
 plt.grid()
 plt.show()
 
+
+
 # Discussion
 print("The maximum range occurs at 45 degrees, as expected from the analytical solution.")
 
