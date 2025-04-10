@@ -172,6 +172,87 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h1 id="forced-damped-pendulum-simulation">Forced Damped Pendulum Simulation</h1>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp</p>
+<h1 id="constants-and-parameters">Constants and Parameters</h1>
+<p>g = 9.81        # gravitational acceleration (m/s^2)
+L = 1.0         # length of pendulum (m)
+b = 0.5         # damping coefficient
+A = 1.2         # driving force amplitude
+omega_d = 2.0   # driving frequency (rad/s)</p>
+<h1 id="time-span">Time span</h1>
+<p>t_span = (0, 50)
+t_eval = np.linspace(t_span[0], t_span[1], 10000)</p>
+<h1 id="initial-conditions-theta-omega">Initial conditions: [theta, omega]</h1>
+<p>y0 = [0.2, 0.0]</p>
+<h1 id="differential-equation-for-the-forced-damped-pendulum">Differential equation for the forced damped pendulum</h1>
+<p>def pendulum_ode(t, y):
+    theta, omega = y
+    dtheta_dt = omega
+    domega_dt = -b * omega - (g / L) * np.sin(theta) + A * np.sin(omega_d * t)
+    return [dtheta_dt, domega_dt]</p>
+<h1 id="solve-ode">Solve ODE</h1>
+<p>sol = solve_ivp(pendulum_ode, t_span, y0, t_eval=t_eval, method='RK45')</p>
+<h1 id="plot-theta-vs-time">Plot theta vs time</h1>
+<p>plt.figure(figsize=(10, 5))
+plt.plot(sol.t, sol.y[0])
+plt.title('Forced Damped Pendulum: Angular Displacement vs Time')
+plt.xlabel('Time (s)')
+plt.ylabel('Theta (rad)')
+plt.grid(True)
+plt.show()</p>
+<h1 id="phase-portrait">Phase Portrait</h1>
+<p>plt.figure(figsize=(6, 6))
+plt.plot(sol.y[0], sol.y[1], lw=0.5)
+plt.title('Phase Portrait')
+plt.xlabel('Theta (rad)')
+plt.ylabel('Angular Velocity (rad/s)')
+plt.grid(True)
+plt.show()</p>
+<h1 id="poincare-section-stroboscopic-map">Poincaré Section (stroboscopic map)</h1>
+<p>t_poincare = np.arange(0, t_span[1], 2 * np.pi / omega_d)
+poincare_indices = [np.argmin(np.abs(sol.t - tp)) for tp in t_poincare if tp &lt;= sol.t[-1]]
+theta_poincare = sol.y[0][poincare_indices]
+omega_poincare = sol.y[1][poincare_indices]</p>
+<p>plt.figure(figsize=(6, 6))
+plt.scatter(theta_poincare, omegapoincare := omega_poincare, s=1)
+plt.title('Poincaré Section')
+plt.xlabel('Theta (rad)')
+plt.ylabel('Angular Velocity (rad/s)')
+plt.grid(True)
+plt.show()</p>
+<h1 id="theory-section">Theory Section</h1>
+<p>"""
+Theoretical Background:
+The forced damped pendulum is governed by the second-order nonlinear differential equation:
+    θ'' + bθ' + (g/L)sin(θ) = A sin(ω_d t)
+Where:
+- b is the damping coefficient
+- A is the amplitude of the driving force
+- ω_d is the driving frequency
+- g is gravitational acceleration
+- L is the length of the pendulum</p>
+<p>For small-angle approximation (θ ≈ sin(θ)), the equation simplifies to a linear differential equation:
+    θ'' + bθ' + (g/L)θ = A sin(ω_d t)</p>
+<p>This equation resembles a driven harmonic oscillator and exhibits resonance when the driving frequency is near the system's natural frequency √(g/L).</p>
+<p>As parameters like A, b, and ω_d vary, the system can show:
+- Periodic behavior
+- Quasiperiodic orbits
+- Chaotic dynamics</p>
+<p>Applications:
+- Suspension bridges under oscillatory load
+- Driven RLC electrical circuits
+- Human biomechanical gait modeling</p>
+<p>Limitations:
+- No consideration for noise or complex driving functions
+- Assumes point mass pendulum and ideal hinge</p>
+<p>Extensions:
+- Add noise terms or nonlinear damping
+- Study bifurcation diagrams for chaos threshold
+- Consider time-dependent damping or frequency
+"""</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
