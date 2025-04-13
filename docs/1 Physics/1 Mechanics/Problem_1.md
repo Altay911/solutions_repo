@@ -56,4 +56,4 @@ print("The maximum range occurs at 45 degrees, as expected from the analytical s
 ![download](https://github.com/user-attachments/assets/94ddaa11-82e6-40bd-9acf-74ff3bb98d0d)
 ![download](https://github.com/user-attachments/assets/97208085-cb8e-4816-84a3-a8cfc8cb7c23)
 
-sssb
+IDK WHAT HAPPENED BUT I GUESS IT STARTED TO WORK?
