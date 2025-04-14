@@ -172,6 +172,94 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Interference occurs when waves from different sources overlap, forming new patterns on the surface of a medium, such as water. These patterns can illustrate how waves combine in various ways: constructive interference (wave reinforcement) or destructive interference (wave cancellation). Studying these patterns helps us understand fundamental wave behaviors, such as the relationship between wave phase and the effect of multiple sources.</p>
+<p>This problem involves analyzing the interference patterns formed on the water surface due to the superposition of waves emitted from point sources placed at the vertices of a regular polygon. By exploring this phenomenon, we gain insight into wave interactions and their real-world applications.</p>
+<hr/>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<h3 id="wave-equation">Wave Equation</h3>
+<p>A circular wave on a water surface, originating from a point source, is described by the following equation:</p>
+<div class="arithmatex">\[
+\psi(\mathbf{r}, t) = A \cdot \cos(k r - \omega t + \phi)
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( \psi(\mathbf{r}, t) \)</span> is the displacement of the water surface at point <span class="arithmatex">\( \mathbf{r} \)</span> and time <span class="arithmatex">\( t \)</span>
+- <span class="arithmatex">\( A \)</span> is the amplitude of the wave
+- <span class="arithmatex">\( k \)</span> is the wave number, related to the wavelength <span class="arithmatex">\( \lambda \)</span>, where <span class="arithmatex">\( k = \frac{2\pi}{\lambda} \)</span>
+- <span class="arithmatex">\( \omega \)</span> is the angular frequency, related to the frequency <span class="arithmatex">\( f \)</span>, where <span class="arithmatex">\( \omega = 2\pi f \)</span>
+- <span class="arithmatex">\( r \)</span> is the distance from the source to the observation point
+- <span class="arithmatex">\( \phi \)</span> is the initial phase of the wave</p>
+<h3 id="superposition-principle">Superposition Principle</h3>
+<p>The principle of superposition states that when multiple waves overlap, the resulting displacement is the sum of the displacements from all individual waves. Thus, for <span class="arithmatex">\( N \)</span> sources located at the vertices of a regular polygon, the total displacement at a point on the surface is:</p>
+<div class="arithmatex">\[
+\Psi(\mathbf{r}, t) = \sum_{i=1}^{N} A_i \cdot \cos(k r_i - \omega t + \phi_i)
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( N \)</span> is the number of sources (vertices of the polygon)
+- <span class="arithmatex">\( A_i \)</span>, <span class="arithmatex">\( r_i \)</span>, and <span class="arithmatex">\( \phi_i \)</span> are the amplitude, distance, and initial phase of the wave from the <span class="arithmatex">\( i^{th} \)</span> source, respectively.</p>
+<h3 id="interference-patterns">Interference Patterns</h3>
+<ul>
+<li><strong>Constructive Interference</strong>: Occurs when the waves from different sources are in phase, leading to wave reinforcement and higher displacement.</li>
+<li><strong>Destructive Interference</strong>: Occurs when the waves are out of phase, leading to wave cancellation and lower displacement.</li>
+</ul>
+<p>The interference pattern depends on the relative phase and position of the sources and the observation point.</p>
+<hr/>
+<h2 id="2-simulation-and-visualization">2. Simulation and Visualization</h2>
+<h3 id="steps-to-implement">Steps to Implement:</h3>
+<ol>
+<li><strong>Choose a Regular Polygon</strong>: For simplicity, we will use a square (4 vertices).</li>
+<li><strong>Position the Sources</strong>: The point sources are placed at the vertices of the square.</li>
+<li><strong>Write the Wave Equations</strong>: For each source, the wave will follow the equation described above.</li>
+<li><strong>Apply Superposition</strong>: Sum the contributions from all sources at each point on the water surface.</li>
+<li><strong>Analyze the Resulting Pattern</strong>: Observe regions of constructive and destructive interference.</li>
+</ol>
+<hr/>
+<h2 id="3-python-implementation">3. Python Implementation</h2>
+<p>Below is a Python script that simulates the interference pattern of waves emitted from the vertices of a square (or any regular polygon). It uses the <strong>matplotlib</strong> library for visualization and <strong>numpy</strong> for numerical calculations.</p>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>A = 1        # Amplitude of the waves
+k = 2 * np.pi / 1.0  # Wave number (assuming wavelength = 1 meter)
+omega = 2 * np.pi  # Angular frequency (assuming frequency = 1 Hz)
+phi = 0      # Initial phase of the waves</p>
+<h1 id="set-up-the-grid-for-the-water-surface">Set up the grid for the water surface</h1>
+<p>x_max, y_max = 10, 10  # Size of the water surface grid (10m x 10m)
+x = np.linspace(-x_max, x_max, 500)
+y = np.linspace(-y_max, y_max, 500)
+X, Y = np.meshgrid(x, y)</p>
+<h1 id="define-the-number-of-sources-and-their-positions-for-a-square">Define the number of sources and their positions for a square</h1>
+<p>N_sources = 4  # Number of sources (vertices of a square)
+radius = 5     # Distance from the center to the sources</p>
+<h1 id="positions-of-the-sources-vertices-of-a-square">Positions of the sources (vertices of a square)</h1>
+<p>angles = np.linspace(0, 2 * np.pi, N_sources, endpoint=False)
+source_positions = np.array([radius * np.cos(angles), radius * np.sin(angles)])</p>
+<h1 id="superposition-of-waves-from-all-sources">Superposition of waves from all sources</h1>
+<p>def wave_sum(X, Y, source_positions, A, k, omega, phi):
+    total_displacement = np.zeros(X.shape)</p>
+<pre><code>for i in range(N_sources):
+    # Calculate distance from each source to each point on the grid
+    r = np.sqrt((X - source_positions[0, i])**2 + (Y - source_positions[1, i])**2)
+
+    # Calculate the wave displacement for this source
+    displacement = A * np.cos(k * r - omega * 0 + phi)  # Assuming t = 0 for simplicity
+    total_displacement += displacement  # Sum the displacements
+
+return total_displacement
+</code></pre>
+<h1 id="calculate-the-wave-displacement-on-the-water-surface">Calculate the wave displacement on the water surface</h1>
+<p>Z = wave_sum(X, Y, source_positions, A, k, omega, phi)</p>
+<h1 id="plotting-the-interference-pattern">Plotting the interference pattern</h1>
+<p>plt.figure(figsize=(8, 6))
+plt.contourf(X, Y, Z, cmap='seismic', levels=np.linspace(-4, 4, 50))
+plt.colorbar(label='Displacement')
+plt.title('Interference Pattern of Waves from Square Sources')
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.show()</p>
+<p>YEPP</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
