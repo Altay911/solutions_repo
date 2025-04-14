@@ -1,42 +1,36 @@
-function calculate_equivalent_resistance(graph):
-    while number of nodes in graph > 1:
+function calculateEquivalentResistance(graph):
+    while graph has more than 1 node:
         for each edge in graph:
             node1, node2 = edge
-            if is_series(node1, node2, graph):
-                R1 = graph[node1][node2].resistance
-                R2 = graph[node2][neighbors(node2)[0]].resistance
+            if nodes node1 and node2 are in series:
+                R1 = getResistance(node1, node2)
+                R2 = getResistance(node2, getNeighbor(node2))
                 R_eq = R1 + R2
-                replace_series_connection(node1, neighbors(node2)[0], R_eq, graph)
-            else if is_parallel(node1, node2, graph):
-                R1 = graph[node1][node2].resistance
-                R2 = graph[node2][neighbors(node2)[0]].resistance
+                mergeNodes(node1, getNeighbor(node2), R_eq)
+            else if nodes node1 and node2 are in parallel:
+                R1 = getResistance(node1, node2)
+                R2 = getResistance(node2, getNeighbor(node2))
                 R_eq = 1 / (1/R1 + 1/R2)
-                replace_parallel_connection(node1, neighbors(node2)[0], R_eq, graph)
-    return graph[remaining_node].resistance
+                mergeNodes(node1, getNeighbor(node2), R_eq)
+    return getFinalResistance(graph)
 
-function is_series(node1, node2, graph):
-    return len(neighbors(node1)) == 1 and len(neighbors(node2)) == 1
+function getResistance(node1, node2):
+    return resistance between node1 and node2
 
-function is_parallel(node1, node2, graph):
-    return common_neighbor_exists(node1, node2, graph)
+function getNeighbor(node):
+    return a neighboring node of the given node
 
-function replace_series_connection(node1, node2, R_eq, graph):
-    merge_nodes(node1, node2, R_eq, graph)
-    remove_old_edges(node1, node2, graph)
+function mergeNodes(node1, node2, R_eq):
+    create a new node by merging node1 and node2
+    update the graph with new node and resistance R_eq
+    remove original nodes and their resistances
 
-function replace_parallel_connection(node1, node2, R_eq, graph):
-    merge_nodes(node1, node2, R_eq, graph)
-    remove_old_edges(node1, node2, graph)
+function nodes node1 and node2 are in series:
+    check if both nodes are connected with no branches in between
 
-function merge_nodes(node1, node2, R_eq, graph):
-    new_node = combine(node1, node2)
-    graph.add_node(new_node)
-    graph.add_edge(node1, new_node, R_eq)
-    graph.add_edge(new_node, neighbors(node2)[0], graph[node2][neighbors(node2)[0]].resistance)
+function nodes node1 and node2 are in parallel:
+    check if both nodes share a common neighbor in the graph
 
-function remove_old_edges(node1, node2, graph):
-    graph.remove_edge(node1, node2)
-    graph.remove_edge(node2, neighbors(node2)[0])
-
-function common_neighbor_exists(node1, node2, graph):
-    return exists(common neighbor between node1 and node2 in graph)
+function getFinalResistance(graph):
+    return the resistance of the final simplified circuit
+idk
