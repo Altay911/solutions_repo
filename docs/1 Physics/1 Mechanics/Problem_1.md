@@ -1,6 +1,8 @@
-# Investigating the Range as a Function of the Angle of Projection
+# PROBLEM 1 
 
-## Motivation
+
+## Motivation Investigating the Range as a Function of the Angle of Projection
+
 
 Projectile motion, while seemingly simple, offers a rich playground for exploring fundamental principles of physics. The basic idea is straightforward: analyze how the **range** of a projectile depends on its **angle of projection**. Yet, beneath this simplicity lies a complex and versatile framework.
 
@@ -114,4 +116,4 @@ plt.grid(True)
 plt.show()
 
 
-TRY AGAIN TRY AGAIN
+TRY AGAIN
