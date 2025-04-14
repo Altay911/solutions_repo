@@ -77,8 +77,6 @@
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
-<ul class="current">
-</ul>
 </li>
 </ul>
 </li>
@@ -171,40 +169,56 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
-<p>import networkx as nx
-import numpy as np</p>
-<h1 id="function-to-calculate-the-equivalent-resistance-for-series-connection">Function to calculate the equivalent resistance for series connection</h1>
-<p>def series_resistance(resistances):
-    return sum(resistances)</p>
-<h1 id="function-to-calculate-the-equivalent-resistance-for-parallel-connection">Function to calculate the equivalent resistance for parallel connection</h1>
-<p>def parallel_resistance(resistances):
-    return 1 / sum(1 / np.array(resistances))</p>
-<h1 id="function-to-simplify-the-circuit-graph-by-reducing-series-and-parallel-combinations">Function to simplify the circuit graph by reducing series and parallel combinations</h1>
-<p>def simplify_graph(circuit_graph):
-    for node1, node2, data in list(circuit_graph.edges(data=True)):
-        resistance = data['resistance']
-        # Check if the two nodes are in series or parallel and simplify accordingly
-        if circuit_graph.has_edge(node1, node2):
-            # Simplify the series or parallel connection
-            pass  # Logic to simplify series or parallel connections</p>
-<pre><code>return circuit_graph
+<p>// Equivalent Resistance Calculation Using Graph Theory</p>
+<p>// A function to calculate the equivalent resistance of a circuit graph
+// where graph represents a network of resistors</p>
+<p>// Example structure for graph: graph[node] = {neighbor1: resistance1, neighbor2: resistance2, ...}</p>
+<p>function calculate_equivalent_resistance(graph) {
+    // Step 1: Iterate over the graph while there is more than one node
+    while (graph.size() &gt; 1) {
+        for (each pair of connected nodes (node1, node2)) {
+            // Step 2: Check if the two resistors are in series
+            if (is_series(graph, node1, node2)) {
+                // Combine the resistors in series: R_eq = R1 + R2
+                R_eq = graph[node1][node2] + graph[node2][node1];
+                // Remove the pair and add the equivalent resistor
+                remove_resistor(graph, node1, node2);
+                add_resistor(graph, node1, node2, R_eq);
+            }
+            // Step 3: Check if the two resistors are in parallel
+            else if (is_parallel(graph, node1, node2)) {
+                // Combine the resistors in parallel: 1/R_eq = 1/R1 + 1/R2
+                R_eq = 1 / (1 / graph[node1][node2] + 1 / graph[node2][node1]);
+                // Remove the pair and add the equivalent resistor
+                remove_resistor(graph, node1, node2);
+                add_resistor(graph, node1, node2, R_eq);
+            }
+        }
+    }</p>
+<pre><code>// Step 4: Once reduced to one node, return the equivalent resistance
+return graph[remaining_node][remaining_node];
 </code></pre>
-<h1 id="main-function-to-calculate-the-equivalent-resistance-of-the-circuit">Main function to calculate the equivalent resistance of the circuit</h1>
-<p>def calculate_equivalent_resistance(circuit_graph):
-    while len(circuit_graph.nodes) &gt; 1:
-        circuit_graph = simplify_graph(circuit_graph)</p>
-<pre><code>return circuit_graph
-</code></pre>
-<h1 id="example-build-a-sample-circuit-graph-with-resistors-between-nodes">Example: Build a sample circuit graph with resistors between nodes</h1>
-<p>G = nx.Graph()</p>
-<h1 id="add-edges-representing-resistors-between-nodes">Add edges representing resistors between nodes</h1>
-<p>G.add_edge('A', 'B', resistance=10)  # Resistor of 10 Ohms between A and B
-G.add_edge('B', 'C', resistance=5)   # Resistor of 5 Ohms between B and C
-G.add_edge('C', 'D', resistance=10)  # Resistor of 10 Ohms between C and D</p>
-<h1 id="calculate-equivalent-resistance">Calculate equivalent resistance</h1>
-<p>equivalent_resistance = calculate_equivalent_resistance(G)
-print(f"Equivalent Resistance: {equivalent_resistance} Ohms")</p>
+<p>}</p>
+<p>// Helper function to check if two resistors are in series
+function is_series(graph, node1, node2) {
+    // Resistors are in series if they are connected with no other junction
+    return (graph[node1][node2] &amp;&amp; graph[node2][node1]);
+}</p>
+<p>// Helper function to check if two resistors are in parallel
+function is_parallel(graph, node1, node2) {
+    // Resistors are in parallel if they are connected to the same pair of nodes
+    return (graph[node1][node2] &amp;&amp; graph[node2][node1]);
+}</p>
+<p>// Helper function to remove a resistor from the graph
+function remove_resistor(graph, node1, node2) {
+    delete graph[node1][node2];
+    delete graph[node2][node1];
+}</p>
+<p>// Helper function to add a resistor to the graph
+function add_resistor(graph, node1, node2, resistance) {
+    graph[node1][node2] = resistance;
+    graph[node2][node1] = resistance;
+}</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
