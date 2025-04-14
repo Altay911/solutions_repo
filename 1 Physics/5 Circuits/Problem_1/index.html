@@ -169,41 +169,36 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<p>function calculate_equivalent_resistance(graph):
-    while number of nodes in graph &gt; 1:
+<p>function calculateEquivalentResistance(graph):
+    while graph has more than 1 node:
         for each edge in graph:
             node1, node2 = edge
-            if is_series(node1, node2, graph):
-                R1 = graph[node1][node2].resistance
-                R2 = graph[node2][neighbors(node2)[0]].resistance
+            if nodes node1 and node2 are in series:
+                R1 = getResistance(node1, node2)
+                R2 = getResistance(node2, getNeighbor(node2))
                 R_eq = R1 + R2
-                replace_series_connection(node1, neighbors(node2)[0], R_eq, graph)
-            else if is_parallel(node1, node2, graph):
-                R1 = graph[node1][node2].resistance
-                R2 = graph[node2][neighbors(node2)[0]].resistance
+                mergeNodes(node1, getNeighbor(node2), R_eq)
+            else if nodes node1 and node2 are in parallel:
+                R1 = getResistance(node1, node2)
+                R2 = getResistance(node2, getNeighbor(node2))
                 R_eq = 1 / (1/R1 + 1/R2)
-                replace_parallel_connection(node1, neighbors(node2)[0], R_eq, graph)
-    return graph[remaining_node].resistance</p>
-<p>function is_series(node1, node2, graph):
-    return len(neighbors(node1)) == 1 and len(neighbors(node2)) == 1</p>
-<p>function is_parallel(node1, node2, graph):
-    return common_neighbor_exists(node1, node2, graph)</p>
-<p>function replace_series_connection(node1, node2, R_eq, graph):
-    merge_nodes(node1, node2, R_eq, graph)
-    remove_old_edges(node1, node2, graph)</p>
-<p>function replace_parallel_connection(node1, node2, R_eq, graph):
-    merge_nodes(node1, node2, R_eq, graph)
-    remove_old_edges(node1, node2, graph)</p>
-<p>function merge_nodes(node1, node2, R_eq, graph):
-    new_node = combine(node1, node2)
-    graph.add_node(new_node)
-    graph.add_edge(node1, new_node, R_eq)
-    graph.add_edge(new_node, neighbors(node2)[0], graph[node2][neighbors(node2)[0]].resistance)</p>
-<p>function remove_old_edges(node1, node2, graph):
-    graph.remove_edge(node1, node2)
-    graph.remove_edge(node2, neighbors(node2)[0])</p>
-<p>function common_neighbor_exists(node1, node2, graph):
-    return exists(common neighbor between node1 and node2 in graph)</p>
+                mergeNodes(node1, getNeighbor(node2), R_eq)
+    return getFinalResistance(graph)</p>
+<p>function getResistance(node1, node2):
+    return resistance between node1 and node2</p>
+<p>function getNeighbor(node):
+    return a neighboring node of the given node</p>
+<p>function mergeNodes(node1, node2, R_eq):
+    create a new node by merging node1 and node2
+    update the graph with new node and resistance R_eq
+    remove original nodes and their resistances</p>
+<p>function nodes node1 and node2 are in series:
+    check if both nodes are connected with no branches in between</p>
+<p>function nodes node1 and node2 are in parallel:
+    check if both nodes share a common neighbor in the graph</p>
+<p>function getFinalResistance(graph):
+    return the resistance of the final simplified circuit
+idk</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
