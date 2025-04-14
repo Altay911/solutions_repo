@@ -1,42 +1,57 @@
-# Problem 1
+// Equivalent Resistance Calculation Using Graph Theory
 
-import networkx as nx
-import numpy as np
+// A function to calculate the equivalent resistance of a circuit graph
+// where graph represents a network of resistors
 
-# Function to calculate the equivalent resistance for series connection
-def series_resistance(resistances):
-    return sum(resistances)
+// Example structure for graph: graph[node] = {neighbor1: resistance1, neighbor2: resistance2, ...}
 
-# Function to calculate the equivalent resistance for parallel connection
-def parallel_resistance(resistances):
-    return 1 / sum(1 / np.array(resistances))
+function calculate_equivalent_resistance(graph) {
+    // Step 1: Iterate over the graph while there is more than one node
+    while (graph.size() > 1) {
+        for (each pair of connected nodes (node1, node2)) {
+            // Step 2: Check if the two resistors are in series
+            if (is_series(graph, node1, node2)) {
+                // Combine the resistors in series: R_eq = R1 + R2
+                R_eq = graph[node1][node2] + graph[node2][node1];
+                // Remove the pair and add the equivalent resistor
+                remove_resistor(graph, node1, node2);
+                add_resistor(graph, node1, node2, R_eq);
+            }
+            // Step 3: Check if the two resistors are in parallel
+            else if (is_parallel(graph, node1, node2)) {
+                // Combine the resistors in parallel: 1/R_eq = 1/R1 + 1/R2
+                R_eq = 1 / (1 / graph[node1][node2] + 1 / graph[node2][node1]);
+                // Remove the pair and add the equivalent resistor
+                remove_resistor(graph, node1, node2);
+                add_resistor(graph, node1, node2, R_eq);
+            }
+        }
+    }
 
-# Function to simplify the circuit graph by reducing series and parallel combinations
-def simplify_graph(circuit_graph):
-    for node1, node2, data in list(circuit_graph.edges(data=True)):
-        resistance = data['resistance']
-        # Check if the two nodes are in series or parallel and simplify accordingly
-        if circuit_graph.has_edge(node1, node2):
-            # Simplify the series or parallel connection
-            pass  # Logic to simplify series or parallel connections
+    // Step 4: Once reduced to one node, return the equivalent resistance
+    return graph[remaining_node][remaining_node];
+}
 
-    return circuit_graph
+// Helper function to check if two resistors are in series
+function is_series(graph, node1, node2) {
+    // Resistors are in series if they are connected with no other junction
+    return (graph[node1][node2] && graph[node2][node1]);
+}
 
-# Main function to calculate the equivalent resistance of the circuit
-def calculate_equivalent_resistance(circuit_graph):
-    while len(circuit_graph.nodes) > 1:
-        circuit_graph = simplify_graph(circuit_graph)
-    
-    return circuit_graph
+// Helper function to check if two resistors are in parallel
+function is_parallel(graph, node1, node2) {
+    // Resistors are in parallel if they are connected to the same pair of nodes
+    return (graph[node1][node2] && graph[node2][node1]);
+}
 
-# Example: Build a sample circuit graph with resistors between nodes
-G = nx.Graph()
+// Helper function to remove a resistor from the graph
+function remove_resistor(graph, node1, node2) {
+    delete graph[node1][node2];
+    delete graph[node2][node1];
+}
 
-# Add edges representing resistors between nodes
-G.add_edge('A', 'B', resistance=10)  # Resistor of 10 Ohms between A and B
-G.add_edge('B', 'C', resistance=5)   # Resistor of 5 Ohms between B and C
-G.add_edge('C', 'D', resistance=10)  # Resistor of 10 Ohms between C and D
-
-# Calculate equivalent resistance
-equivalent_resistance = calculate_equivalent_resistance(G)
-print(f"Equivalent Resistance: {equivalent_resistance} Ohms")
+// Helper function to add a resistor to the graph
+function add_resistor(graph, node1, node2, resistance) {
+    graph[node1][node2] = resistance;
+    graph[node2][node1] = resistance;
+}
