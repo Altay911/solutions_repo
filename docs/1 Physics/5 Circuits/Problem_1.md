@@ -1,57 +1,169 @@
-// Equivalent Resistance Calculation Using Graph Theory
+import networkx as nx
+from collections import defaultdict
 
-// A function to calculate the equivalent resistance of a circuit graph
-// where graph represents a network of resistors
+class CircuitAnalyzer:
+    def __init__(self):
+        self.graph = nx.Graph()
+    
+    def add_resistor(self, node1, node2, resistance):
+        """Add a resistor between two nodes with given resistance"""
+        self.graph.add_edge(node1, node2, resistance=resistance)
+    
+    def calculate_equivalent_resistance(self, start_node, end_node):
+        """
+        Calculate equivalent resistance between two nodes using series-parallel reduction
+        Returns the equivalent resistance or None if nodes are disconnected
+        """
+        working_graph = self.graph.copy()
+        
+        while True:
+            # Check if we've simplified to a single resistor
+            if working_graph.number_of_edges() == 1:
+                if start_node in working_graph and end_node in working_graph:
+                    return working_graph.edges[start_node, end_node]['resistance']
+                else:
+                    return None  # Nodes are disconnected
+            
+            # Try series reduction first
+            reduced = self._reduce_series(working_graph, start_node, end_node)
+            if reduced:
+                working_graph = reduced
+                continue
+            
+            # Then try parallel reduction
+            reduced = self._reduce_parallel(working_graph)
+            if reduced:
+                working_graph = reduced
+                continue
+            
+            # If no more reductions possible but still multiple edges
+            if working_graph.number_of_edges() > 1:
+                print("Warning: Circuit contains non-series-parallel components")
+                return None
+            
+            break
+        
+        # Final check for direct connection
+        if working_graph.has_edge(start_node, end_node):
+            return working_graph.edges[start_node, end_node]['resistance']
+        return None
+    
+    def _reduce_series(self, graph, start_node, end_node):
+        """
+        Reduce series resistors in the graph
+        Returns a new simplified graph or None if no series reductions found
+        """
+        # Find nodes with degree 2 (excluding start and end nodes)
+        series_nodes = [
+            node for node in graph.nodes()
+            if (node != start_node and node != end_node and 
+                graph.degree(node) == 2)
+        ]
+        
+        if not series_nodes:
+            return None
+        
+        # Create a copy to modify
+        new_graph = graph.copy()
+        
+        for node in series_nodes:
+            # Get the two neighbors
+            neighbors = list(new_graph.neighbors(node))
+            if len(neighbors) != 2:
+                continue
+                
+            a, b = neighbors
+            
+            # Calculate combined resistance
+            r1 = new_graph.edges[node, a]['resistance']
+            r2 = new_graph.edges[node, b]['resistance']
+            total = r1 + r2
+            
+            # Remove the series node and add new resistor
+            new_graph.remove_node(node)
+            new_graph.add_edge(a, b, resistance=total)
+            
+            # Only reduce one series at a time to avoid complications
+            return new_graph
+        
+        return None
+    
+    def _reduce_parallel(self, graph):
+        """
+        Reduce parallel resistors in the graph
+        Returns a new simplified graph or None if no parallel reductions found
+        """
+        # Find all pairs with multiple edges
+        parallel_edges = defaultdict(list)
+        for u, v in graph.edges():
+            if u > v:  # To avoid duplicate (u,v) and (v,u)
+                u, v = v, u
+            parallel_edges[(u, v)].append((u, v))
+        
+        # Find pairs with multiple edges between them
+        parallel_pairs = [pair for pair, edges in parallel_edges.items() 
+                         if len(edges) > 1]
+        
+        if not parallel_pairs:
+            return None
+        
+        # Create a copy to modify
+        new_graph = graph.copy()
+        
+        for u, v in parallel_pairs[:1]:  # Only process one pair at a time
+            # Get all resistances between u and v
+            resistances = []
+            for edge in graph.edges(u, data=True):
+                if edge[1] == v:
+                    resistances.append(edge[2]['resistance'])
+            
+            # Calculate equivalent parallel resistance
+            if len(resistances) > 1:
+                inv_total = sum(1/r for r in resistances)
+                if inv_total == 0:
+                    equivalent = 0  # Short circuit case
+                else:
+                    equivalent = 1 / inv_total
+                
+                # Remove all parallel edges and add one equivalent
+                new_graph.remove_edges_from(list(graph.edges(u, v)))
+                new_graph.add_edge(u, v, resistance=equivalent)
+                
+                return new_graph
+        
+        return None
 
-// Example structure for graph: graph[node] = {neighbor1: resistance1, neighbor2: resistance2, ...}
 
-function calculate_equivalent_resistance(graph) {
-    // Step 1: Iterate over the graph while there is more than one node
-    while (graph.size() > 1) {
-        for (each pair of connected nodes (node1, node2)) {
-            // Step 2: Check if the two resistors are in series
-            if (is_series(graph, node1, node2)) {
-                // Combine the resistors in series: R_eq = R1 + R2
-                R_eq = graph[node1][node2] + graph[node2][node1];
-                // Remove the pair and add the equivalent resistor
-                remove_resistor(graph, node1, node2);
-                add_resistor(graph, node1, node2, R_eq);
-            }
-            // Step 3: Check if the two resistors are in parallel
-            else if (is_parallel(graph, node1, node2)) {
-                // Combine the resistors in parallel: 1/R_eq = 1/R1 + 1/R2
-                R_eq = 1 / (1 / graph[node1][node2] + 1 / graph[node2][node1]);
-                // Remove the pair and add the equivalent resistor
-                remove_resistor(graph, node1, node2);
-                add_resistor(graph, node1, node2, R_eq);
-            }
-        }
-    }
+def test_circuits():
+    """Test the implementation with example circuits"""
+    print("Testing equivalent resistance calculator...\n")
+    
+    # Example 1: Simple series circuit
+    print("Example 1: Simple series circuit (R1 + R2)")
+    analyzer = CircuitAnalyzer()
+    analyzer.add_resistor('A', 'B', 10)  # R1 = 10Ω
+    analyzer.add_resistor('B', 'C', 20)  # R2 = 20Ω
+    equivalent = analyzer.calculate_equivalent_resistance('A', 'C')
+    print(f"Equivalent resistance between A and C: {equivalent} Ω (Expected: 30 Ω)\n")
+    
+    # Example 2: Simple parallel circuit
+    print("Example 2: Simple parallel circuit (R1 || R2)")
+    analyzer = CircuitAnalyzer()
+    analyzer.add_resistor('A', 'B', 10)  # R1 = 10Ω
+    analyzer.add_resistor('A', 'B', 20)  # R2 = 20Ω
+    equivalent = analyzer.calculate_equivalent_resistance('A', 'B')
+    print(f"Equivalent resistance between A and B: {equivalent:.2f} Ω (Expected: 6.67 Ω)\n")
+    
+    # Example 3: Nested series-parallel circuit
+    print("Example 3: Nested series-parallel circuit")
+    analyzer = CircuitAnalyzer()
+    analyzer.add_resistor('A', 'B', 10)  # R1 = 10Ω
+    analyzer.add_resistor('B', 'C', 20)  # R2 = 20Ω
+    analyzer.add_resistor('B', 'C', 30)  # R3 = 30Ω (parallel with R2)
+    analyzer.add_resistor('C', 'D', 40)  # R4 = 40Ω
+    equivalent = analyzer.calculate_equivalent_resistance('A', 'D')
+    print(f"Equivalent resistance between A and D: {equivalent:.2f} Ω (Expected: 62.00 Ω)\n")
 
-    // Step 4: Once reduced to one node, return the equivalent resistance
-    return graph[remaining_node][remaining_node];
-}
 
-// Helper function to check if two resistors are in series
-function is_series(graph, node1, node2) {
-    // Resistors are in series if they are connected with no other junction
-    return (graph[node1][node2] && graph[node2][node1]);
-}
-
-// Helper function to check if two resistors are in parallel
-function is_parallel(graph, node1, node2) {
-    // Resistors are in parallel if they are connected to the same pair of nodes
-    return (graph[node1][node2] && graph[node2][node1]);
-}
-
-// Helper function to remove a resistor from the graph
-function remove_resistor(graph, node1, node2) {
-    delete graph[node1][node2];
-    delete graph[node2][node1];
-}
-
-// Helper function to add a resistor to the graph
-function add_resistor(graph, node1, node2, resistance) {
-    graph[node1][node2] = resistance;
-    graph[node2][node1] = resistance;
-}
+if __name__ == "__main__":
+    test_circuits()
