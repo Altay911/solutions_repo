@@ -172,6 +172,100 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-3">Problem 3</h1>
+<h1 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h1>
+<h2 id="motivation">Motivation</h2>
+<p>When an object is released from a moving rocket near Earth, its trajectory is determined by initial conditions such as position, velocity, and altitude, along with gravitational forces. This problem blends principles of orbital mechanics and numerical methods. Understanding these trajectories is crucial for space missions, including payload deployment, orbital insertion, reentry, and escape scenarios.</p>
+<hr/>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<p>The trajectory of a payload released near Earth is influenced by Earth's gravitational pull, which follows <strong>Newton's Law of Gravitation</strong>. The law states that the gravitational force between two objects is proportional to their masses and inversely proportional to the square of the distance between their centers:</p>
+<div class="arithmatex">\[
+F = \frac{G M_1 M_2}{r^2}
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( F \)</span> is the gravitational force
+- <span class="arithmatex">\( G \)</span> is the gravitational constant (<span class="arithmatex">\(6.674 \times 10^{-11} \, \text{m}^3 \, \text{kg}^{-1} \, \text{s}^{-2}\)</span>)
+- <span class="arithmatex">\( M_1 \)</span> and <span class="arithmatex">\( M_2 \)</span> are the masses of the two objects (in this case, Earth and the payload)
+- <span class="arithmatex">\( r \)</span> is the distance between the centers of the two objects</p>
+<p>The gravitational acceleration <span class="arithmatex">\( g \)</span> near Earth's surface is approximately <span class="arithmatex">\(9.8 \, \text{m/s}^2\)</span>, but this changes with altitude. </p>
+<h3 id="types-of-trajectories">Types of Trajectories</h3>
+<ol>
+<li>
+<p><strong>Parabolic Trajectory</strong>: If the velocity is less than the escape velocity but sufficient to overcome Earth's gravitational pull, the trajectory will be a parabola.</p>
+</li>
+<li>
+<p><strong>Hyperbolic Trajectory</strong>: If the object is released with a velocity greater than the escape velocity, the trajectory will be hyperbolic, indicating that the object is escaping Earth's gravitational influence.</p>
+</li>
+<li>
+<p><strong>Elliptical Trajectory</strong>: If the object's velocity is less than the escape velocity but greater than the orbital velocity, the trajectory will be elliptical, which is characteristic of orbital motion.</p>
+</li>
+</ol>
+<h3 id="governing-equations">Governing Equations</h3>
+<p>For a two-body system, the trajectory of the payload is governed by the following equations derived from Newton's second law and the gravitational force:</p>
+<div class="arithmatex">\[
+\ddot{r} = -\frac{GM}{r^2}
+\]</div>
+<p>Where <span class="arithmatex">\( \ddot{r} \)</span> is the acceleration of the payload, <span class="arithmatex">\( r \)</span> is the distance from the center of Earth, and <span class="arithmatex">\( M \)</span> is the mass of Earth.</p>
+<p>In the absence of air resistance, the motion can be described in polar coordinates, where the position of the object is defined by radius <span class="arithmatex">\( r \)</span> and angle <span class="arithmatex">\( \theta \)</span>.</p>
+<hr/>
+<h2 id="2-numerical-analysis">2. Numerical Analysis</h2>
+<p>We will use numerical methods to simulate the trajectory of the payload, considering different initial conditions (position, velocity, and altitude). Specifically, we will use <strong>Euler’s method</strong> to solve the equations of motion iteratively.</p>
+<h3 id="initial-conditions">Initial Conditions</h3>
+<ul>
+<li>Initial position <span class="arithmatex">\( r_0 \)</span>: Distance from the center of the Earth (radius of Earth + altitude)</li>
+<li>Initial velocity <span class="arithmatex">\( v_0 \)</span>: The speed of the payload at the moment of release</li>
+<li>Initial angle <span class="arithmatex">\( \theta_0 \)</span>: The direction of the velocity vector</li>
+<li>The direction of the velocity vector determines whether the trajectory is elliptical, parabolic, or hyperbolic.</li>
+</ul>
+<hr/>
+<h2 id="3-implementation-python-simulation">3. Implementation (Python Simulation)</h2>
+<p>Below is a Python script to simulate and visualize the trajectory of a freely released payload near Earth. This code solves the equations of motion using a simple numerical integration method (Euler’s method) and plots the resulting trajectory.</p>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>G = 6.674 * 10<strong>-11  # Gravitational constant (m^3 kg^-1 s^-2)
+M_earth = 5.972 * 10</strong>24  # Mass of Earth (kg)
+R_earth = 6.371 * 10**6  # Radius of Earth (m)</p>
+<h1 id="initial-conditions_1">Initial conditions</h1>
+<p>r_0 = R_earth + 500000  # Initial position (500 km altitude)
+v_0 = 8000  # Initial velocity (m/s) - roughly 8 km/s
+theta_0 = 0  # Angle of velocity vector (0 for horizontal)</p>
+<h1 id="time-parameters">Time parameters</h1>
+<p>t_max = 10000  # Maximum time for the simulation (s)
+dt = 10  # Time step (s)</p>
+<h1 id="convert-to-polar-coordinates">Convert to polar coordinates</h1>
+<p>r = r_0  # Distance from the center of Earth
+theta = theta_0  # Angle in the plane of motion
+v = v_0  # Velocity magnitude
+vx = v * np.cos(theta)  # Velocity in x-direction
+vy = v * np.sin(theta)  # Velocity in y-direction</p>
+<h1 id="arrays-to-store-positions-for-plotting">Arrays to store positions for plotting</h1>
+<p>times = np.arange(0, t_max, dt)
+x_vals = []
+y_vals = []</p>
+<h1 id="eulers-method-for-numerical-integration">Euler's method for numerical integration</h1>
+<p>for t in times:
+    # Compute gravitational force
+    F_gravity = G * M_earth / r**2  # Gravitational force (N)
+    ax = -F_gravity * np.cos(theta)  # Acceleration in x-direction
+    ay = -F_gravity * np.sin(theta)  # Acceleration in y-direction</p>
+<pre><code># Update velocity and position
+vx += ax * dt  # Update velocity in x-direction
+vy += ay * dt  # Update velocity in y-direction
+r = np.sqrt(x_vals[-1]**2 + y_vals[-1]**2)  # Update radius
+x_vals.append(x_vals[-1] + vx * dt)  # Update x position
+y_vals.append(y_vals[-1] + vy * dt)  # Update y position
+</code></pre>
+<h1 id="plot-the-trajectory">Plot the trajectory</h1>
+<p>plt.figure(figsize=(8, 6))
+plt.plot(x_vals, y_vals, label='Payload Trajectory')
+plt.scatter(0, 0, color='r', label='Earth')  # Earth's position
+plt.title('Trajectory of a Payload Released Near Earth')
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.legend()
+plt.grid(True)
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
