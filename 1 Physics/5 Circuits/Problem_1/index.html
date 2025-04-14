@@ -172,6 +172,39 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<p>import networkx as nx
+import numpy as np</p>
+<h1 id="function-to-calculate-the-equivalent-resistance-for-series-connection">Function to calculate the equivalent resistance for series connection</h1>
+<p>def series_resistance(resistances):
+    return sum(resistances)</p>
+<h1 id="function-to-calculate-the-equivalent-resistance-for-parallel-connection">Function to calculate the equivalent resistance for parallel connection</h1>
+<p>def parallel_resistance(resistances):
+    return 1 / sum(1 / np.array(resistances))</p>
+<h1 id="function-to-simplify-the-circuit-graph-by-reducing-series-and-parallel-combinations">Function to simplify the circuit graph by reducing series and parallel combinations</h1>
+<p>def simplify_graph(circuit_graph):
+    for node1, node2, data in list(circuit_graph.edges(data=True)):
+        resistance = data['resistance']
+        # Check if the two nodes are in series or parallel and simplify accordingly
+        if circuit_graph.has_edge(node1, node2):
+            # Simplify the series or parallel connection
+            pass  # Logic to simplify series or parallel connections</p>
+<pre><code>return circuit_graph
+</code></pre>
+<h1 id="main-function-to-calculate-the-equivalent-resistance-of-the-circuit">Main function to calculate the equivalent resistance of the circuit</h1>
+<p>def calculate_equivalent_resistance(circuit_graph):
+    while len(circuit_graph.nodes) &gt; 1:
+        circuit_graph = simplify_graph(circuit_graph)</p>
+<pre><code>return circuit_graph
+</code></pre>
+<h1 id="example-build-a-sample-circuit-graph-with-resistors-between-nodes">Example: Build a sample circuit graph with resistors between nodes</h1>
+<p>G = nx.Graph()</p>
+<h1 id="add-edges-representing-resistors-between-nodes">Add edges representing resistors between nodes</h1>
+<p>G.add_edge('A', 'B', resistance=10)  # Resistor of 10 Ohms between A and B
+G.add_edge('B', 'C', resistance=5)   # Resistor of 5 Ohms between B and C
+G.add_edge('C', 'D', resistance=10)  # Resistor of 10 Ohms between C and D</p>
+<h1 id="calculate-equivalent-resistance">Calculate equivalent resistance</h1>
+<p>equivalent_resistance = calculate_equivalent_resistance(G)
+print(f"Equivalent Resistance: {equivalent_resistance} Ohms")</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
