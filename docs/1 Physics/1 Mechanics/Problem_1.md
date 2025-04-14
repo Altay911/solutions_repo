@@ -1,59 +1,114 @@
-# Problem 1
+# Investigating the Range as a Function of the Angle of Projection
 
+## Motivation
+
+Projectile motion, while seemingly simple, offers a rich playground for exploring fundamental principles of physics. The basic idea is straightforward: analyze how the **range** of a projectile depends on its **angle of projection**. Yet, beneath this simplicity lies a complex and versatile framework.
+
+What makes this topic compelling is the number of **free parameters** involved—such as **initial velocity**, **gravitational acceleration**, and **launch height**. These parameters allow for a diverse set of solutions that describe phenomena ranging from the arc of a soccer ball to the trajectory of a rocket.
+
+---
+
+## 1. Theoretical Foundation
+
+We start with the fundamental equations of motion under constant acceleration due to gravity, assuming no air resistance.
+
+### Equations of Motion
+
+Let:
+- \( v_0 \): Initial velocity
+- \( \theta \): Angle of projection
+- \( g \): Acceleration due to gravity (typically \( 9.81 \, \text{m/s}^2 \))
+- \( R \): Horizontal range
+
+Decomposing the motion:
+
+- Horizontal component:  
+  \[
+  v_{x} = v_0 \cos(\theta)
+  \]
+- Vertical component:  
+  \[
+  v_{y} = v_0 \sin(\theta)
+  \]
+
+Time of flight \( T \) (for level ground):
+
+\[
+T = \frac{2 v_0 \sin(\theta)}{g}
+\]
+
+**Range** is then:
+
+\[
+R(\theta) = v_{x} \cdot T = \frac{v_0^2 \sin(2\theta)}{g}
+\]
+
+---
+
+## 2. Analysis of the Range
+
+### Effect of Angle on Range
+
+- The range is maximized when \( \sin(2\theta) \) is maximized.
+- Max value of \( \sin(2\theta) \) is 1 when \( 2\theta = 90^\circ \) → \( \theta = 45^\circ \)
+
+### Effect of Initial Velocity
+
+- Range increases **quadratically** with \( v_0 \):  
+  \[
+  R \propto v_0^2
+  \]
+
+### Effect of Gravitational Acceleration
+
+- Range is **inversely proportional** to \( g \):  
+  \[
+  R \propto \frac{1}{g}
+  \]
+
+---
+
+## 3. Practical Applications
+
+Real-world projectile motion often includes:
+
+- Uneven terrain (non-zero launch and landing height)
+- Air resistance (drag)
+- Wind or spin (Magnus effect)
+
+To account for these, we would need to:
+
+- Modify the equations to include **drag force** proportional to velocity.
+- Adjust for **initial and final height differences**.
+- Use **numerical methods** to solve non-linear equations.
+
+---
+
+## 4. Implementation (Python Simulation)
+
+Below is a Python script to visualize how the **range** varies with the **angle of projection**, for different initial velocities.
+
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Constants
 g = 9.81  # gravitational acceleration (m/s^2)
-v0 = 20   # initial velocity (m/s)
-angles = np.linspace(0, 90, num=100)  # angles from 0 to 90 degrees
+angles = np.linspace(0, 90, 100)  # degrees
+radians = np.radians(angles)
 
-# Function to calculate range
-def projectile_range(v0, theta, g=9.81):
-    theta_rad = np.radians(theta)
-    return (v0**2 * np.sin(2 * theta_rad)) / g
+# Initial velocities to compare
+initial_velocities = [10, 20, 30]
 
-# Compute range for each angle
-ranges = projectile_range(v0, angles)
+plt.figure(figsize=(10, 6))
 
-# Plot range vs angle
-plt.figure(figsize=(8, 5))
-plt.plot(angles, ranges, label=f'v0 = {v0} m/s', color='b')
-plt.xlabel("Angle of Projection (degrees)")
-plt.ylabel("Range (m)")
-plt.title("Projectile Range as a Function of Angle")
+for v0 in initial_velocities:
+    range_vals = (v0**2 * np.sin(2 * radians)) / g
+    plt.plot(angles, range_vals, label=f'v₀ = {v0} m/s')
+
+plt.title("Range vs Angle of Projection")
+plt.xlabel("Angle (degrees)")
+plt.ylabel("Range (meters)")
 plt.legend()
-plt.grid()
+plt.grid(True)
 plt.show()
-
-# Function to compute projectile motion trajectory
-def projectile_trajectory(v0, theta, g=9.81):
-    theta_rad = np.radians(theta)
-    t_flight = (2 * v0 * np.sin(theta_rad)) / g
-    t = np.linspace(0, t_flight, num=100)
-    x = v0 * np.cos(theta_rad) * t
-    y = v0 * np.sin(theta_rad) * t - 0.5 * g * t**2
-    return x, y
-
-# Plot projectile motion for a few angles
-plt.figure(figsize=(8, 5))
-for theta in [15, 30, 45, 60, 75]:
-    x, y = projectile_trajectory(v0, theta)
-    plt.plot(x, y, label=f'{theta}°')
-
-plt.xlabel("Horizontal Distance (m)")
-plt.ylabel("Vertical Distance (m)")
-plt.title("Projectile Motion Trajectories")
-plt.legend()
-plt.grid()
-plt.show()
-
-
-
-# Discussion
-print("The maximum range occurs at 45 degrees, as expected from the analytical solution.")
-
-![download](https://github.com/user-attachments/assets/94ddaa11-82e6-40bd-9acf-74ff3bb98d0d)
-![download](https://github.com/user-attachments/assets/97208085-cb8e-4816-84a3-a8cfc8cb7c23)
-
-IDK WHAT HAPPENED BUT I GUESS IT STARTED TO WORK??
