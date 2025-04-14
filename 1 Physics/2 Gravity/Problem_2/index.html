@@ -172,6 +172,116 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h1 id="escape-velocities-and-cosmic-velocities">Escape Velocities and Cosmic Velocities</h1>
+<h2 id="motivation">Motivation</h2>
+<p>The concept of <strong>escape velocity</strong> is fundamental in understanding the conditions required to escape a celestial body's gravitational pull. Extending this concept, the <strong>first, second, and third cosmic velocities</strong> define the velocities required for different types of space missions:
+- <strong>First cosmic velocity</strong>: The velocity needed to stay in orbit around a celestial body.
+- <strong>Second cosmic velocity</strong>: The velocity needed to escape the gravitational influence of a celestial body.
+- <strong>Third cosmic velocity</strong>: The velocity required to escape the gravitational influence of a star, enabling travel to another star system.</p>
+<p>These velocities are pivotal in space exploration, from launching satellites to planning interplanetary and interstellar missions.</p>
+<hr/>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<h3 id="escape-velocity">Escape Velocity</h3>
+<p>The <strong>escape velocity</strong> is the minimum velocity an object must have to break free from the gravitational influence of a celestial body without further propulsion. The formula for escape velocity <span class="arithmatex">\( v_e \)</span> is derived from the conservation of energy, considering both kinetic energy and gravitational potential energy:</p>
+<div class="arithmatex">\[
+v_e = \sqrt{\frac{2 G M}{r}}
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( G \)</span> is the gravitational constant (<span class="arithmatex">\(6.674 \times 10^{-11} \, \text{m}^3 \, \text{kg}^{-1} \, \text{s}^{-2}\)</span>)
+- <span class="arithmatex">\( M \)</span> is the mass of the celestial body (e.g., Earth, Mars, Jupiter)
+- <span class="arithmatex">\( r \)</span> is the radius of the celestial body</p>
+<h3 id="first-cosmic-velocity-orbital-velocity">First Cosmic Velocity (Orbital Velocity)</h3>
+<p>The <strong>first cosmic velocity</strong> is the velocity needed for a stable orbit around a celestial body. This is the velocity an object must have to stay in orbit without falling back to the surface. The formula for orbital velocity <span class="arithmatex">\( v_1 \)</span> is:</p>
+<div class="arithmatex">\[
+v_1 = \sqrt{\frac{G M}{r}}
+\]</div>
+<p>This velocity corresponds to the speed required to maintain a circular orbit at a specific radius.</p>
+<h3 id="second-cosmic-velocity-escape-velocity">Second Cosmic Velocity (Escape Velocity)</h3>
+<p>The <strong>second cosmic velocity</strong> is the velocity needed to completely escape a celestial body’s gravitational pull. It is twice the value of the first cosmic velocity:</p>
+<div class="arithmatex">\[
+v_2 = \sqrt{\frac{2 G M}{r}}
+\]</div>
+<p>This is the same as the formula for <strong>escape velocity</strong>, meaning it is the velocity required to leave the body’s gravitational influence.</p>
+<h3 id="third-cosmic-velocity-escape-from-a-star-system">Third Cosmic Velocity (Escape from a Star System)</h3>
+<p>The <strong>third cosmic velocity</strong> is the velocity needed to escape the gravitational influence of the Sun (or any central star), which would enable an object to travel to another star system. This can be calculated as:</p>
+<div class="arithmatex">\[
+v_3 = \sqrt{\frac{2 G M_{\text{star}}}{r_{\text{star}}} + \frac{2 G M_{\text{planet}}}{r_{\text{planet}}}}
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( M_{\text{star}} \)</span> is the mass of the central star (e.g., the Sun)
+- <span class="arithmatex">\( r_{\text{star}} \)</span> is the distance from the star (in this case, the distance from the Sun to the planet, like Earth)
+- <span class="arithmatex">\( M_{\text{planet}} \)</span> and <span class="arithmatex">\( r_{\text{planet}} \)</span> are the mass and radius of the planet from which the object is escaping.</p>
+<hr/>
+<h2 id="2-practical-applications">2. Practical Applications</h2>
+<h3 id="escape-velocities-and-space-exploration">Escape Velocities and Space Exploration</h3>
+<ul>
+<li>
+<p><strong>Launching Satellites</strong>: The first cosmic velocity is essential for launching satellites into orbit. For example, satellites orbiting Earth need to reach the first cosmic velocity to avoid falling back to Earth.</p>
+</li>
+<li>
+<p><strong>Interplanetary Missions</strong>: The second cosmic velocity is required for missions that escape Earth's gravity, such as spacecraft heading to other planets or the Moon.</p>
+</li>
+<li>
+<p><strong>Interstellar Travel</strong>: The third cosmic velocity is theoretical for interstellar travel, as it involves escaping the gravitational pull of the Sun to reach another star system.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="3-implementation-python-simulation">3. Implementation (Python Simulation)</h2>
+<p>Below is a Python script that calculates and visualizes the escape velocities and cosmic velocities for different celestial bodies, including Earth, Mars, and Jupiter.</p>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>G = 6.674 * 10**-11  # Gravitational constant (m^3 kg^-1 s^-2)</p>
+<h1 id="celestial-bodies-mass-in-kg-radius-in-meters">Celestial bodies: (Mass in kg, Radius in meters)</h1>
+<p>bodies = {
+    "Earth": {"M": 5.972 * 10<strong>24, "r": 6.371 * 10</strong>6},
+    "Mars": {"M": 0.64171 * 10<strong>24, "r": 3.396 * 10</strong>6},
+    "Jupiter": {"M": 1.898 * 10<strong>27, "r": 6.991 * 10</strong>7}
+}</p>
+<h1 id="function-to-calculate-escape-and-cosmic-velocities">Function to calculate escape and cosmic velocities</h1>
+<p>def escape_velocity(M, r):
+    return np.sqrt(2 * G * M / r)</p>
+<p>def first_cosmic_velocity(M, r):
+    return np.sqrt(G * M / r)</p>
+<p>def third_cosmic_velocity(M_star, r_star, M_planet, r_planet):
+    return np.sqrt((2 * G * M_star / r_star) + (2 * G * M_planet / r_planet))</p>
+<h1 id="calculate-velocities">Calculate velocities</h1>
+<p>velocities = {}
+for body, params in bodies.items():
+    M = params["M"]
+    r = params["r"]</p>
+<pre><code>v1 = first_cosmic_velocity(M, r)
+v2 = escape_velocity(M, r)
+
+# Using the Sun's mass and Earth's distance for third cosmic velocity calculation
+if body == "Earth":
+    v3 = third_cosmic_velocity(1.989 * 10**30, 1.496 * 10**11, M, r)  # Sun's mass and Earth's distance
+else:
+    v3 = np.nan  # Not calculating third cosmic velocity for Mars and Jupiter here
+
+velocities[body] = {"v1": v1, "v2": v2, "v3": v3}
+</code></pre>
+<h1 id="plotting-the-velocities">Plotting the velocities</h1>
+<p>fig, ax = plt.subplots(figsize=(10, 6))
+bodies_names = list(bodies.keys())
+v1_values = [velocities[body]["v1"] for body in bodies_names]
+v2_values = [velocities[body]["v2"] for body in bodies_names]
+v3_values = [velocities[body]["v3"] if not np.isnan(velocities[body]["v3"]) else np.nan for body in bodies_names]</p>
+<p>bar_width = 0.25
+index = np.arange(len(bodies_names))</p>
+<h1 id="plot-bars-for-each-velocity-type">Plot bars for each velocity type</h1>
+<p>ax.bar(index, v1_values, bar_width, label='First Cosmic Velocity (Orbital Velocity)')
+ax.bar(index + bar_width, v2_values, bar_width, label='Second Cosmic Velocity (Escape Velocity)')
+ax.bar(index + 2 * bar_width, v3_values, bar_width, label='Third Cosmic Velocity')</p>
+<h1 id="formatting-the-chart">Formatting the chart</h1>
+<p>ax.set_xlabel('Celestial Bodies')
+ax.set_ylabel('Velocity (m/s)')
+ax.set_title('Cosmic Velocities for Different Celestial Bodies')
+ax.set_xticks(index + bar_width)
+ax.set_xticklabels(bodies_names)
+ax.legend()</p>
+<p>plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
