@@ -46,17 +46,17 @@ public:
 
 private:
     bool isSeries(int node1, int node2, Resistor r) {
-        // Checks for series connection
+        // Check if resistors are in series
         return (node1 == r.node1 && node2 == r.node2);
     }
 
     bool isParallel(int node1, int node2, Resistor r) {
-        // Checks for parallel connection
+        // Check if resistors are in parallel
         return (node1 == r.node1 || node2 == r.node2);
     }
 
     void mergeNodes(int i, int j, double R_eq) {
-        // Merges two resistors into one
+        // Merge the resistors into one equivalent resistor
         resistors[i].resistance = R_eq;
         resistors.erase(resistors.begin() + j);
     }
