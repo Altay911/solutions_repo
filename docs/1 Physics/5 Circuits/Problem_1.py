@@ -1,11 +1,17 @@
+# --- Equivalent Resistance Solver ---
+
 def combine_series(resistors):
+    """Add resistors in series: R_eq = R1 + R2 + ..."""
     return sum(resistors)
 
 def combine_parallel(resistors):
+    """Combine resistors in parallel: 1/R_eq = 1/R1 + 1/R2 + ..."""
     return 1 / sum(1 / r for r in resistors)
 
 def print_result(title, resistance):
     print(f"{title}\nEquivalent Resistance: {round(resistance, 2)} Ω\n")
+
+# --- EXAMPLES ---
 
 # Example 1: Series
 series_resistors = [5, 10]
@@ -26,4 +32,4 @@ print_result("Example 3: Nested [(2Ω || 2Ω) + 3Ω]", nested_total)
 part1 = combine_parallel([2, 4])
 part2 = combine_parallel([6, 3])
 crazy_result = combine_series([part1, part2])
-print_result("Example 4: Nested [(2||4)+(6||3)]", crazy_result)
+print_result("Example 4: Nested [(2Ω‖4Ω)+(6Ω‖3Ω)]", crazy_result)
