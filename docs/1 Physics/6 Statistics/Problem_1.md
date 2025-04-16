@@ -1,45 +1,45 @@
-# Problem 1
+# Exploring the Central Limit Theorem through Simulations
 
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+## Motivation
+The Central Limit Theorem (CLT) is a cornerstone of probability and statistics, stating that the sampling distribution of the sample mean approaches a normal distribution as the sample size increases, regardless of the population’s original distribution. Simulations provide an intuitive and hands-on way to observe this phenomenon in action.
 
-# Function to generate and visualize sampling distributions
-def central_limit_theorem(population_size=10000, sample_sizes=[5, 10, 30, 50], num_samples=1000):
-    # 1. Generate large datasets from different distributions
-    uniform_population = np.random.uniform(0, 1, population_size)
-    exponential_population = np.random.exponential(1, population_size)
-    binomial_population = np.random.binomial(10, 0.5, population_size)
-    
-    # 2. Function to take random samples and calculate the sample means
-    def sample_means(population, sample_size, num_samples):
-        means = []
-        for _ in range(num_samples):
-            sample = np.random.choice(population, size=sample_size, replace=False)
-            means.append(np.mean(sample))
-        return means
-    
-    # 3. Create plots for each distribution and sample size
-    fig, axes = plt.subplots(3, len(sample_sizes), figsize=(15, 12))
-    
-    for i, sample_size in enumerate(sample_sizes):
-        # Uniform distribution sampling
-        uniform_means = sample_means(uniform_population, sample_size, num_samples)
-        sns.histplot(uniform_means, bins=30, kde=True, ax=axes[0, i])
-        axes[0, i].set_title(f'Uniform Distribution - Sample Size {sample_size}')
-        
-        # Exponential distribution sampling
-        exponential_means = sample_means(exponential_population, sample_size, num_samples)
-        sns.histplot(exponential_means, bins=30, kde=True, ax=axes[1, i])
-        axes[1, i].set_title(f'Exponential Distribution - Sample Size {sample_size}')
-        
-        # Binomial distribution sampling
-        binomial_means = sample_means(binomial_population, sample_size, num_samples)
-        sns.histplot(binomial_means, bins=30, kde=True, ax=axes[2, i])
-        axes[2, i].set_title(f'Binomial Distribution - Sample Size {sample_size}')
-    
-    plt.tight_layout()
-    plt.show()
+## Task Overview
 
-# Run the simulation
-central_limit_theorem()
+### 1. Simulating Sampling Distributions:
+
+Select several types of population distributions, such as:
+- **Uniform distribution**
+- **Exponential distribution**
+- **Binomial distribution**
+
+For each distribution, generate a large dataset representing the population.
+
+### 2. Sampling and Visualization:
+
+- Randomly sample data from the population and calculate the sample mean for different sample sizes (e.g., 5, 10, 30, 50).
+- Repeat the process multiple times to create a sampling distribution of the sample mean.
+- Plot histograms of the sample means for each sample size and observe the convergence to a normal distribution.
+
+### 3. Parameter Exploration:
+
+- Investigate how the shape of the original distribution and the sample size influence the rate of convergence to normality.
+- Highlight the impact of the population’s variance on the spread of the sampling distribution.
+
+### 4. Practical Applications:
+
+Reflect on the importance of the CLT in real-world scenarios, such as:
+- Estimating population parameters.
+- Quality control in manufacturing.
+- Predicting outcomes in financial models.
+
+## Deliverables:
+- A Markdown document and Python scripts or notebooks implementing the simulations for various population distributions.
+- Plots illustrating the sampling distributions and their progression toward normality.
+- A discussion on the implications of the results and their connection to theoretical expectations.
+
+## Hints and Resources:
+- Use Python libraries such as **NumPy** for random number generation and **Matplotlib/Seaborn** for visualization.
+- Begin with simple populations (e.g., uniform or normal) before exploring more complex distributions.
+- Ensure students understand how to calculate and interpret the sample mean and variance.
+
+This task encourages students to explore the Central Limit Theorem through computational experiments, deepening their understanding of its significance in statistics.
