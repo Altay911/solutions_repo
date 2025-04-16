@@ -56,17 +56,3 @@ The task at hand is to calculate the **equivalent resistance** of a circuit usin
    - The algorithm continues until the entire graph is reduced to a single node representing the total equivalent resistance.
 
 ### Pseudocode
-
-```plaintext
-function calculateEquivalentResistance(graph):
-    while graph has more than one node:
-        for each edge (u, v) in graph:
-            if u and v are in series:
-                R_series = sum of resistances along the chain
-                reduce the edge (u, v) to R_series
-            else if u and v are in parallel:
-                R_parallel = 1 / (1/R_u + 1/R_v)
-                replace the edge (u, v) with R_parallel
-
-    return the resistance value of the final reduced graph
-s
