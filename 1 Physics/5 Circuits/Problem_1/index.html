@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Equivalent Resistance using Graph Theory - Physics and Mathematics</title>
+<title>Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Equivalent Resistance using Graph Theory";
+        var mkdocs_page_name = "Problem 1";
         var mkdocs_page_input_path = "1 Physics/5 Circuits/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -76,7 +76,7 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Equivalent Resistance using Graph Theory</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
 </ul>
 </li>
@@ -163,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">5 Circuits</li>
-<li class="breadcrumb-item active">Equivalent Resistance using Graph Theory</li>
+<li class="breadcrumb-item active">Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,113 +171,13 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="equivalent-resistance-using-graph-theory">Equivalent Resistance using Graph Theory</h1>
-<h1 id="author-your-name">Author: Your Name</h1>
-<h1 id="description-this-script-calculates-the-equivalent-resistance-of-a-circuit-represented-as-a-graph">Description: This script calculates the equivalent resistance of a circuit represented as a graph.</h1>
-<p>import networkx as nx</p>
-<h1 id="-">-------------------------------</h1>
-<h1 id="helper-functions">Helper functions</h1>
-<h1 id="-_1">-------------------------------</h1>
-<p>def is_series(G, u, v):
-    """
-    Returns True if node u and v form a series connection (degree 2 and one edge between them).
-    """
-    return G.degree[u] == 2 and G.degree[v] == 2 and G.number_of_edges(u, v) == 1</p>
-<p>def is_parallel(edges):
-    """
-    Checks if there are multiple edges between the same pair of nodes (parallel connection).
-    """
-    return len(edges) &gt; 1</p>
-<p>def reduce_series(G):
-    """
-    Detect and reduce series connections.
-    """
-    changed = False
-    for node in list(G.nodes):
-        if G.degree[node] == 2:
-            neighbors = list(G.neighbors(node))
-            if len(neighbors) == 2 and not G.has_edge(neighbors[0], neighbors[1]):
-                r1 = G[node][neighbors[0]]["resistance"]
-                r2 = G[node][neighbors[1]]["resistance"]
-                G.add_edge(neighbors[0], neighbors[1], resistance=r1 + r2)
-                G.remove_node(node)
-                changed = True
-                break
-    return changed</p>
-<p>def reduce_parallel(G):
-    """
-    Detect and reduce parallel connections.
-    """
-    changed = False
-    for u, v in list(G.edges()):
-        parallel_edges = [e for e in G.edges(u, data=True) if e[1] == v]
-        if len(parallel_edges) &gt; 1:
-            total = sum(1 / e[2]["resistance"] for e in parallel_edges)
-            G.remove_edges_from([(u, v) for <em>, </em>, _ in parallel_edges])
-            G.add_edge(u, v, resistance=1 / total)
-            changed = True
-            break
-    return changed</p>
-<p>def simplify_circuit(G):
-    """
-    Iteratively reduce the graph until a single edge remains.
-    """
-    while True:
-        if reduce_series(G):
-            continue
-        elif reduce_parallel(G):
-            continue
-        else:
-            break
-    return G</p>
-<h1 id="-_2">-------------------------------</h1>
-<h1 id="example-1-series-circuit">Example 1: Series Circuit</h1>
-<h1 id="-_3">-------------------------------</h1>
-<p>G1 = nx.Graph()
-G1.add_edge("A", "B", resistance=5)
-G1.add_edge("B", "C", resistance=10)</p>
-<p>simplify_circuit(G1)
-print("\nExample 1: Series Circuit")
-for u, v, data in G1.edges(data=True):
-    print(f"Equivalent resistance between {u} and {v}: {data['resistance']} Ohms")</p>
-<h1 id="-_4">-------------------------------</h1>
-<h1 id="example-2-parallel-circuit">Example 2: Parallel Circuit</h1>
-<h1 id="-_5">-------------------------------</h1>
-<p>G2 = nx.MultiGraph()
-G2.add_edge("A", "B", resistance=4)
-G2.add_edge("A", "B", resistance=6)</p>
-<h1 id="convert-multigraph-to-graph-for-compatibility">Convert MultiGraph to Graph for compatibility</h1>
-<p>G2_simple = nx.Graph()
-for u, v, data in G2.edges(data=True):
-    if G2_simple.has_edge(u, v):
-        r1 = G2_simple[u][v]['resistance']
-        r2 = data['resistance']
-        G2_simple[u][v]['resistance'] = 1 / (1 / r1 + 1 / r2)
-    else:
-        G2_simple.add_edge(u, v, resistance=data['resistance'])</p>
-<p>print("\nExample 2: Parallel Circuit")
-simplify_circuit(G2_simple)
-for u, v, data in G2_simple.edges(data=True):
-    print(f"Equivalent resistance between {u} and {v}: {data['resistance']:.2f} Ohms")</p>
-<h1 id="-_6">-------------------------------</h1>
-<h1 id="example-3-nested-configuration">Example 3: Nested Configuration</h1>
-<h1 id="-_7">-------------------------------</h1>
-<p>G3 = nx.Graph()
-G3.add_edge("A", "B", resistance=3)
-G3.add_edge("B", "C", resistance=6)
-G3.add_edge("C", "D", resistance=3)
-G3.add_edge("A", "D", resistance=6)</p>
-<p>print("\nExample 3: Nested Configuration")
-simplify_circuit(G3)
-for u, v, data in G3.edges(data=True):
-    print(f"Equivalent resistance between {u} and {v}: {data['resistance']:.2f} Ohms")</p>
-<h1 id="-_8">-------------------------------</h1>
-<h1 id="notes">Notes:</h1>
-<h1 id="-_9">-------------------------------</h1>
-<h1 id="-this-implementation-handles-simple-series-and-parallel-reductions">- This implementation handles simple series and parallel reductions.</h1>
-<h1 id="-for-more-complex-graph-topologies-with-loops-and-bridges">- For more complex graph topologies with loops and bridges,</h1>
-<h1 id="kirchhoffs-laws-and-matrix-methods-like-laplacian-are-more-suitable">Kirchhoff's laws and matrix methods (like Laplacian) are more suitable.</h1>
-<h1 id="-can-be-extended-using-dfsbfs-to-detect-subgraphs-for-reduction">- Can be extended using DFS/BFS to detect subgraphs for reduction.</h1>
+<blockquote>
+<p>✅ Put triple backticks (<code>) **before** and **after** your code  
+✅ Make sure it starts with `</code>python ` to enable syntax highlighting<br/>
+❌ Don’t paste Python code as plain text inside Markdown — it will collapse into ugly blocks like in your screenshot.</p>
+</blockquote>
+<h3 id="if-you-want-me-to-format-that-entire-block-for-you-in-proper-markdown-code-syntax-i-can-do-that-too-just-say-the-word">If you want me to format <strong>that entire block</strong> for you in proper Markdown code syntax, I can do that too. Just say the word.</h3>
+<p>Want me to reformat the full code from that page into readable Markdown?</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
