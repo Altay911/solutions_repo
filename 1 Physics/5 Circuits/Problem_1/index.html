@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>-------------------------------------------- - Physics and Mathematics</title>
+<title>Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "--------------------------------------------";
+        var mkdocs_page_name = "Problem 1";
         var mkdocs_page_input_path = "1 Physics/5 Circuits/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -76,7 +76,7 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">--------------------------------------------</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
 </ul>
 </li>
@@ -163,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">5 Circuits</li>
-<li class="breadcrumb-item active">--------------------------------------------</li>
+<li class="breadcrumb-item active">Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,37 +171,28 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="-">--------------------------------------------</h1>
-<h1 id="equivalent-resistance-calculator-no-imports">Equivalent Resistance Calculator (No Imports)</h1>
-<h1 id="-_1">--------------------------------------------</h1>
 <p>def combine_series(resistors):
-    """Add resistors in series: R = R1 + R2 + ..."""
     return sum(resistors)</p>
 <p>def combine_parallel(resistors):
-    """Add resistors in parallel: 1/R = 1/R1 + 1/R2 + ..."""
     return 1 / sum(1 / r for r in resistors)</p>
 <p>def print_result(title, resistance):
     print(f"{title}\nEquivalent Resistance: {round(resistance, 2)} Ω\n")</p>
-<h1 id="-_2">-------------------</h1>
-<h1 id="examples">Examples</h1>
-<h1 id="-_3">-------------------</h1>
 <h1 id="example-1-series">Example 1: Series</h1>
-<p>series_resistors = [5, 10]  # 5Ω + 10Ω
+<p>series_resistors = [5, 10]
 result_series = combine_series(series_resistors)
 print_result("Example 1: Series [5Ω, 10Ω]", result_series)</p>
 <h1 id="example-2-parallel">Example 2: Parallel</h1>
-<p>parallel_resistors = [4, 6]  # 1 / (1/4 + 1/6)
+<p>parallel_resistors = [4, 6]
 result_parallel = combine_parallel(parallel_resistors)
 print_result("Example 2: Parallel [4Ω, 6Ω]", result_parallel)</p>
-<h1 id="example-3-nested-parallel-inside-series">Example 3: Nested (Parallel inside Series)</h1>
-<h1 id="2-2-3">(2Ω || 2Ω) + 3Ω</h1>
-<p>nested_parallel = combine_parallel([2, 2])  # = 1Ω
-nested_total = combine_series([nested_parallel, 3])  # = 4Ω
+<h1 id="example-3-nested-2-2-3">Example 3: Nested (2Ω || 2Ω) + 3Ω</h1>
+<p>nested_parallel = combine_parallel([2, 2])
+nested_total = combine_series([nested_parallel, 3])
 print_result("Example 3: Nested [(2Ω || 2Ω) + 3Ω]", nested_total)</p>
-<h1 id="example-4-crazy-one-2-4-6-3-in-series">Example 4: Crazy One - ((2Ω || 4Ω) + (6Ω || 3Ω)) in series</h1>
-<p>part1 = combine_parallel([2, 4])  # = 1.33
-part2 = combine_parallel([6, 3])  # = 2.0
-crazy_result = combine_series([part1, part2])  # = 3.33
+<h1 id="example-4-2-4-6-3">Example 4: ((2Ω || 4Ω) + (6Ω || 3Ω))</h1>
+<p>part1 = combine_parallel([2, 4])
+part2 = combine_parallel([6, 3])
+crazy_result = combine_series([part1, part2])
 print_result("Example 4: Nested [(2||4)+(6||3)]", crazy_result)</p>
 </div>
 </div><footer>
