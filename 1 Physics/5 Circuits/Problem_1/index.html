@@ -253,19 +253,6 @@
 <li>The algorithm continues until the entire graph is reduced to a single node representing the total equivalent resistance.</li>
 </ol>
 <h3 id="pseudocode">Pseudocode</h3>
-<p>```plaintext
-function calculateEquivalentResistance(graph):
-    while graph has more than one node:
-        for each edge (u, v) in graph:
-            if u and v are in series:
-                R_series = sum of resistances along the chain
-                reduce the edge (u, v) to R_series
-            else if u and v are in parallel:
-                R_parallel = 1 / (1/R_u + 1/R_v)
-                replace the edge (u, v) with R_parallel</p>
-<pre><code>return the resistance value of the final reduced graph
-</code></pre>
-<p>s</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
