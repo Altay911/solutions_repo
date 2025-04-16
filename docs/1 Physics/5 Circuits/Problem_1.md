@@ -55,4 +55,3 @@ The task at hand is to calculate the **equivalent resistance** of a circuit usin
 5. **Termination**:
    - The algorithm continues until the entire graph is reduced to a single node representing the total equivalent resistance.
 
-### Pseudocode
