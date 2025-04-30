@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Projectile Motion: Range vs. Launch Angle Analysis - Physics and Mathematics</title>
+<title>Equivalent Resistance Using Graph Theory - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Projectile Motion: Range vs. Launch Angle Analysis";
+        var mkdocs_page_name = "Equivalent Resistance Using Graph Theory";
         var mkdocs_page_input_path = "1 Physics/5 Circuits/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -46,7 +46,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal">1 Mechanics</a>
 <ul>
-<li class="toctree-l2"><a class="reference internal" href="../../1%20Mechanics/Problem_1/">PROBLEM 1</a>
+<li class="toctree-l2"><a class="reference internal" href="../../1%20Mechanics/Problem_1/">Projectile Motion: Range vs. Launch Angle Analysis</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../1%20Mechanics/Problem_2/">Investigating the Dynamics of a Forced Damped Pendulum</a>
 </li>
@@ -76,29 +76,17 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Projectile Motion: Range vs. Launch Angle Analysis</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Equivalent Resistance Using Graph Theory</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#theoretical-foundations">Theoretical Foundations</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#basic-equations-of-motion">Basic Equations of Motion</a>
+<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#key-results">Key Results</a>
+<li class="toctree-l3"><a class="reference internal" href="#task-overview">Task Overview</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#option-1-simplified-task-algorithm-description">Option 1: Simplified Task – Algorithm Description</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-by-step-explanation">Step-by-Step Explanation</a>
 </li>
 </ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#range-analysis">Range Analysis</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#optimal-angle">Optimal Angle</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#parameter-dependence">Parameter Dependence</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#practical-applications">Practical Applications</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations-of-ideal-model">Limitations of Ideal Model</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#visualization-concepts">Visualization Concepts</a>
 </li>
 </ul>
 </li>
@@ -185,7 +173,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">5 Circuits</li>
-<li class="breadcrumb-item active">Projectile Motion: Range vs. Launch Angle Analysis</li>
+<li class="breadcrumb-item active">Equivalent Resistance Using Graph Theory</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -193,97 +181,74 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="projectile-motion-range-vs-launch-angle-analysis">Projectile Motion: Range vs. Launch Angle Analysis</h1>
-<h2 id="theoretical-foundations">Theoretical Foundations</h2>
-<h3 id="basic-equations-of-motion">Basic Equations of Motion</h3>
-<p>For a projectile launched from ground level (<span class="arithmatex">\(y_0 = 0\)</span>):</p>
-<p><strong>Horizontal motion:</strong>
-$$ x(t) = v_0 \cos\theta \cdot t $$</p>
-<p><strong>Vertical motion:</strong>
-$$ y(t) = v_0 \sin\theta \cdot t - \frac{1}{2}gt^2 $$</p>
-<h3 id="key-results">Key Results</h3>
+<h1 id="equivalent-resistance-using-graph-theory">Equivalent Resistance Using Graph Theory</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Calculating the equivalent resistance is a fundamental problem in electrical circuits, essential for understanding and designing efficient systems. Traditional methods, such as iteratively applying series and parallel resistor rules, can become cumbersome when dealing with complex circuits with many components. Graph theory offers a powerful alternative, allowing for a more structured and algorithmic approach to analyzing circuits.</p>
+<p>In this approach, the circuit is represented as a graph where:
+- <strong>Nodes</strong> correspond to junctions or connection points in the circuit.
+- <strong>Edges</strong> represent resistors with weights equal to their resistance values.</p>
+<p>This method simplifies even intricate networks and enables automated analysis, which is especially useful in modern applications like circuit simulation, optimization problems, and network design.</p>
+<h2 id="task-overview">Task Overview</h2>
+<p>The task at hand is to calculate the <strong>equivalent resistance</strong> of a circuit using graph theory, focusing on the following:</p>
 <ol>
+<li><strong>Option 1: Simplified Task – Algorithm Description</strong></li>
+<li>We will describe the algorithm for calculating the equivalent resistance using graph theory.</li>
 <li>
-<p><strong>Time of flight:</strong>
-$$ T = \frac{2v_0 \sin\theta}{g} $$</p>
-</li>
-<li>
-<p><strong>Maximum range (ground level):</strong>
-$$ R = \frac{v_0^2 \sin(2\theta)}{g} $$</p>
-</li>
-<li>
-<p><strong>Maximum height:</strong>
-$$ H = \frac{v_0^2 \sin^2\theta}{2g} $$</p>
-</li>
-</ol>
-<h2 id="range-analysis">Range Analysis</h2>
-<h3 id="optimal-angle">Optimal Angle</h3>
+<p>Provide pseudocode for the algorithm that:</p>
 <ul>
-<li>For <span class="arithmatex">\(y_0 = 0\)</span>, maximum range occurs at <span class="arithmatex">\(\theta = 45°\)</span></li>
-<li>For <span class="arithmatex">\(y_0 &gt; 0\)</span>, optimal angle decreases below 45°</li>
-<li>For <span class="arithmatex">\(y_0 &lt; 0\)</span> (below launch level), optimal angle increases above 45°</li>
+<li>Identifies series and parallel connections.</li>
+<li>Iteratively reduces the graph until a single equivalent resistance is obtained.</li>
+<li>Handles nested combinations and ensures that the graph is simplified properly.</li>
 </ul>
-<h3 id="parameter-dependence">Parameter Dependence</h3>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Effect on Range</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(v_0\)</span></td>
-<td>Increases quadratically</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\theta\)</span></td>
-<td>Peaks at optimal angle</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(g\)</span></td>
-<td>Inversely proportional</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(y_0\)</span></td>
-<td>Increases with height</td>
-</tr>
-</tbody>
-</table>
-<h2 id="practical-applications">Practical Applications</h2>
-<ol>
-<li><strong>Sports:</strong> Optimizing throw angles in javelin, shot put</li>
-<li><strong>Military:</strong> Artillery trajectory calculations</li>
-<li><strong>Space:</strong> Suborbital rocket trajectories</li>
-<li><strong>Engineering:</strong> Water fountain designs</li>
+</li>
+<li>
+<p><strong>Option 2: Advanced Task – Full Implementation</strong> </p>
+</li>
+<li>Implement the algorithm to handle arbitrary resistor configurations, including nested series and parallel connections.</li>
+<li>Test the implementation on examples like simple series and parallel combinations, nested configurations, and complex graphs with multiple cycles.</li>
 </ol>
-<h2 id="limitations-of-ideal-model">Limitations of Ideal Model</h2>
+<hr/>
+<h2 id="option-1-simplified-task-algorithm-description">Option 1: Simplified Task – Algorithm Description</h2>
+<h3 id="step-by-step-explanation">Step-by-Step Explanation</h3>
 <ol>
-<li><strong>Air resistance:</strong> Significant at high velocities</li>
-<li><strong>Wind effects:</strong> Lateral displacement</li>
-<li><strong>Spin:</strong> Magnus effect in sports balls</li>
-<li><strong>Variations in g:</strong> For long-range projectiles</li>
-<li><strong>Earth's curvature:</strong> For ICBMs</li>
-</ol>
-<h2 id="visualization-concepts">Visualization Concepts</h2>
-<ol>
-<li><strong>Range vs. Angle curve:</strong></li>
-<li>Parabolic shape peaking at optimal angle</li>
+<li><strong>Input Representation</strong>:</li>
 <li>
-<p>Symmetric about 45° for ground level</p>
+<p>A circuit is represented as a graph <span class="arithmatex">\( G(V, E) \)</span>, where:</p>
+<ul>
+<li><span class="arithmatex">\( V \)</span> is the set of vertices (nodes representing junctions).</li>
+<li><span class="arithmatex">\( E \)</span> is the set of edges (resistors) with weights corresponding to their resistance values.</li>
+</ul>
 </li>
 <li>
-<p><strong>Trajectory plots:</strong></p>
+<p><strong>Identifying Series and Parallel Connections</strong>:</p>
 </li>
-<li>Show height vs. distance</li>
+<li><strong>Series Connection</strong>: If two resistors are connected end-to-end (i.e., the two nodes are directly connected without any branching in between), their resistances simply add up. Mathematically:
+     [
+     R_{\text{eq}} = R_1 + R_2
+     ]</li>
 <li>
-<p>Compare different launch angles</p>
+<p><strong>Parallel Connection</strong>: If two resistors are connected in parallel (i.e., both ends of the resistors are connected to the same two nodes), their equivalent resistance is calculated using the formula:
+     [
+     \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2}
+     ]</p>
 </li>
 <li>
-<p><strong>Parameter sensitivity:</strong></p>
+<p><strong>Graph Reduction Algorithm</strong>:</p>
 </li>
-<li>How range changes with <span class="arithmatex">\(v_0\)</span></li>
-<li>Effect of initial height <span class="arithmatex">\(y_0\)</span></li>
+<li><strong>Detecting Series Connections</strong>: Traverse the graph and identify linear chains of resistors. These can be reduced by summing their resistance values.</li>
+<li>
+<p><strong>Detecting Parallel Connections</strong>: Identify resistors that share the same pair of nodes. Apply the parallel resistance formula to reduce them to a single equivalent resistor.</p>
+</li>
+<li>
+<p><strong>Handling Nested Combinations</strong>:</p>
+</li>
+<li>
+<p>After reducing series or parallel combinations, the graph may still contain nested combinations. The algorithm should recursively simplify the graph, reducing it step-by-step until only a single equivalent resistance remains.</p>
+</li>
+<li>
+<p><strong>Termination</strong>:</p>
+</li>
+<li>The algorithm continues until the entire graph is reduced to a single node representing the total equivalent resistance.</li>
 </ol>
 </div>
 </div><footer>
