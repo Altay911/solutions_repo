@@ -17,27 +17,6 @@
 
 **Physical Meaning:** Combines Earth's escape velocity with the Sun's gravitational influence at Earth's orbital distance.
 
-## Mathematical Foundations
-
-### Key Equations
-
-1. **First Cosmic Velocity:**
-   \[
-   v_1 = \sqrt{\frac{GM}{R}}
-   \]
-   
-2. **Second Cosmic Velocity:**
-   \[
-   v_2 = \sqrt{2} \times v_1 = \sqrt{\frac{2GM}{R}}
-   \]
-
-3. **Third Cosmic Velocity:**
-   \[
-   v_3 \approx \sqrt{v_2^2 + (v_{esc,\odot} - v_{Earth})^2}
-   \]
-   Where:
-   - \( v_{esc,\odot} \approx 42.1 \) km/s (Solar escape velocity at Earth's orbit)
-   - \( v_{Earth} \approx 29.8 \) km/s (Earth's orbital speed around Sun)
 
 ### Parameter Dependencies
 
