@@ -1,118 +1,70 @@
-# PROBLEM 1 
+# Projectile Motion: Range vs. Launch Angle Analysis
 
+## Theoretical Foundations
 
-## Motivation Investigating the Range as a Function of the Angle of Projection
+### Basic Equations of Motion
 
+For a projectile launched from ground level ($y_0 = 0$):
 
-Projectile motion, while seemingly simple, offers a rich playground for exploring fundamental principles of physics. The basic idea is straightforward: analyze how the **range** of a projectile depends on its **angle of projection**. Yet, beneath this simplicity lies a complex and versatile framework.
+**Horizontal motion:**
+$$ x(t) = v_0 \cos\theta \cdot t $$
 
-What makes this topic compelling is the number of **free parameters** involved—such as **initial velocity**, **gravitational acceleration**, and **launch height**. These parameters allow for a diverse set of solutions that describe phenomena ranging from the arc of a soccer ball to the trajectory of a rocket.
+**Vertical motion:**
+$$ y(t) = v_0 \sin\theta \cdot t - \frac{1}{2}gt^2 $$
 
----
+### Key Results
 
-## 1. Theoretical Foundation
+1. **Time of flight:**
+$$ T = \frac{2v_0 \sin\theta}{g} $$
 
-We start with the fundamental equations of motion under constant acceleration due to gravity, assuming no air resistance.
+2. **Maximum range (ground level):**
+$$ R = \frac{v_0^2 \sin(2\theta)}{g} $$
 
-### Equations of Motion
+3. **Maximum height:**
+$$ H = \frac{v_0^2 \sin^2\theta}{2g} $$
 
-Let:
-- \( v_0 \): Initial velocity
-- \( \theta \): Angle of projection
-- \( g \): Acceleration due to gravity (typically \( 9.81 \, \text{m/s}^2 \))
-- \( R \): Horizontal range
+## Range Analysis
 
-Decomposing the motion:
+### Optimal Angle
 
-- Horizontal component:  
-  \[
-  v_{x} = v_0 \cos(\theta)
-  \]
-- Vertical component:  
-  \[
-  v_{y} = v_0 \sin(\theta)
-  \]
+- For $y_0 = 0$, maximum range occurs at $\theta = 45°$
+- For $y_0 > 0$, optimal angle decreases below 45°
+- For $y_0 < 0$ (below launch level), optimal angle increases above 45°
 
-Time of flight \( T \) (for level ground):
+### Parameter Dependence
 
-\[
-T = \frac{2 v_0 \sin(\theta)}{g}
-\]
+| Parameter | Effect on Range |
+|-----------|-----------------|
+| $v_0$ | Increases quadratically |
+| $\theta$ | Peaks at optimal angle |
+| $g$ | Inversely proportional |
+| $y_0$ | Increases with height |
 
-**Range** is then:
+## Practical Applications
 
-\[
-R(\theta) = v_{x} \cdot T = \frac{v_0^2 \sin(2\theta)}{g}
-\]
+1. **Sports:** Optimizing throw angles in javelin, shot put
+2. **Military:** Artillery trajectory calculations
+3. **Space:** Suborbital rocket trajectories
+4. **Engineering:** Water fountain designs
 
----
+## Limitations of Ideal Model
 
-## 2. Analysis of the Range
+1. **Air resistance:** Significant at high velocities
+2. **Wind effects:** Lateral displacement
+3. **Spin:** Magnus effect in sports balls
+4. **Variations in g:** For long-range projectiles
+5. **Earth's curvature:** For ICBMs
 
-### Effect of Angle on Range
+## Visualization Concepts
 
-- The range is maximized when \( \sin(2\theta) \) is maximized.
-- Max value of \( \sin(2\theta) \) is 1 when \( 2\theta = 90^\circ \) → \( \theta = 45^\circ \)
+1. **Range vs. Angle curve:**
+   - Parabolic shape peaking at optimal angle
+   - Symmetric about 45° for ground level
 
-### Effect of Initial Velocity
+2. **Trajectory plots:**
+   - Show height vs. distance
+   - Compare different launch angles
 
-- Range increases **quadratically** with \( v_0 \):  
-  \[
-  R \propto v_0^2
-  \]
-
-### Effect of Gravitational Acceleration
-
-- Range is **inversely proportional** to \( g \):  
-  \[
-  R \propto \frac{1}{g}
-  \]
-
----
-
-## 3. Practical Applications
-
-Real-world projectile motion often includes:
-
-- Uneven terrain (non-zero launch and landing height)
-- Air resistance (drag)
-- Wind or spin (Magnus effect)
-
-To account for these, we would need to:
-
-- Modify the equations to include **drag force** proportional to velocity.
-- Adjust for **initial and final height differences**.
-- Use **numerical methods** to solve non-linear equations.
-
----
-
-## 4. Implementation (Python Simulation)
-
-Below is a Python script to visualize how the **range** varies with the **angle of projection**, for different initial velocities.
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Constants
-g = 9.81  # gravitational acceleration (m/s^2)
-angles = np.linspace(0, 90, 100)  # degrees
-radians = np.radians(angles)
-
-# Initial velocities to compare
-initial_velocities = [10, 20, 30]
-
-plt.figure(figsize=(10, 6))
-
-for v0 in initial_velocities:
-    range_vals = (v0**2 * np.sin(2 * radians)) / g
-    plt.plot(angles, range_vals, label=f'v₀ = {v0} m/s')
-
-plt.title("Range vs Angle of Projection")
-plt.xlabel("Angle (degrees)")
-plt.ylabel("Range (meters)")
-plt.legend()
-plt.grid(True)
-plt.show()
-
-FINAL
+3. **Parameter sensitivity:**
+   - How range changes with $v_0$
+   - Effect of initial height $y_0$

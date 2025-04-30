@@ -1,70 +1,57 @@
-# Projectile Motion: Range vs. Launch Angle Analysis
+# Equivalent Resistance Using Graph Theory
 
-## Theoretical Foundations
+## Motivation
+Calculating the equivalent resistance is a fundamental problem in electrical circuits, essential for understanding and designing efficient systems. Traditional methods, such as iteratively applying series and parallel resistor rules, can become cumbersome when dealing with complex circuits with many components. Graph theory offers a powerful alternative, allowing for a more structured and algorithmic approach to analyzing circuits.
 
-### Basic Equations of Motion
+In this approach, the circuit is represented as a graph where:
+- **Nodes** correspond to junctions or connection points in the circuit.
+- **Edges** represent resistors with weights equal to their resistance values.
 
-For a projectile launched from ground level ($y_0 = 0$):
+This method simplifies even intricate networks and enables automated analysis, which is especially useful in modern applications like circuit simulation, optimization problems, and network design.
 
-**Horizontal motion:**
-$$ x(t) = v_0 \cos\theta \cdot t $$
+## Task Overview
 
-**Vertical motion:**
-$$ y(t) = v_0 \sin\theta \cdot t - \frac{1}{2}gt^2 $$
+The task at hand is to calculate the **equivalent resistance** of a circuit using graph theory, focusing on the following:
 
-### Key Results
+1. **Option 1: Simplified Task – Algorithm Description**
+   - We will describe the algorithm for calculating the equivalent resistance using graph theory.
+   - Provide pseudocode for the algorithm that:
+     - Identifies series and parallel connections.
+     - Iteratively reduces the graph until a single equivalent resistance is obtained.
+     - Handles nested combinations and ensures that the graph is simplified properly.
 
-1. **Time of flight:**
-$$ T = \frac{2v_0 \sin\theta}{g} $$
+2. **Option 2: Advanced Task – Full Implementation** 
+   - Implement the algorithm to handle arbitrary resistor configurations, including nested series and parallel connections.
+   - Test the implementation on examples like simple series and parallel combinations, nested configurations, and complex graphs with multiple cycles.
 
-2. **Maximum range (ground level):**
-$$ R = \frac{v_0^2 \sin(2\theta)}{g} $$
+---
 
-3. **Maximum height:**
-$$ H = \frac{v_0^2 \sin^2\theta}{2g} $$
+## Option 1: Simplified Task – Algorithm Description
 
-## Range Analysis
+### Step-by-Step Explanation
 
-### Optimal Angle
+1. **Input Representation**:
+   - A circuit is represented as a graph \( G(V, E) \), where:
+     - \( V \) is the set of vertices (nodes representing junctions).
+     - \( E \) is the set of edges (resistors) with weights corresponding to their resistance values.
 
-- For $y_0 = 0$, maximum range occurs at $\theta = 45°$
-- For $y_0 > 0$, optimal angle decreases below 45°
-- For $y_0 < 0$ (below launch level), optimal angle increases above 45°
+2. **Identifying Series and Parallel Connections**:
+   - **Series Connection**: If two resistors are connected end-to-end (i.e., the two nodes are directly connected without any branching in between), their resistances simply add up. Mathematically:
+     \[
+     R_{\text{eq}} = R_1 + R_2
+     \]
+   - **Parallel Connection**: If two resistors are connected in parallel (i.e., both ends of the resistors are connected to the same two nodes), their equivalent resistance is calculated using the formula:
+     \[
+     \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2}
+     \]
 
-### Parameter Dependence
+3. **Graph Reduction Algorithm**:
+   - **Detecting Series Connections**: Traverse the graph and identify linear chains of resistors. These can be reduced by summing their resistance values.
+   - **Detecting Parallel Connections**: Identify resistors that share the same pair of nodes. Apply the parallel resistance formula to reduce them to a single equivalent resistor.
 
-| Parameter | Effect on Range |
-|-----------|-----------------|
-| $v_0$ | Increases quadratically |
-| $\theta$ | Peaks at optimal angle |
-| $g$ | Inversely proportional |
-| $y_0$ | Increases with height |
+4. **Handling Nested Combinations**:
+   - After reducing series or parallel combinations, the graph may still contain nested combinations. The algorithm should recursively simplify the graph, reducing it step-by-step until only a single equivalent resistance remains.
 
-## Practical Applications
+5. **Termination**:
+   - The algorithm continues until the entire graph is reduced to a single node representing the total equivalent resistance.
 
-1. **Sports:** Optimizing throw angles in javelin, shot put
-2. **Military:** Artillery trajectory calculations
-3. **Space:** Suborbital rocket trajectories
-4. **Engineering:** Water fountain designs
-
-## Limitations of Ideal Model
-
-1. **Air resistance:** Significant at high velocities
-2. **Wind effects:** Lateral displacement
-3. **Spin:** Magnus effect in sports balls
-4. **Variations in g:** For long-range projectiles
-5. **Earth's curvature:** For ICBMs
-
-## Visualization Concepts
-
-1. **Range vs. Angle curve:**
-   - Parabolic shape peaking at optimal angle
-   - Symmetric about 45° for ground level
-
-2. **Trajectory plots:**
-   - Show height vs. distance
-   - Compare different launch angles
-
-3. **Parameter sensitivity:**
-   - How range changes with $v_0$
-   - Effect of initial height $y_0$
