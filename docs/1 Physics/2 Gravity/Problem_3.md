@@ -1,113 +1,74 @@
-# Kepler's Third Law: Orbital Period and Radius Relationship
+# Projection 3: Trajectories of a Freely Released Payload Near Earth
 
-## 1. Derivation of the Relationship
+## Theory
+When a payload is released near Earth, its trajectory depends on its initial velocity and altitude. The possible trajectories are:
+- **Elliptical**: Velocity below escape velocity.
+- **Parabolic**: Velocity exactly at escape velocity (rare in practice).
+- **Hyperbolic**: Velocity exceeds escape velocity (payload escapes Earth’s gravity).
 
-For a circular orbit, the centripetal force is provided by gravity:
-
+The motion is governed by Newton’s law of gravitation:
 \[
-\frac{GMm}{r^2} = \frac{mv^2}{r}
+a = \frac{GM}{r^2}
+\]
+where \( G = 6.674 \times 10^{-11} \, \text{N·m}^2/\text{kg}^2 \), \( M = 5.972 \times 10^{24} \, \text{kg} \), and \( r = R_{\text{Earth}} + h \) (Earth’s radius \( R_{\text{Earth}} = 6.371 \times 10^6 \, \text{m} \)).
+
+Escape velocity at altitude \( h \) is:
+\[
+v_{\text{escape}} = \sqrt{\frac{2GM}{R_{\text{Earth}} + h}}
 \]
 
-Where:
-- \( G \) = gravitational constant
-- \( M \) = mass of central body
-- \( m \) = mass of orbiting body
-- \( r \) = orbital radius
-- \( v \) = orbital velocity
-
-The orbital period \( T \) is related to velocity by:
-
-\[
-v = \frac{2\pi r}{T}
-\]
-
-Substituting and simplifying:
-
-\[
-\frac{GM}{r^2} = \frac{(2\pi r/T)^2}{r}
-\]
-
-\[
-\frac{GM}{r^2} = \frac{4\pi^2 r}{T^2}
-\]
-
-Rearranging gives Kepler's Third Law:
-
-\[
-T^2 = \frac{4\pi^2}{GM} r^3
-\]
-
-Thus, the square of the orbital period is proportional to the cube of the orbital radius.
-
-## 2. Astronomical Implications
-
-This relationship has profound implications:
-- **Mass determination**: By measuring \( T \) and \( r \) of orbiting bodies, we can calculate the mass of the central object
-- **Distance scaling**: Allows calculation of relative distances in planetary systems
-- **Exoplanet studies**: Used to characterize planets around other stars
-- **Satellite operations**: Essential for placing satellites in correct orbits
-
-## 3. Real-World Examples
-
-### Earth-Moon System:
-- Orbital radius: 384,400 km
-- Orbital period: 27.3 days
-- Using Kepler's Law, we can verify these values are consistent
-
-### Solar System Planets:
-The following table shows how \( T^2 \) is proportional to \( r^3 \):
-
-| Planet | Orbital Radius (AU) | Orbital Period (years) | \( r^3 \) | \( T^2 \) |
-|--------|---------------------|------------------------|----------|----------|
-| Mercury| 0.39                | 0.24                   | 0.059    | 0.058    |
-| Venus  | 0.72                | 0.62                   | 0.373    | 0.384    |
-| Earth  | 1.00                | 1.00                   | 1.000    | 1.000    |
-| Mars   | 1.52                | 1.88                   | 3.512    | 3.534    |
-
-## 4. Computational Model
-# Kepler's Third Law Explained
-
-## The Fundamental Equation
-For circular orbits, gravity provides the centripetal force:
-
-\[
-\frac{GMm}{r^2} = \frac{mv^2}{r}
-\]
-
-Where:
-- \( G \) = 6.674×10⁻¹¹ N(m/kg)² (gravitational constant)
-- \( M \) = mass of central body (kg)
-- \( m \) = mass of orbiting body (kg)
-- \( r \) = orbital radius (m)
-- \( v \) = orbital velocity (m/s)
-
-## Deriving the Law
-1. Relate velocity to period:
-   \[
-   v = \frac{2\pi r}{T}
-   \]
-2. Substitute into the force equation:
-   \[
-   \frac{GM}{r^2} = \frac{4\pi^2 r}{T^2}
-   \]
-3. Rearrange to get Kepler's Third Law:
-   \[
-   T^2 = \frac{4\pi^2}{GM}r^3
-   \]
-
-## Live Python Calculator
+## Python Simulation
 ```python
 import numpy as np
+import matplotlib.pyplot as plt
 
-G = 6.674e-11  # Gravitational constant
+# Constants
+G = 6.674e-11  # N·m²/kg²
+M = 5.972e24    # Earth mass (kg)
+R_earth = 6.371e6  # Earth radius (m)
 
-def orbital_period(M, r):
-    """Calculate orbital period in seconds"""
-    return 2 * np.pi * np.sqrt(r**3 / (G * M))
+# Initial conditions
+h = 500e3  # Altitude (500 km)
+v0 = 7600  # Initial velocity (m/s). Adjust to see different trajectories.
 
-# Example: Earth's orbit around Sun
-sun_mass = 1.989e30  # kg
-earth_orbit_radius = 149.6e9  # meters
+# Initial position and velocity (x-direction)
+x0 = R_earth + h
+y0 = 0
+vx0 = 0
+vy0 = v0
 
-period = orbital_period(sun_mass, earth_orbit_radius)
-print(f"Earth's orbital period: {period/86400:.2f} days")
+# Simulation parameters
+dt = 10  # Time step (s)
+t_max = 10000  # Total simulation time (s)
+steps = int(t_max / dt)
+
+# Arrays to store positions
+x = np.zeros(steps)
+y = np.zeros(steps)
+x[0], y[0] = x0, y0
+vx, vy = vx0, vy0
+
+# Numerical integration (Euler method)
+for i in range(1, steps):
+    r = np.sqrt(x[i-1]**2 + y[i-1]**2)
+    ax = -G * M * x[i-1] / r**3
+    ay = -G * M * y[i-1] / r**3
+    
+    vx += ax * dt
+    vy += ay * dt
+    
+    x[i] = x[i-1] + vx * dt
+    y[i] = y[i-1] + vy * dt
+
+# Plot trajectory
+plt.figure(figsize=(8, 8))
+earth = plt.Circle((0, 0), R_earth, color='blue', alpha=0.2)
+plt.gca().add_patch(earth)
+plt.plot(x, y, 'r--', label='Payload Trajectory')
+plt.xlabel('X (m)')
+plt.ylabel('Y (m)')
+plt.title('Payload Trajectory Near Earth')
+plt.legend()
+plt.axis('equal')
+plt.grid()
+plt.show()
