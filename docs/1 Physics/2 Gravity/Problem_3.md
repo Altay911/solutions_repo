@@ -1,144 +1,108 @@
-# Trajectories of Freely Released Payloads Near Earth
+# Kepler's Third Law: Orbital Period and Radius Relationship
 
-## Fundamental Orbital Mechanics
+## 1. Derivation of the Relationship
 
-### Classification of Trajectories
+For a circular orbit, the centripetal force is provided by gravity:
 
-1. **Circular Orbit:**
-   - Perfect balance between velocity and gravity
-   - Constant altitude and speed
-   - Required velocity: ~7.8 km/s at 200 km altitude
+\[
+\frac{GMm}{r^2} = \frac{mv^2}{r}
+\]
 
-2. **Elliptical Orbit:**
-   - Intermediate energy between circular and escape
-   - Perigee and apogee distances vary
-   - Velocity between first and second cosmic velocities
+Where:
+- \( G \) = gravitational constant
+- \( M \) = mass of central body
+- \( m \) = mass of orbiting body
+- \( r \) = orbital radius
+- \( v \) = orbital velocity
 
-3. **Parabolic Trajectory:**
-   - Exact escape velocity achieved
-   - Open-ended orbit (escape path)
-   - Velocity equals second cosmic velocity (~11.2 km/s at surface)
+The orbital period \( T \) is related to velocity by:
 
-4. **Hyperbolic Trajectory:**
-   - Exceeds escape velocity
-   - Excess kinetic energy results in hyperbolic excess velocity
-   - Used for interplanetary missions
+\[
+v = \frac{2\pi r}{T}
+\]
 
-## Key Parameters
+Substituting and simplifying:
 
-### Determining Factors
+\[
+\frac{GM}{r^2} = \frac{(2\pi r/T)^2}{r}
+\]
 
-| Parameter | Effect on Trajectory |
-|-----------|----------------------|
-| Initial Velocity | Determines orbit shape |
-| Release Altitude | Affects gravitational strength |
-| Flight Path Angle | Influences orbit eccentricity |
-| Atmospheric Drag | Causes orbital decay (LEO) |
+\[
+\frac{GM}{r^2} = \frac{4\pi^2 r}{T^2}
+\]
 
-### Critical Velocity Thresholds
+Rearranging gives Kepler's Third Law:
 
-1. **Suborbital:**
-   - Velocity < 7.8 km/s
-   - Ballistic arc returning to Earth
+\[
+T^2 = \frac{4\pi^2}{GM} r^3
+\]
 
-2. **Orbital:**
-   - 7.8 km/s < v < 11.2 km/s
-   - Closed elliptical or circular orbit
+Thus, the square of the orbital period is proportional to the cube of the orbital radius.
 
-3. **Escape:**
-   - v ≥ 11.2 km/s
-   - Parabolic or hyperbolic departure
+## 2. Astronomical Implications
 
-## Numerical Analysis Approach
+This relationship has profound implications:
+- **Mass determination**: By measuring \( T \) and \( r \) of orbiting bodies, we can calculate the mass of the central object
+- **Distance scaling**: Allows calculation of relative distances in planetary systems
+- **Exoplanet studies**: Used to characterize planets around other stars
+- **Satellite operations**: Essential for placing satellites in correct orbits
 
-### Recommended Methods
+## 3. Real-World Examples
 
-1. **Equation of Motion:**
-   \[
-   \frac{d^2\mathbf{r}}{dt^2} = -\frac{GM}{r^3}\mathbf{r}
-   \]
-   
-2. **Conserved Quantities:**
-   - Specific orbital energy
-   - Angular momentum
-   - Laplace-Runge-Lenz vector
+### Earth-Moon System:
+- Orbital radius: 384,400 km
+- Orbital period: 27.3 days
+- Using Kepler's Law, we can verify these values are consistent
 
-3. **Solution Techniques:**
-   - Runge-Kutta integration
-   - Verlet algorithm
-   - Symplectic integrators
+### Solar System Planets:
+The following table shows how \( T^2 \) is proportional to \( r^3 \):
 
-## Trajectory Visualization Concepts
+| Planet | Orbital Radius (AU) | Orbital Period (years) | \( r^3 \) | \( T^2 \) |
+|--------|---------------------|------------------------|----------|----------|
+| Mercury| 0.39                | 0.24                   | 0.059    | 0.058    |
+| Venus  | 0.72                | 0.62                   | 0.373    | 0.384    |
+| Earth  | 1.00                | 1.00                   | 1.000    | 1.000    |
+| Mars   | 1.52                | 1.88                   | 3.512    | 3.534    |
 
-### Suggested Plots
+## 4. Computational Model
 
-1. **2D Trajectory Map:**
-   - X-Y plot showing Earth and path
-   - Color-coded velocity along trajectory
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.constants import G
 
-2. **3D Orbit Visualization:**
-   - Earth sphere with trajectory curve
-   - Optional atmospheric layer
+def calculate_period(r, M):
+    """Calculate orbital period for circular orbit"""
+    return np.sqrt(4 * np.pi**2 * r**3 / (G * M))
 
-3. **Energy Diagram:**
-   - Kinetic vs potential energy over time
-   - Total energy conservation check
+# Earth parameters
+M_earth = 5.972e24  # kg
+earth_radius = 6.371e6  # m
 
-## Mission Applications
+# Generate orbital radii from LEO to GEO
+radii = np.linspace(earth_radius + 160e3, 42164e3, 100)  # 160km to GEO
 
-### Practical Scenarios
+# Calculate periods
+periods = calculate_period(radii, M_earth)
 
-1. **Payload Deployment:**
-   - ISS releases at ~7.7 km/s (circular orbit)
-   - CubeSat ejection velocities
+# Convert to hours for better readability
+periods_hours = periods / 3600
 
-2. **Reentry Planning:**
-   - Deorbit burns create suborbital trajectories
-   - Heat shield requirements analysis
+# Plot
+plt.figure(figsize=(10, 6))
+plt.plot(radii/1000, periods_hours)
+plt.title("Kepler's Third Law Verification")
+plt.xlabel('Orbital Radius (km)')
+plt.ylabel('Orbital Period (hours)')
+plt.grid(True)
+plt.show()
 
-3. **Interplanetary Transfers:**
-   - Earth escape trajectories
-   - Gravity assist maneuvers
+# Verify with known values
+leo_radius = earth_radius + 400e3  # 400km altitude
+geo_radius = 42164e3  # GEO altitude
 
-### Historical Examples
+leo_period = calculate_period(leo_radius, M_earth)/3600
+geo_period = calculate_period(geo_radius, M_earth)/3600
 
-1. **Space Shuttle Payloads:**
-   - Typical release at ~7.8 km/s
-   - Hubble deployment (1990)
-
-2. **Apollo Lunar Missions:**
-   - Trans-lunar injection (~10.8 km/s)
-   - Near-escape velocity trajectories
-
-## Theoretical Extensions
-
-### Advanced Considerations
-
-1. **Perturbation Effects:**
-   - Non-spherical Earth gravity
-   - Atmospheric drag
-   - Third-body effects (Moon/Sun)
-
-2. **Optimal Control:**
-   - Minimum-energy transfers
-   - Powered flight guidance
-
-3. **Relativistic Corrections:**
-   - Necessary for GPS satellites
-   - Time dilation effects
-
-## Educational Demonstrations
-
-### Classroom Activities
-
-1. **Trajectory Mapping:**
-   - Plot different initial conditions
-   - Identify orbit types visually
-
-2. **Energy Calculations:**
-   - Verify conservation principles
-   - Compare potential/kinetic energy
-
-3. **Mission Design:**
-   - Simulate satellite deployments
-   - Plan lunar transfer trajectories
+print(f"LEO (400km) period: {leo_period:.2f} hours")
+print(f"GEO period: {geo_period:.2f} hours (should be 24 hours)")
