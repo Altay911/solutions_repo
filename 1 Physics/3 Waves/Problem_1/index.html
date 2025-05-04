@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Waves: Interference Patterns from Regular Polygon Sources - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Waves: Interference Patterns from Regular Polygon Sources";
         var mkdocs_page_input_path = "1 Physics/3 Waves/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -64,8 +64,38 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">3 Waves</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Waves: Interference Patterns from Regular Polygon Sources</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#wave-equation-for-single-source">Wave Equation for Single Source</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#solution-methodology">Solution Methodology</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-regular-polygon-configuration">1. Regular Polygon Configuration</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-superposition-principle">2. Superposition Principle</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-interference-analysis">3. Interference Analysis</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-equilateral-triangle-n3">Example: Equilateral Triangle (N=3)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#vertex-positions">Vertex Positions</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#characteristic-patterns">Characteristic Patterns</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visualization-approach">Visualization Approach</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#key-findings">Key Findings</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#physical-interpretation">Physical Interpretation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +193,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">3 Waves</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Waves: Interference Patterns from Regular Polygon Sources</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,95 +201,135 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
-<h1 id="interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</h1>
-<h2 id="motivation">Motivation</h2>
-<p>Interference occurs when waves from different sources overlap, forming new patterns on the surface of a medium, such as water. These patterns can illustrate how waves combine in various ways: constructive interference (wave reinforcement) or destructive interference (wave cancellation). Studying these patterns helps us understand fundamental wave behaviors, such as the relationship between wave phase and the effect of multiple sources.</p>
-<p>This problem involves analyzing the interference patterns formed on the water surface due to the superposition of waves emitted from point sources placed at the vertices of a regular polygon. By exploring this phenomenon, we gain insight into wave interactions and their real-world applications.</p>
-<hr/>
-<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
-<h3 id="wave-equation">Wave Equation</h3>
-<p>A circular wave on a water surface, originating from a point source, is described by the following equation:</p>
+<h1 id="waves-interference-patterns-from-regular-polygon-sources">Waves: Interference Patterns from Regular Polygon Sources</h1>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>Analyze interference patterns created by wave sources placed at the vertices of a regular polygon on a water surface. The superposition of these circular waves produces distinctive patterns of constructive and destructive interference.</p>
+<h2 id="wave-equation-for-single-source">Wave Equation for Single Source</h2>
+<p>Each point source at vertex position <span class="arithmatex">\((x_i, y_i)\)</span> generates a circular wave described by:</p>
 <div class="arithmatex">\[
-\psi(\mathbf{r}, t) = A \cdot \cos(k r - \omega t + \phi)
+\eta_i(x, y, t) = \frac{A}{\sqrt{r_i}} \cdot \cos(kr_i - \omega t + \phi)
 \]</div>
-<p>Where:
-- <span class="arithmatex">\( \psi(\mathbf{r}, t) \)</span> is the displacement of the water surface at point <span class="arithmatex">\( \mathbf{r} \)</span> and time <span class="arithmatex">\( t \)</span>
-- <span class="arithmatex">\( A \)</span> is the amplitude of the wave
-- <span class="arithmatex">\( k \)</span> is the wave number, related to the wavelength <span class="arithmatex">\( \lambda \)</span>, where <span class="arithmatex">\( k = \frac{2\pi}{\lambda} \)</span>
-- <span class="arithmatex">\( \omega \)</span> is the angular frequency, related to the frequency <span class="arithmatex">\( f \)</span>, where <span class="arithmatex">\( \omega = 2\pi f \)</span>
-- <span class="arithmatex">\( r \)</span> is the distance from the source to the observation point
-- <span class="arithmatex">\( \phi \)</span> is the initial phase of the wave</p>
-<h3 id="superposition-principle">Superposition Principle</h3>
-<p>The principle of superposition states that when multiple waves overlap, the resulting displacement is the sum of the displacements from all individual waves. Thus, for <span class="arithmatex">\( N \)</span> sources located at the vertices of a regular polygon, the total displacement at a point on the surface is:</p>
+<p>where:
+- <span class="arithmatex">\(r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}\)</span> (distance from source <span class="arithmatex">\(i\)</span>)
+- <span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span> (wavenumber)
+- <span class="arithmatex">\(\omega = 2\pi f\)</span> (angular frequency)
+- <span class="arithmatex">\(\phi\)</span> = initial phase (same for all sources)</p>
+<h2 id="solution-methodology">Solution Methodology</h2>
+<h3 id="1-regular-polygon-configuration">1. Regular Polygon Configuration</h3>
+<p>For an N-sided regular polygon with radius <span class="arithmatex">\(R\)</span>:
+- Vertex positions: <span class="arithmatex">\((x_i, y_i) = (R\cos\theta_i, R\sin\theta_i)\)</span>
+- <span class="arithmatex">\(\theta_i = \frac{2\pi i}{N}\)</span> for <span class="arithmatex">\(i = 0,1,...,N-1\)</span></p>
+<h3 id="2-superposition-principle">2. Superposition Principle</h3>
+<p>Total wave displacement at any point:</p>
 <div class="arithmatex">\[
-\Psi(\mathbf{r}, t) = \sum_{i=1}^{N} A_i \cdot \cos(k r_i - \omega t + \phi_i)
+\eta_{\text{sum}}(x, y, t) = \sum_{i=0}^{N-1} \frac{A}{\sqrt{r_i}} \cos(kr_i - \omega t)
 \]</div>
-<p>Where:
-- <span class="arithmatex">\( N \)</span> is the number of sources (vertices of the polygon)
-- <span class="arithmatex">\( A_i \)</span>, <span class="arithmatex">\( r_i \)</span>, and <span class="arithmatex">\( \phi_i \)</span> are the amplitude, distance, and initial phase of the wave from the <span class="arithmatex">\( i^{th} \)</span> source, respectively.</p>
-<h3 id="interference-patterns">Interference Patterns</h3>
+<h3 id="3-interference-analysis">3. Interference Analysis</h3>
 <ul>
-<li><strong>Constructive Interference</strong>: Occurs when the waves from different sources are in phase, leading to wave reinforcement and higher displacement.</li>
-<li><strong>Destructive Interference</strong>: Occurs when the waves are out of phase, leading to wave cancellation and lower displacement.</li>
+<li><strong>Constructive Interference</strong>: Occurs when wave crests align
+  [
+  \Delta r = n\lambda \quad (n \in \mathbb{Z})
+  ]</li>
+<li><strong>Destructive Interference</strong>: Occurs when crests meet troughs
+  [
+  \Delta r = (n + \frac{1}{2})\lambda
+  ]</li>
 </ul>
-<p>The interference pattern depends on the relative phase and position of the sources and the observation point.</p>
-<hr/>
-<h2 id="2-simulation-and-visualization">2. Simulation and Visualization</h2>
-<h3 id="steps-to-implement">Steps to Implement:</h3>
+<h2 id="example-equilateral-triangle-n3">Example: Equilateral Triangle (N=3)</h2>
+<h3 id="vertex-positions">Vertex Positions</h3>
+<div class="arithmatex">\[
+\begin{cases}
+(x_0, y_0) = (R, 0) \\
+(x_1, y_1) = (-\frac{R}{2}, \frac{R\sqrt{3}}{2}) \\
+(x_2, y_2) = (-\frac{R}{2}, -\frac{R\sqrt{3}}{2})
+\end{cases}
+\]</div>
+<h3 id="characteristic-patterns">Characteristic Patterns</h3>
 <ol>
-<li><strong>Choose a Regular Polygon</strong>: For simplicity, we will use a square (4 vertices).</li>
-<li><strong>Position the Sources</strong>: The point sources are placed at the vertices of the square.</li>
-<li><strong>Write the Wave Equations</strong>: For each source, the wave will follow the equation described above.</li>
-<li><strong>Apply Superposition</strong>: Sum the contributions from all sources at each point on the water surface.</li>
-<li><strong>Analyze the Resulting Pattern</strong>: Observe regions of constructive and destructive interference.</li>
+<li><strong>Central Region</strong>: </li>
+<li>Symmetric interference</li>
+<li>
+<p>Six-fold pattern of maxima/minima</p>
+</li>
+<li>
+<p><strong>Edge Regions</strong>:</p>
+</li>
+<li>Complex interference fringes</li>
+<li>Directional propagation patterns</li>
 </ol>
-<hr/>
-<h2 id="3-python-implementation">3. Python Implementation</h2>
-<p>Below is a Python script that simulates the interference pattern of waves emitted from the vertices of a square (or any regular polygon). It uses the <strong>matplotlib</strong> library for visualization and <strong>numpy</strong> for numerical calculations.</p>
-<p>```python
-import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="constants">Constants</h1>
-<p>A = 1        # Amplitude of the waves
-k = 2 * np.pi / 1.0  # Wave number (assuming wavelength = 1 meter)
-omega = 2 * np.pi  # Angular frequency (assuming frequency = 1 Hz)
-phi = 0      # Initial phase of the waves</p>
-<h1 id="set-up-the-grid-for-the-water-surface">Set up the grid for the water surface</h1>
-<p>x_max, y_max = 10, 10  # Size of the water surface grid (10m x 10m)
-x = np.linspace(-x_max, x_max, 500)
-y = np.linspace(-y_max, y_max, 500)
-X, Y = np.meshgrid(x, y)</p>
-<h1 id="define-the-number-of-sources-and-their-positions-for-a-square">Define the number of sources and their positions for a square</h1>
-<p>N_sources = 4  # Number of sources (vertices of a square)
-radius = 5     # Distance from the center to the sources</p>
-<h1 id="positions-of-the-sources-vertices-of-a-square">Positions of the sources (vertices of a square)</h1>
-<p>angles = np.linspace(0, 2 * np.pi, N_sources, endpoint=False)
-source_positions = np.array([radius * np.cos(angles), radius * np.sin(angles)])</p>
-<h1 id="superposition-of-waves-from-all-sources">Superposition of waves from all sources</h1>
-<p>def wave_sum(X, Y, source_positions, A, k, omega, phi):
-    total_displacement = np.zeros(X.shape)</p>
-<pre><code>for i in range(N_sources):
-    # Calculate distance from each source to each point on the grid
-    r = np.sqrt((X - source_positions[0, i])**2 + (Y - source_positions[1, i])**2)
-
-    # Calculate the wave displacement for this source
-    displacement = A * np.cos(k * r - omega * 0 + phi)  # Assuming t = 0 for simplicity
-    total_displacement += displacement  # Sum the displacements
-
-return total_displacement
-</code></pre>
-<h1 id="calculate-the-wave-displacement-on-the-water-surface">Calculate the wave displacement on the water surface</h1>
-<p>Z = wave_sum(X, Y, source_positions, A, k, omega, phi)</p>
-<h1 id="plotting-the-interference-pattern">Plotting the interference pattern</h1>
-<p>plt.figure(figsize=(8, 6))
-plt.contourf(X, Y, Z, cmap='seismic', levels=np.linspace(-4, 4, 50))
-plt.colorbar(label='Displacement')
-plt.title('Interference Pattern of Waves from Square Sources')
-plt.xlabel('x (m)')
-plt.ylabel('y (m)')
-plt.show()</p>
-<p>YEPP</p>
+<h2 id="visualization-approach">Visualization Approach</h2>
+<ol>
+<li><strong>Spatial Map</strong>:</li>
+<li>Plot <span class="arithmatex">\(|\eta_{\text{sum}}|\)</span> over a grid</li>
+<li>
+<p>Color mapping for wave amplitude</p>
+</li>
+<li>
+<p><strong>Time Evolution</strong>:</p>
+</li>
+<li>Animate wave propagation</li>
+<li>Highlight phase relationships</li>
+</ol>
+<h2 id="key-findings">Key Findings</h2>
+<table>
+<thead>
+<tr>
+<th>Polygon Type</th>
+<th>Characteristic Pattern</th>
+<th>Notable Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Triangle (3)</td>
+<td>6-fold symmetry</td>
+<td>Strong central interference</td>
+</tr>
+<tr>
+<td>Square (4)</td>
+<td>8-lobed pattern</td>
+<td>Clear diagonal maxima</td>
+</tr>
+<tr>
+<td>Pentagon (5)</td>
+<td>10-armed spiral</td>
+<td>Rotating interference bands</td>
+</tr>
+</tbody>
+</table>
+<h2 id="physical-interpretation">Physical Interpretation</h2>
+<ol>
+<li><strong>Symmetry Effects</strong>:</li>
+<li>N sources → 2N-fold interference symmetry</li>
+<li>
+<p>Polygon rotation preserved in pattern</p>
+</li>
+<li>
+<p><strong>Distance Decay</strong>:</p>
+</li>
+<li><span class="arithmatex">\(\frac{1}{\sqrt{r}}\)</span> amplitude decay</li>
+<li>Far-field pattern simplification</li>
+</ol>
+<h2 id="deliverables">Deliverables</h2>
+<ol>
+<li><strong>Mathematical Analysis</strong>:</li>
+<li>Complete derivation of superposition</li>
+<li>
+<p>Phase difference calculations</p>
+</li>
+<li>
+<p><strong>Visualizations</strong>:</p>
+</li>
+<li>Static interference patterns</li>
+<li>
+<p>Time evolution animations</p>
+</li>
+<li>
+<p><strong>Discussion</strong>:</p>
+</li>
+<li>Comparison of different polygons</li>
+<li>Real-world water wave analogs</li>
+</ol>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
