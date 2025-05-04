@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Gravity 1: Kepler's Third Law and Orbital Mechanics - Physics and Mathematics</title>
+<title>Projection 3: Trajectories of a Freely Released Payload Near Earth - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Gravity 1: Kepler\u0027s Third Law and Orbital Mechanics";
+        var mkdocs_page_name = "Projection 3: Trajectories of a Freely Released Payload Near Earth";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_3.md";
         var mkdocs_page_url = null;
       </script>
@@ -58,17 +58,19 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Escape Velocities and Cosmic Velocities</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Gravity 1: Kepler's Third Law and Orbital Mechanics</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Projection 3: Trajectories of a Freely Released Payload Near Earth</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#problem-1-orbital-period-and-orbital-radius">Problem 1: Orbital Period and Orbital Radius</a>
+<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#task-1-trajectory-analysis">Task 1: Trajectory Analysis</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#task-2-numerical-analysis">Task 2: Numerical Analysis</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#task-3-trajectory-scenarios">Task 3: Trajectory Scenarios</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#task-4-computational-tool-python-implementation">Task 4: Computational Tool (Python Implementation)</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#1-derivation-of-keplers-third-law-for-circular-orbits">1. Derivation of Kepler's Third Law for Circular Orbits</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#2-implications-for-astronomy">2. Implications for Astronomy</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#3-real-world-examples">3. Real-World Examples</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#4-computational-model-python-implementation">4. Computational Model (Python Implementation)</a>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a>
 </li>
 </ul>
 </li>
@@ -175,7 +177,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Gravity 1: Kepler's Third Law and Orbital Mechanics</li>
+<li class="breadcrumb-item active">Projection 3: Trajectories of a Freely Released Payload Near Earth</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -183,75 +185,77 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="gravity-1-keplers-third-law-and-orbital-mechanics">Gravity 1: Kepler's Third Law and Orbital Mechanics</h1>
-<h2 id="problem-1-orbital-period-and-orbital-radius">Problem 1: Orbital Period and Orbital Radius</h2>
-<h3 id="1-derivation-of-keplers-third-law-for-circular-orbits">1. Derivation of Kepler's Third Law for Circular Orbits</h3>
-<p>For a celestial body of mass <span class="arithmatex">\( m \)</span> orbiting a much larger mass <span class="arithmatex">\( M \)</span> (e.g., a planet around the Sun) in a circular orbit of radius <span class="arithmatex">\( r \)</span>, the gravitational force provides the centripetal force:</p>
-<div class="arithmatex">\[
-\frac{GMm}{r^2} = \frac{mv^2}{r}
-\]</div>
-<p>Where:
-- <span class="arithmatex">\( G \)</span> is the gravitational constant,
-- <span class="arithmatex">\( v \)</span> is the orbital velocity.</p>
-<p>The orbital velocity can be expressed in terms of the orbital period <span class="arithmatex">\( T \)</span>:</p>
-<div class="arithmatex">\[
-v = \frac{2\pi r}{T}
-\]</div>
-<p>Substituting <span class="arithmatex">\( v \)</span> into the force balance equation:</p>
-<div class="arithmatex">\[
-\frac{GMm}{r^2} = \frac{m(2\pi r / T)^2}{r}
-\]</div>
-<p>Simplifying:</p>
-<div class="arithmatex">\[
-\frac{GM}{r^2} = \frac{4\pi^2 r}{T^2}
-\]</div>
-<p>Rearranging to isolate <span class="arithmatex">\( T^2 \)</span>:</p>
-<div class="arithmatex">\[
-T^2 = \frac{4\pi^2 r^3}{GM}
-\]</div>
-<p>This is Kepler's Third Law for circular orbits, showing that <span class="arithmatex">\( T^2 \propto r^3 \)</span>.</p>
+<h1 id="projection-3-trajectories-of-a-freely-released-payload-near-earth">Projection 3: Trajectories of a Freely Released Payload Near Earth</h1>
+<h2 id="motivation">Motivation</h2>
+<p>When a payload is released from a moving rocket near Earth, its trajectory is determined by initial conditions (position, velocity, altitude) and Earth's gravitational pull. Understanding these trajectories is crucial for applications like satellite deployment, space missions, and reentry scenarios. This project combines orbital mechanics and numerical methods to simulate and analyze payload motion.</p>
 <hr/>
-<h3 id="2-implications-for-astronomy">2. Implications for Astronomy</h3>
-<p>Kepler's Third Law is pivotal in astronomy for:
-- <strong>Calculating Planetary Masses:</strong> By observing <span class="arithmatex">\( T \)</span> and <span class="arithmatex">\( r \)</span> for a moon orbiting a planet, we can solve for the planet's mass <span class="arithmatex">\( M \)</span>.
-- <strong>Determining Distances:</strong> The law helps estimate the semi-major axis of exoplanets or binary star systems when <span class="arithmatex">\( T \)</span> is known.
-- <strong>Understanding Dynamics:</strong> It underpins models of galactic rotation curves and dark matter distributions.</p>
+<h2 id="task-1-trajectory-analysis">Task 1: Trajectory Analysis</h2>
+<p>Possible trajectories of a payload under Earth's gravity depend on its initial velocity <span class="arithmatex">\( v \)</span>:<br/>
+- <strong>Elliptical Orbit:</strong> <span class="arithmatex">\( v &lt; v_{\text{escape}} \)</span> (bound trajectory).<br/>
+- <strong>Parabolic Trajectory:</strong> <span class="arithmatex">\( v = v_{\text{escape}} \)</span> (marginally unbound).<br/>
+- <strong>Hyperbolic Trajectory:</strong> <span class="arithmatex">\( v &gt; v_{\text{escape}} \)</span> (unbound, escape velocity).  </p>
+<p><strong>Escape Velocity:</strong><br/>
+[
+v_{\text{escape}} = \sqrt{\frac{2GM_{\text{Earth}}}{r}}
+]<br/>
+Where <span class="arithmatex">\( r \)</span> is the distance from Earth's center.</p>
 <hr/>
-<h3 id="3-real-world-examples">3. Real-World Examples</h3>
+<h2 id="task-2-numerical-analysis">Task 2: Numerical Analysis</h2>
+<p>The payload's motion is governed by Newton's law of gravitation:<br/>
+[
+\frac{d^2 \mathbf{r}}{dt^2} = -\frac{GM_{\text{Earth}}}{r^3} \mathbf{r}
+]<br/>
+We solve this ODE numerically using the <strong>Runge-Kutta 4th-order (RK4)</strong> method.</p>
+<hr/>
+<h2 id="task-3-trajectory-scenarios">Task 3: Trajectory Scenarios</h2>
 <ul>
-<li>
-<p><strong>Moon-Earth System:</strong><br/>
-  The Moon's orbital period (<span class="arithmatex">\( T \approx 27.3 \)</span> days) and average distance (<span class="arithmatex">\( r \approx 384,400 \)</span> km) align with Kepler's law when Earth's mass is plugged in.</p>
-</li>
-<li>
-<p><strong>Solar System Planets:</strong><br/>
-  For Earth, <span class="arithmatex">\( T^2 \approx 1 \)</span> year<span class="arithmatex">\(^2\)</span> and <span class="arithmatex">\( r^3 \approx 1 \)</span> AU<span class="arithmatex">\(^3\)</span>, confirming the proportionality. Data for other planets (e.g., Mars, Jupiter) similarly fit.</p>
-</li>
+<li><strong>Orbital Insertion:</strong> Sub-escape velocity → elliptical orbit.  </li>
+<li><strong>Reentry:</strong> Low velocity with atmospheric drag → decayed orbit.  </li>
+<li><strong>Escape:</strong> Hyperbolic trajectory if <span class="arithmatex">\( v \geq v_{\text{escape}} \)</span>.</li>
 </ul>
 <hr/>
-<h3 id="4-computational-model-python-implementation">4. Computational Model (Python Implementation)</h3>
+<h2 id="task-4-computational-tool-python-implementation">Task 4: Computational Tool (Python Implementation)</h2>
+<h3 id="code">Code</h3>
 <p>```python
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.constants import G</p>
-<h1 id="constants-si-units">Constants (SI units)</h1>
-<p>M_sun = 1.989e30  # Mass of the Sun</p>
-<p>def orbital_period(r, M=M_sun):
-    """Calculate orbital period for circular orbit."""
-    return np.sqrt(4 * np.pi<strong>2 * r</strong>3 / (G * M))</p>
-<h1 id="example-earths-orbit-r-1-au-in-meters">Example: Earth's orbit (r = 1 AU in meters)</h1>
-<p>r_earth = 1.496e11<br/>
-T_earth = orbital_period(r_earth)
-print(f"Earth's orbital period: {T_earth / (60<em>60</em>24):.2f} days")</p>
-<h1 id="plot-t2-vs-r3-for-varying-radii">Plot T^2 vs. r^3 for varying radii</h1>
-<p>radii = np.linspace(1e10, 5e11, 100)  # 0.1 AU to 5 AU
-periods = orbital_period(radii)
-plt.figure(figsize=(8, 5))
-plt.plot(radii<strong>3, periods</strong>2, 'b-')
-plt.xlabel('Orbital Radius Cubed (r³) [m³]')
-plt.ylabel('Orbital Period Squared (T²) [s²]')
-plt.title("Kepler's Third Law: T² ∝ r³")
-plt.grid(True)
+from scipy.constants import G
+from scipy.integrate import solve_ivp</p>
+<h1 id="constants">Constants</h1>
+<p>M_earth = 5.972e24  # kg
+R_earth = 6.371e6   # m</p>
+<p>def equations_of_motion(t, y):
+    """ODE system for payload motion: dy/dt = [velocity, acceleration]."""
+    r = np.array(y[:3])
+    v = np.array(y[3:])
+    r_norm = np.linalg.norm(r)
+    a = -G * M_earth * r / r_norm**3
+    return np.concatenate((v, a))</p>
+<p>def simulate_trajectory(initial_pos, initial_vel, t_span=(0, 10000), dt=10):
+    """Simulate payload trajectory using RK4."""
+    sol = solve_ivp(
+        equations_of_motion,
+        t_span,
+        np.concatenate((initial_pos, initial_vel)),
+        t_eval=np.arange(t_span[0], t_span[1], dt),
+        method='RK45'
+    )
+    return sol.y[:3, :]  # Return position vectors</p>
+<h1 id="example-payload-released-at-500-km-altitude">Example: Payload released at 500 km altitude</h1>
+<p>altitude = 500e3  # 500 km
+initial_pos = np.array([R_earth + altitude, 0, 0])
+initial_vel = np.array([0, 7.5e3, 0])  # 7.5 km/s (elliptical orbit)</p>
+<p>trajectory = simulate_trajectory(initial_pos, initial_vel)</p>
+<h1 id="visualization">Visualization</h1>
+<p>fig = plt.figure(figsize=(10, 8))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(trajectory[0], trajectory[1], trajectory[2], 'b-', label='Payload Trajectory')
+ax.scatter(0, 0, 0, color='green', s=100, label='Earth')
+ax.set_xlabel('X [m]')
+ax.set_ylabel('Y [m]')
+ax.set_zlabel('Z [m]')
+ax.set_title('Payload Trajectory Near Earth')
+ax.legend()
 plt.show()</p>
 </div>
 </div><footer>
