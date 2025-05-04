@@ -16,46 +16,16 @@ The Lorentz force, given by \(\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mat
 
 ---
 
-## Python Simulation
+FUNCTION lorentz_force(q, E, v, B):
+    RETURN q * (E + cross_product(v, B))
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+FUNCTION simulate_trajectory(q, m, E, B, v0, dt, steps):
+    INITIALIZE r[steps][3], v[steps][3]
+    SET r[0] = [0, 0, 0], v[0] = v0
 
-def lorentz_force(q, E, v, B):
-    """Compute the Lorentz force on a charged particle."""
-    return q * E + q * np.cross(v, B)
-
-def simulate_trajectory(q, m, E, B, v0, dt=0.01, steps=1000):
-    """Simulate particle trajectory using the Runge-Kutta method."""
-    r = np.zeros((steps, 3))
-    v = np.zeros((steps, 3))
-    r[0], v[0] = np.array([0, 0, 0]), v0
-
-    for i in range(1, steps):
-        F = lorentz_force(q, E, v[i-1], B)
-        a = F / m
+    FOR i FROM 1 TO steps:
+        a = lorentz_force(q, E, v[i-1], B) / m
         v[i] = v[i-1] + a * dt
         r[i] = r[i-1] + v[i] * dt
 
-    return r
-
-# Example: Uniform magnetic field (Bz) with initial velocity (vx, 0, 0)
-q, m = 1.6e-19, 9.1e-31  # Charge of electron, mass of electron
-E = np.array([0, 0, 0])
-B = np.array([0, 0, 1e-3])  # 1 mT in z-direction
-v0 = np.array([1e6, 0, 0])  # Initial velocity: 1e6 m/s along x
-
-trajectory = simulate_trajectory(q, m, E, B, v0)
-
-# Plotting
-fig = plt.figure(figsize=(10, 6))
-ax = fig.add_subplot(111, projection='3d')
-ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], label='Particle Path')
-ax.set_xlabel('X (m)')
-ax.set_ylabel('Y (m)')
-ax.set_zlabel('Z (m)')
-ax.set_title('Particle Trajectory in Uniform Magnetic Field')
-plt.legend()
-plt.show()
+    RETURN r
