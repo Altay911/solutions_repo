@@ -1,43 +1,116 @@
-# Electromagnetism 1: Simulating Lorentz Force Effects
+# Electromagnetism 1: Lorentz Force Simulations (Pure Theory)
 
-## Problem Statement
-Simulate and analyze the motion of charged particles under various electromagnetic field configurations governed by the Lorentz force:
+## Analytical Solutions for Common Configurations
+
+### 1. Uniform Magnetic Field (𝐁 = Bẑ)
+**Trajectory Equations**:
 \[
-\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}
+\begin{cases}
+x(t) = r_L \sin(\omega_c t) \\
+y(t) = r_L [1 - \cos(\omega_c t)] \\
+z(t) = v_{\parallel} t
+\end{cases}
 \]
+where:
+- \( r_L = \frac{mv_\perp}{qB} \) (Larmor radius)
+- \( \omega_c = \frac{qB}{m} \) (Cyclotron frequency)
 
-## Physics Foundations
+### 2. Crossed Fields (𝐄 = Eŷ, 𝐁 = Bẑ)
+**Drift Motion Solution**:
+\[
+\mathbf{r}(t) = 
+\begin{pmatrix}
+\frac{E}{B}t - r_L \sin(\omega_c t) \\
+r_L \cos(\omega_c t) \\
+0
+\end{pmatrix}
+\]
+**Key Features**:
+- E×B drift velocity: \( v_E = E/B \)
+- Superimposed cyclotron motion
 
-### Key Equations
-1. **Lorentz Force**:
+## Phase Space Analysis
+
+### Conservation Laws
+1. **Energy**:
    \[
-   \mathbf{F} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})
+   \frac{1}{2}mv^2 + q\phi = \text{constant}
    \]
-2. **Equations of Motion**:
+2. **Magnetic Moment** (Adiabatic Invariant):
    \[
-   \frac{d\mathbf{v}}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v} \times \mathbf{B})
+   \mu = \frac{mv_\perp^2}{2B}
    \]
+
+### Characteristic Scales
+| Quantity | Expression | Physical Meaning |
+|----------|------------|------------------|
+| Larmor radius | \( r_L = \frac{mv_\perp}{|q|B} \) | Gyration scale |
+| Drift velocity | \( v_E = \frac{E}{B} \) | Cross-field drift |
+| Cyclotron period | \( T_c = \frac{2\pi m}{|q|B} \) | Rotation timescale |
+
+## Visualization Methodology
+
+### 1. Graphical Construction
+- **2D Plots**: Parametric plots of (x(t), y(t))
+- **3D Trajectories**: Helix equations with pitch \( h = 2\pi v_\parallel/\omega_c \)
+- **Phase Portraits**: Plot vₓ vs x for oscillatory motion
+
+### 2. Key Features to Highlight
+- **Guiding Center Motion**: Average position of gyrating particle
+- **Drift Separation**: E×B vs grad-B drifts
+- **Magnetic Mirroring**: Velocity space plots
+
+## Practical Systems Analysis
+
+### Cyclotron Operation
+1. **Resonance Condition**:
    \[
-   \frac{d\mathbf{r}}{dt} = \mathbf{v}
+   \omega_{RF} = \omega_c = \frac{qB}{m}
+   \]
+2. **Energy Gain**:
+   \[
+   \Delta E = 2qV_0 \text{ per revolution}
    \]
 
-### Characteristic Motions
-| Field Configuration | Particle Trajectory | Physical Parameters |
-|---------------------|---------------------|---------------------|
-| Pure \(\mathbf{B}\) | Circular/Helical | Larmor radius \(r_L = \frac{mv_\perp}{|q|B}\) |
-| \(\mathbf{E} + \mathbf{B}\) | Drift motion | \(\mathbf{v}_E = \frac{\mathbf{E} \times \mathbf{B}}{B^2}\) |
-| Crossed fields | Cycloid | Drift velocity dependent on \(E/B\) ratio |
+### Mass Spectrometer
+- **Mass-to-Charge Resolution**:
+  \[
+  \frac{m}{q} = \frac{B^2 r^2}{2V}
+  \]
+- **Detection Principle**: Spatial separation by rₗ
 
-## Numerical Implementation
+## Deliverables
 
-### Simulation Algorithm (Runge-Kutta 4th Order)
-```python
-# Pseudocode for RK4 implementation
-def lorentz_force(q, m, E, B, v):
-    return q*(E + np.cross(v,B)) / m
+1. **Analytical Derivations**:
+   - Complete solutions for 5 field configurations
+   - Dimensional analysis of parameters
 
-def rk4_step(r, v, dt, q, m, E, B):
-    k1v = lorentz_force(q, m, E, B, v)
-    k1r = v
-    # ... complete RK4 steps ...
-    return r_new, v_new
+2. **Hand-Drawn Visualizations**:
+   - Trajectory diagrams with labeled components
+   - Comparative plots of different drift types
+
+3. **Physics Interpretation**:
+   - Table linking mathematical terms to physical effects
+   - Case study explanations (e.g., aurora formation)
+
+4. **Extensions**:
+   - Relativistic corrections framework
+   - Non-uniform field perturbation theory
+
+## Execution Framework
+
+1. **Coordinate Systems**:
+   - Frenet-Serret frame for curved 𝐁
+   - Field-aligned coordinates
+
+2. **Dimensionless Parameters**:
+   \[
+   \epsilon = \frac{E}{v_0 B}, \quad \rho = \frac{r_L}{L}
+   \]
+   where L is system scale length
+
+3. **Validation Checks**:
+   - Energy conservation proofs
+   - Limit case comparisons (E→0, B→0)
+
+This theoretical approach provides complete analytical understanding without computational tools, focusing on fundamental physics and mathematical modeling.
