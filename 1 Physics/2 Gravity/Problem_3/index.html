@@ -63,12 +63,22 @@
 <li class="toctree-l3"><a class="reference internal" href="#analysis-of-possible-trajectories">Analysis of Possible Trajectories</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#key-physics-principles">Key Physics Principles</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#gravitational-force">Gravitational Force</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#critical-velocities">Critical Velocities</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#energy-considerations">Energy Considerations</a>
+</li>
+</ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#numerical-approach-conceptual">Numerical Approach (Conceptual)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#equations-of-motion">Equations of Motion</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#trajectory-scenarios">Trajectory Scenarios</a>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-steps">Implementation Steps</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
+</ul>
 </li>
 </ul>
 </li>
@@ -183,108 +193,73 @@
 <div class="section" itemprop="articleBody">
 <h1 id="problem-3-trajectories-of-a-freely-released-payload-near-earth">Problem 3: Trajectories of a Freely Released Payload Near Earth</h1>
 <h2 id="analysis-of-possible-trajectories">Analysis of Possible Trajectories</h2>
-<p>When a payload is released near Earth, its trajectory depends on initial velocity and position. The possible trajectories are:</p>
-<ol>
-<li><strong>Elliptical Orbit</strong>: Velocity below escape velocity but sufficient to orbit.</li>
-<li><strong>Circular Orbit</strong>: Perfectly balanced velocity for a circular path.</li>
-<li><strong>Parabolic Trajectory</strong>: Exactly at escape velocity.</li>
-<li><strong>Hyperbolic Trajectory</strong>: Velocity exceeds escape velocity.</li>
-<li><strong>Suborbital/Reentry</strong>: Velocity too low to maintain orbit.</li>
-</ol>
-<h2 id="key-physics-principles">Key Physics Principles</h2>
-<ul>
-<li>
-<p><strong>Newton's Law of Gravitation</strong>:
-  [
-  F = G \frac{m_1 m_2}{r^2}
-  ]</p>
-</li>
-<li>
-<p><strong>Escape Velocity</strong>:
-  [
-  v_{\text{escape}} = \sqrt{\frac{2GM}{r}}
-  ]</p>
-</li>
-<li>
-<p><strong>Circular Orbit Velocity</strong>:
-  [
-  v_{\text{circ}} = \sqrt{\frac{GM}{r}}
-  ]</p>
-</li>
-</ul>
-<h2 id="numerical-approach-conceptual">Numerical Approach (Conceptual)</h2>
+<p>When a payload is released near Earth, its trajectory is determined by the balance between its initial velocity and Earth's gravitational pull. The possible trajectories are:</p>
 <ol>
 <li>
-<p><strong>Equations of Motion</strong>:
+<p><strong>Elliptical Orbit</strong>: Occurs when the payload's velocity is below escape velocity but sufficient to maintain an orbit. The shape becomes more elongated as velocity increases toward escape velocity.</p>
+</li>
+<li>
+<p><strong>Circular Orbit</strong>: A special case of elliptical orbit where velocity is perfectly perpendicular to gravity with magnitude:
    [
-   \frac{d^2 \vec{r}}{dt^2} = -\frac{GM}{r^3} \vec{r}
+   v_{\text{circ}} = \sqrt{\frac{GM}{r}}
    ]</p>
 </li>
 <li>
-<p><strong>Initial Conditions</strong>:</p>
-</li>
-<li>Altitude (<span class="arithmatex">\(h\)</span>)</li>
-<li>Speed (<span class="arithmatex">\(v_0\)</span>)</li>
-<li>
-<p>Flight path angle (<span class="arithmatex">\(\theta\)</span>)</p>
+<p><strong>Parabolic Trajectory</strong>: Achieved exactly at escape velocity. The payload will theoretically never return.</p>
 </li>
 <li>
-<p><strong>Iterative Solution</strong>:</p>
+<p><strong>Hyperbolic Trajectory</strong>: Occurs when velocity exceeds escape velocity. The payload will escape Earth's gravitational influence entirely.</p>
 </li>
-<li>Update velocity and position at each time step <span class="arithmatex">\(\Delta t\)</span>:
-     [
-     \vec{v}<em>{n+1} = \vec{v}_n + \vec{a}_n \Delta t
-     ]
-     [
-     \vec{r}</em>{n+1} = \vec{r}_n + \vec{v}_n \Delta t
-     ]</li>
+<li>
+<p><strong>Suborbital/Reentry</strong>: If velocity is insufficient for orbit, the payload follows a ballistic arc and reenters the atmosphere.</p>
+</li>
 </ol>
-<h2 id="trajectory-scenarios">Trajectory Scenarios</h2>
-<table>
-<thead>
-<tr>
-<th>Scenario</th>
-<th>Condition</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Stable Orbit</td>
-<td><span class="arithmatex">\(v_0 \approx v_{\text{circ}}\)</span></td>
-<td>Elliptical/Circular</td>
-</tr>
-<tr>
-<td>Reentry</td>
-<td><span class="arithmatex">\(v_0 \ll v_{\text{circ}}\)</span></td>
-<td>Suborbital</td>
-</tr>
-<tr>
-<td>Escape</td>
-<td><span class="arithmatex">\(v_0 \geq v_{\text{escape}}\)</span></td>
-<td>Hyperbolic</td>
-</tr>
-</tbody>
-</table>
-<h2 id="deliverables">Deliverables</h2>
+<h2 id="key-physics-principles">Key Physics Principles</h2>
+<h3 id="gravitational-force">Gravitational Force</h3>
+<p>[
+F = G \frac{m_1 m_2}{r^2}
+]
+- <span class="arithmatex">\(G\)</span>: Gravitational constant
+- <span class="arithmatex">\(m_1, m_2\)</span>: Masses of Earth and payload
+- <span class="arithmatex">\(r\)</span>: Distance between centers</p>
+<h3 id="critical-velocities">Critical Velocities</h3>
+<ul>
+<li><strong>Circular Orbit Velocity</strong>:
+  [
+  v_{\text{circ}} = \sqrt{\frac{GM}{r}}
+  ]</li>
+<li><strong>Escape Velocity</strong>:
+  [
+  v_{\text{escape}} = \sqrt{\frac{2GM}{r}}
+  ]</li>
+</ul>
+<h3 id="energy-considerations">Energy Considerations</h3>
+<p>Total orbital energy determines trajectory shape:
+- Negative: Elliptical/Circular (bound orbit)
+- Zero: Parabolic (escape)
+- Positive: Hyperbolic (escape with excess energy)</p>
+<h2 id="numerical-approach-conceptual">Numerical Approach (Conceptual)</h2>
+<h3 id="equations-of-motion">Equations of Motion</h3>
+<p>[
+\frac{d^2 \vec{r}}{dt^2} = -\frac{GM}{r^3} \vec{r}
+]
+This second-order differential equation describes the payload's acceleration due to gravity.</p>
+<h3 id="implementation-steps">Implementation Steps</h3>
 <ol>
-<li><strong>Physics Explanation</strong>:</li>
-<li>Gravitational forces</li>
+<li><strong>Initial Conditions</strong>:</li>
+<li>Position: <span class="arithmatex">\(\vec{r}_0 = (R_E + h, 0)\)</span></li>
 <li>
-<p>Orbital mechanics</p>
+<p>Velocity: <span class="arithmatex">\(\vec{v}_0 = (v_0 \cos \theta, v_0 \sin \theta)\)</span></p>
 </li>
 <li>
-<p><strong>Visualizations</strong>:</p>
+<p><strong>Numerical Integration</strong> (Euler method example):
+   ```python
+   # Pseudocode
+   for each time step:
+       a = -GM * r / norm(r)^3
+       v += a * dt
+       r += v * dt</p>
 </li>
-<li>Trajectory plots</li>
-<li>
-<p>Velocity vs. altitude</p>
-</li>
-<li>
-<p><strong>Applications</strong>:</p>
-</li>
-<li>Payload deployment</li>
-<li>Reentry vehicles</li>
 </ol>
 </div>
 </div><footer>
