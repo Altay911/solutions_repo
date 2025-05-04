@@ -270,44 +270,33 @@ T^2 = \frac{4\pi^2}{GM} r^3
 </tbody>
 </table>
 <h2 id="4-computational-model">4. Computational Model</h2>
-<h1 id="keplers-third-law-computational-model">Kepler's Third Law Computational Model</h1>
+<h1 id="simple-keplers-law-calculator-just-copy-all-below">SIMPLE KEPLER'S LAW CALCULATOR (JUST COPY ALL BELOW)</h1>
 <p>import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import G</p>
-<p>def orbital_period(radius, central_mass):
-    """Calculate orbital period for circular orbit using Kepler's Third Law"""
-    return 2 * np.pi * np.sqrt(radius**3 / (G * central_mass))</p>
-<h1 id="constants-for-earth">Constants for Earth</h1>
+<h1 id="earth-data">Earth data</h1>
 <p>EARTH_MASS = 5.972e24  # kg
-EARTH_RADIUS = 6.371e6  # meters</p>
-<h1 id="create-range-of-orbital-radii-from-160km-to-geo">Create range of orbital radii (from 160km to GEO)</h1>
-<p>altitudes = np.linspace(160e3, 42164e3 - EARTH_RADIUS, 100)  # in meters
-radii = EARTH_RADIUS + altitudes  # actual orbital radii</p>
-<h1 id="calculate-periods-in-seconds-then-convert-to-hours">Calculate periods in seconds then convert to hours</h1>
-<p>periods_seconds = orbital_period(radii, EARTH_MASS)
-periods_hours = periods_seconds / 3600</p>
-<h1 id="create-the-plot">Create the plot</h1>
-<p>plt.figure(figsize=(10, 6))
-plt.plot(radii/1000, periods_hours, 'b-', linewidth=2)
-plt.title("Orbital Period vs. Radius (Kepler's Third Law)", fontsize=14)
-plt.xlabel('Orbital Radius (km)', fontsize=12)
-plt.ylabel('Orbital Period (hours)', fontsize=12)
-plt.grid(True, which='both', linestyle='--', alpha=0.7)
-plt.tight_layout()</p>
-<h1 id="add-some-reference-points">Add some reference points</h1>
-<p>plt.plot(radii[0]/1000, periods_hours[0], 'ro', label='LEO (160km)')
-plt.plot(radii[-1]/1000, periods_hours[-1], 'go', label='GEO (35,786km)')
-plt.legend()</p>
-<p>plt.show()</p>
-<h1 id="verification-with-known-values">Verification with known values</h1>
-<p>def print_verification(altitude_km):
-    r = EARTH_RADIUS + altitude_km * 1000
-    T = orbital_period(r, EARTH_MASS)/3600
-    print(f"Altitude {altitude_km} km: Period = {T:.2f} hours")</p>
-<p>print("\nVerification:")
-print_verification(400)  # ISS orbit
-print_verification(35786)  # GEO
-print_verification(384400)  # Moon orbit (~27.3 days expected)</p>
+EARTH_RADIUS = 6371000  # meters</p>
+<h1 id="function-to-calculate-period">Function to calculate period</h1>
+<p>def get_orbit_time(altitude_km):
+    radius = EARTH_RADIUS + altitude_km<em>1000
+    return 2</em>np.pi<em>np.sqrt(radius</em><em>3/(G</em>EARTH_MASS))/3600</p>
+<h1 id="make-the-plot">Make the plot</h1>
+<p>altitudes = np.linspace(160, 35786, 100)  # From 160km to GEO
+periods = [get_orbit_time(alt) for alt in altitudes]</p>
+<p>plt.figure(figsize=(10,5))
+plt.plot(altitudes, periods, 'b-')
+plt.title("Orbit Time vs Altitude")
+plt.xlabel("Altitude (km)")
+plt.ylabel("Orbit Time (hours)")
+plt.grid(True)
+plt.show()</p>
+<h1 id="check-some-real-values">Check some real values</h1>
+<p>print("\nReal orbit checks:")
+print(f"ISS (400km): {get_orbit_time(400):.2f} hours")
+print(f"GPS (20,200km): {get_orbit_time(20200):.2f} hours")
+print(f"GEO (35,786km): {get_orbit_time(35786):.2f} hours")
+print(f"Moon (384,400km): {get_orbit_time(384400):.2f} hours")</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
