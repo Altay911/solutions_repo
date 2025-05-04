@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Electromagnetism 1: Simulating Lorentz Force Effects - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Electromagnetism 1: Simulating Lorentz Force Effects";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,8 +70,24 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism 1: Simulating Lorentz Force Effects</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#physics-foundations">Physics Foundations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#key-equations">Key Equations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#characteristic-motions">Characteristic Motions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-implementation">Numerical Implementation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-algorithm-runge-kutta-4th-order">Simulation Algorithm (Runge-Kutta 4th Order)</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +179,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Electromagnetism 1: Simulating Lorentz Force Effects</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,107 +187,65 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
-<h1 id="simulating-the-effects-of-the-lorentz-force">Simulating the Effects of the Lorentz Force</h1>
-<h2 id="motivation">Motivation</h2>
-<p>The Lorentz force is the force experienced by a charged particle moving in an electric and magnetic field. The force is given by:</p>
-<div class="arithmatex">\[
-\mathbf{F} = q (\mathbf{E} + \mathbf{v} \times \mathbf{B})
-\]</div>
-<p>Where:
-- <span class="arithmatex">\( \mathbf{F} \)</span> is the Lorentz force,
-- <span class="arithmatex">\( q \)</span> is the charge of the particle,
-- <span class="arithmatex">\( \mathbf{E} \)</span> is the electric field,
-- <span class="arithmatex">\( \mathbf{v} \)</span> is the velocity of the particle,
-- <span class="arithmatex">\( \mathbf{B} \)</span> is the magnetic field.</p>
-<p>This force governs the motion of charged particles in fields and plays a key role in many physical systems, including particle accelerators, mass spectrometers, and plasma confinement devices. Simulations of the Lorentz force help visualize and explore the complex trajectories that arise due to these fields.</p>
-<hr/>
-<h2 id="1-exploration-of-applications">1. Exploration of Applications</h2>
-<h3 id="key-systems-where-lorentz-force-plays-a-role">Key Systems Where Lorentz Force Plays a Role:</h3>
-<ul>
-<li><strong>Particle Accelerators</strong>: The Lorentz force is used to accelerate charged particles in cyclotrons and synchrotrons, where electric and magnetic fields are used to steer and accelerate particles to high velocities.</li>
-<li><strong>Mass Spectrometers</strong>: In mass spectrometers, charged particles are deflected by magnetic fields, allowing for the determination of their mass-to-charge ratio.</li>
-<li><strong>Plasma Confinement</strong>: Magnetic fields are used to confine hot plasma in fusion reactors (e.g., Tokamaks), where the motion of charged particles is controlled by Lorentz forces.</li>
-</ul>
-<h3 id="relevance-of-electric-and-magnetic-fields">Relevance of Electric and Magnetic Fields:</h3>
-<ul>
-<li><strong>Electric Fields (<span class="arithmatex">\( \mathbf{E} \)</span>)</strong>: Accelerate or decelerate charged particles along the direction of the field.</li>
-<li><strong>Magnetic Fields (<span class="arithmatex">\( \mathbf{B} \)</span>)</strong>: Deflect charged particles, causing them to follow curved paths, depending on their velocity and charge.</li>
-</ul>
-<hr/>
-<h2 id="2-simulating-particle-motion">2. Simulating Particle Motion</h2>
-<p>We will simulate the motion of a charged particle under the influence of different electric and magnetic field configurations. The basic equation of motion is:</p>
-<div class="arithmatex">\[
-m \frac{d\mathbf{v}}{dt} = q (\mathbf{E} + \mathbf{v} \times \mathbf{B})
-\]</div>
-<p>Where:
-- <span class="arithmatex">\( m \)</span> is the mass of the particle,
-- <span class="arithmatex">\( \mathbf{v} \)</span> is the velocity of the particle,
-- <span class="arithmatex">\( \mathbf{E} \)</span> and <span class="arithmatex">\( \mathbf{B} \)</span> are the electric and magnetic fields.</p>
-<h3 id="steps-to-implement">Steps to Implement:</h3>
+<h1 id="electromagnetism-1-simulating-lorentz-force-effects">Electromagnetism 1: Simulating Lorentz Force Effects</h1>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>Simulate and analyze the motion of charged particles under various electromagnetic field configurations governed by the Lorentz force:
+[
+\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}
+]</p>
+<h2 id="physics-foundations">Physics Foundations</h2>
+<h3 id="key-equations">Key Equations</h3>
 <ol>
-<li><strong>Uniform Magnetic Field</strong>: Simulate the motion of a charged particle in a uniform magnetic field, which results in circular motion.</li>
-<li><strong>Combined Electric and Magnetic Fields</strong>: Simulate the motion in both electric and magnetic fields, leading to helical trajectories.</li>
-<li><strong>Crossed Electric and Magnetic Fields</strong>: Simulate the motion of the particle in crossed fields (electric and magnetic fields perpendicular to each other), resulting in drift motion.</li>
-<li><strong>Parameter Exploration</strong>: Vary the particle’s charge, mass, velocity, and field strengths to observe their influence on the trajectory.</li>
+<li><strong>Lorentz Force</strong>:
+   [
+   \mathbf{F} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})
+   ]</li>
+<li><strong>Equations of Motion</strong>:
+   [
+   \frac{d\mathbf{v}}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v} \times \mathbf{B})
+   ]
+   [
+   \frac{d\mathbf{r}}{dt} = \mathbf{v}
+   ]</li>
 </ol>
-<hr/>
-<h2 id="3-python-implementation">3. Python Implementation</h2>
-<p>Below is a Python script to simulate the motion of a charged particle under various field configurations using the Lorentz force. We will use the <strong>Runge-Kutta method</strong> to solve the equations of motion numerically.</p>
-<p>```python
-import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="constants">Constants</h1>
-<p>q = 1.6e-19  # Charge of the particle (Coulombs)
-m = 9.11e-31  # Mass of the particle (kg)
-B = np.array([0, 0, 1])  # Magnetic field (T) along the z-axis
-E = np.array([0, 0, 0])  # Electric field (V/m), assuming no electric field for simplicity</p>
-<h1 id="initial-conditions">Initial conditions</h1>
-<p>v0 = np.array([1e6, 0, 0])  # Initial velocity (m/s)
-r0 = np.array([0, 0, 0])  # Initial position (m)
-t_max = 10e-6  # Maximum time (s)
-dt = 1e-9  # Time step (s)</p>
-<h1 id="lorentz-force-calculation">Lorentz force calculation</h1>
-<p>def lorentz_force(v, r, q, m, E, B):
-    # v: velocity, r: position, q: charge, m: mass, E: electric field, B: magnetic field
-    return (q / m) * (E + np.cross(v, B))</p>
-<h1 id="runge-kutta-method-for-numerical-integration">Runge-Kutta method for numerical integration</h1>
-<p>def runge_kutta(v, r, q, m, E, B, dt):
-    k1v = lorentz_force(v, r, q, m, E, B)
-    k1r = v</p>
-<pre><code>k2v = lorentz_force(v + 0.5 * k1v * dt, r + 0.5 * k1r * dt, q, m, E, B)
-k2r = v + 0.5 * k1v * dt
-
-k3v = lorentz_force(v + 0.5 * k2v * dt, r + 0.5 * k2r * dt, q, m, E, B)
-k3r = v + 0.5 * k2v * dt
-
-k4v = lorentz_force(v + k3v * dt, r + k3r * dt, q, m, E, B)
-k4r = v + k3v * dt
-
-# Update velocity and position
-v_new = v + (k1v + 2*k2v + 2*k3v + k4v) * dt / 6
-r_new = r + (k1r + 2*k2r + 2*k3r + k4r) * dt / 6
-
-return v_new, r_new
-</code></pre>
-<h1 id="simulate-the-motion">Simulate the motion</h1>
-<p>t = np.arange(0, t_max, dt)
-r = np.zeros((len(t), 3))  # Position array
-v = np.zeros((len(t), 3))  # Velocity array</p>
-<p>r[0] = r0
-v[0] = v0</p>
-<h1 id="integration-loop">Integration loop</h1>
-<p>for i in range(1, len(t)):
-    v[i], r[i] = runge_kutta(v[i-1], r[i-1], q, m, E, B, dt)</p>
-<h1 id="plot-the-trajectory">Plot the trajectory</h1>
-<p>fig = plt.figure(figsize=(8, 6))
-ax = fig.add_subplot(111, projection='3d')
-ax.plot(r[:, 0], r[:, 1], r[:, 2])
-ax.set_title("Trajectory of the Charged Particle")
-ax.set_xlabel('X (m)')
-ax.set_ylabel('Y (m)')
-ax.set_zlabel('Z (m)')
-plt.show()</p>
+<h3 id="characteristic-motions">Characteristic Motions</h3>
+<table>
+<thead>
+<tr>
+<th>Field Configuration</th>
+<th>Particle Trajectory</th>
+<th>Physical Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pure <span class="arithmatex">\(\mathbf{B}\)</span></td>
+<td>Circular/Helical</td>
+<td>Larmor radius (r_L = \frac{mv_\perp}{</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{E} + \mathbf{B}\)</span></td>
+<td>Drift motion</td>
+<td><span class="arithmatex">\(\mathbf{v}_E = \frac{\mathbf{E} \times \mathbf{B}}{B^2}\)</span></td>
+</tr>
+<tr>
+<td>Crossed fields</td>
+<td>Cycloid</td>
+<td>Drift velocity dependent on <span class="arithmatex">\(E/B\)</span> ratio</td>
+</tr>
+</tbody>
+</table>
+<h2 id="numerical-implementation">Numerical Implementation</h2>
+<h3 id="simulation-algorithm-runge-kutta-4th-order">Simulation Algorithm (Runge-Kutta 4th Order)</h3>
+<p>```python</p>
+<h1 id="pseudocode-for-rk4-implementation">Pseudocode for RK4 implementation</h1>
+<p>def lorentz_force(q, m, E, B, v):
+    return q*(E + np.cross(v,B)) / m</p>
+<p>def rk4_step(r, v, dt, q, m, E, B):
+    k1v = lorentz_force(q, m, E, B, v)
+    k1r = v
+    # ... complete RK4 steps ...
+    return r_new, v_new</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
