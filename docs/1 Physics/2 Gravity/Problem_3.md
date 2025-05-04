@@ -66,7 +66,6 @@ The following table shows how \( T^2 \) is proportional to \( r^3 \):
 
 ## 4. Computational Model
 
-```python
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import G
