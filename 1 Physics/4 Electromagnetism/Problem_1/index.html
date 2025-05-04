@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Electromagnetism 1: Lorentz Force Simulations (Pure Theory) - Physics and Mathematics</title>
+<title>Electromagnetism: Lorentz Force Analysis - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Electromagnetism 1: Lorentz Force Simulations (Pure Theory)";
+        var mkdocs_page_name = "Electromagnetism: Lorentz Force Analysis";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,43 +70,31 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism 1: Lorentz Force Simulations (Pure Theory)</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism: Lorentz Force Analysis</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#analytical-solutions-for-common-configurations">Analytical Solutions for Common Configurations</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#1-uniform-magnetic-field-b-bz">1. Uniform Magnetic Field (𝐁 = Bẑ)</a>
+<li class="toctree-l3"><a class="reference internal" href="#fundamental-equation">Fundamental Equation</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#2-crossed-fields-e-ey-b-bz">2. Crossed Fields (𝐄 = Eŷ, 𝐁 = Bẑ)</a>
+<li class="toctree-l3"><a class="reference internal" href="#key-cases-solutions">Key Cases &amp; Solutions</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-pure-magnetic-field-b-only">1. Pure Magnetic Field (𝐁 only)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-crossed-fields-e-b">2. Crossed Fields (𝐄 ⊥ 𝐁)</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#phase-space-analysis">Phase Space Analysis</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#conservation-laws">Conservation Laws</a>
+<li class="toctree-l3"><a class="reference internal" href="#reference-table">Reference Table</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#characteristic-scales">Characteristic Scales</a>
+<li class="toctree-l3"><a class="reference internal" href="#step-by-step-derivations">Step-by-Step Derivations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#circular-motion-proof">Circular Motion Proof</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#eb-drift-proof">E×B Drift Proof</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#visualization-methodology">Visualization Methodology</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#1-graphical-construction">1. Graphical Construction</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#2-key-features-to-highlight">2. Key Features to Highlight</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#practical-systems-analysis">Practical Systems Analysis</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#cyclotron-operation">Cyclotron Operation</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#mass-spectrometer">Mass Spectrometer</a>
-</li>
-</ul>
+<li class="toctree-l3"><a class="reference internal" href="#applications">Applications</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#execution-framework">Execution Framework</a>
 </li>
 </ul>
 </li>
@@ -199,7 +187,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Electromagnetism 1: Lorentz Force Simulations (Pure Theory)</li>
+<li class="breadcrumb-item active">Electromagnetism: Lorentz Force Analysis</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -207,52 +195,44 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="electromagnetism-1-lorentz-force-simulations-pure-theory">Electromagnetism 1: Lorentz Force Simulations (Pure Theory)</h1>
-<h2 id="analytical-solutions-for-common-configurations">Analytical Solutions for Common Configurations</h2>
-<h3 id="1-uniform-magnetic-field-b-bz">1. Uniform Magnetic Field (𝐁 = Bẑ)</h3>
-<p><strong>Trajectory Equations</strong>:
+<h1 id="electromagnetism-lorentz-force-analysis">Electromagnetism: Lorentz Force Analysis</h1>
+<p><strong>Pure theoretical approach - No simulations required</strong> </p>
+<h2 id="fundamental-equation">Fundamental Equation</h2>
+<p>The Lorentz force governs charged particle motion:<br/>
 [
-\begin{cases}
-x(t) = r_L \sin(\omega_c t) \
-y(t) = r_L [1 - \cos(\omega_c t)] \
-z(t) = v_{\parallel} t
-\end{cases}
-]
-where:
-- <span class="arithmatex">\( r_L = \frac{mv_\perp}{qB} \)</span> (Larmor radius)
-- <span class="arithmatex">\( \omega_c = \frac{qB}{m} \)</span> (Cyclotron frequency)</p>
-<h3 id="2-crossed-fields-e-ey-b-bz">2. Crossed Fields (𝐄 = Eŷ, 𝐁 = Bẑ)</h3>
-<p><strong>Drift Motion Solution</strong>:
-[
-\mathbf{r}(t) = 
-\begin{pmatrix}
-\frac{E}{B}t - r_L \sin(\omega_c t) \
-r_L \cos(\omega_c t) \
-0
-\end{pmatrix}
-]
-<strong>Key Features</strong>:
-- E×B drift velocity: <span class="arithmatex">\( v_E = E/B \)</span>
-- Superimposed cyclotron motion</p>
-<h2 id="phase-space-analysis">Phase Space Analysis</h2>
-<h3 id="conservation-laws">Conservation Laws</h3>
-<ol>
-<li><strong>Energy</strong>:
-   [
-   \frac{1}{2}mv^2 + q\phi = \text{constant}
-   ]</li>
-<li><strong>Magnetic Moment</strong> (Adiabatic Invariant):
-   [
-   \mu = \frac{mv_\perp^2}{2B}
-   ]</li>
-</ol>
-<h3 id="characteristic-scales">Characteristic Scales</h3>
+\mathbf{F} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})
+]</p>
+<h2 id="key-cases-solutions">Key Cases &amp; Solutions</h2>
+<h3 id="1-pure-magnetic-field-b-only">1. Pure Magnetic Field (𝐁 only)</h3>
+<p><strong>Trajectory</strong>: Circular/helical motion<br/>
+- <strong>Larmor radius</strong>:<br/>
+  [
+  r_L = \frac{mv_\perp}{|q|B}
+  ]<br/>
+- <strong>Cyclotron frequency</strong>:<br/>
+  [
+  \omega_c = \frac{|q|B}{m}
+  ]  </p>
+<h3 id="2-crossed-fields-e-b">2. Crossed Fields (𝐄 ⊥ 𝐁)</h3>
+<p><strong>Trajectory</strong>: Cycloid + Drift<br/>
+- <strong>E×B drift velocity</strong>:<br/>
+  [
+  \mathbf{v}_E = \frac{\mathbf{E} \times \mathbf{B}}{B^2}
+  ]<br/>
+- <strong>Position functions</strong>:<br/>
+  [
+  x(t) = v_E t - r_L \sin(\omega_c t)
+  ]
+  [
+  y(t) = r_L \cos(\omega_c t)
+  ]</p>
+<h2 id="reference-table">Reference Table</h2>
 <table>
 <thead>
 <tr>
 <th>Quantity</th>
-<th>Expression</th>
-<th>Physical Meaning</th>
+<th>Formula</th>
+<th>Units</th>
 </tr>
 </thead>
 <tbody>
@@ -262,98 +242,50 @@ r_L \cos(\omega_c t) \
 <td>q</td>
 </tr>
 <tr>
-<td>Drift velocity</td>
-<td><span class="arithmatex">\( v_E = \frac{E}{B} \)</span></td>
-<td>Cross-field drift</td>
+<td>Gyration period</td>
+<td><span class="arithmatex">\( T_c = \frac{2\pi}{\omega_c} \)</span></td>
+<td>seconds</td>
 </tr>
 <tr>
-<td>Cyclotron period</td>
-<td>( T_c = \frac{2\pi m}{</td>
-<td>q</td>
+<td>Drift velocity</td>
+<td><span class="arithmatex">\( v_E = E/B \)</span></td>
+<td>m/s</td>
 </tr>
 </tbody>
 </table>
-<h2 id="visualization-methodology">Visualization Methodology</h2>
-<h3 id="1-graphical-construction">1. Graphical Construction</h3>
-<ul>
-<li><strong>2D Plots</strong>: Parametric plots of (x(t), y(t))</li>
-<li><strong>3D Trajectories</strong>: Helix equations with pitch <span class="arithmatex">\( h = 2\pi v_\parallel/\omega_c \)</span></li>
-<li><strong>Phase Portraits</strong>: Plot vₓ vs x for oscillatory motion</li>
-</ul>
-<h3 id="2-key-features-to-highlight">2. Key Features to Highlight</h3>
-<ul>
-<li><strong>Guiding Center Motion</strong>: Average position of gyrating particle</li>
-<li><strong>Drift Separation</strong>: E×B vs grad-B drifts</li>
-<li><strong>Magnetic Mirroring</strong>: Velocity space plots</li>
-</ul>
-<h2 id="practical-systems-analysis">Practical Systems Analysis</h2>
-<h3 id="cyclotron-operation">Cyclotron Operation</h3>
+<h2 id="step-by-step-derivations">Step-by-Step Derivations</h2>
+<h3 id="circular-motion-proof">Circular Motion Proof</h3>
 <ol>
-<li><strong>Resonance Condition</strong>:
+<li>Centripetal force = Lorentz force:<br/>
    [
-   \omega_{RF} = \omega_c = \frac{qB}{m}
-   ]</li>
-<li><strong>Energy Gain</strong>:
+   \frac{mv_\perp^2}{r} = qv_\perp B
+   ]  </li>
+<li>Solve for radius:<br/>
    [
-   \Delta E = 2qV_0 \text{ per revolution}
+   r_L = \frac{mv_\perp}{qB}
    ]</li>
 </ol>
-<h3 id="mass-spectrometer">Mass Spectrometer</h3>
+<h3 id="eb-drift-proof">E×B Drift Proof</h3>
+<ol>
+<li>Time-average of oscillatory terms → 0  </li>
+<li>Residual motion:<br/>
+   [
+   \mathbf{v}_E = \frac{\mathbf{E} \times \mathbf{B}}{B^2}
+   ]</li>
+</ol>
+<h2 id="applications">Applications</h2>
 <ul>
-<li><strong>Mass-to-Charge Resolution</strong>:
-  [
-  \frac{m}{q} = \frac{B^2 r^2}{2V}
-  ]</li>
-<li><strong>Detection Principle</strong>: Spatial separation by rₗ</li>
+<li><strong>Particle accelerators</strong>: Cyclotron resonance at <span class="arithmatex">\( \omega = \omega_c \)</span> </li>
+<li><strong>Mass spectrometry</strong>: Spatial separation by <span class="arithmatex">\( r_L \)</span> </li>
+<li><strong>Plasma confinement</strong>: Drift currents in tokamaks  </li>
 </ul>
 <h2 id="deliverables">Deliverables</h2>
 <ol>
-<li><strong>Analytical Derivations</strong>:</li>
-<li>Complete solutions for 5 field configurations</li>
-<li>
-<p>Dimensional analysis of parameters</p>
-</li>
-<li>
-<p><strong>Hand-Drawn Visualizations</strong>:</p>
-</li>
-<li>Trajectory diagrams with labeled components</li>
-<li>
-<p>Comparative plots of different drift types</p>
-</li>
-<li>
-<p><strong>Physics Interpretation</strong>:</p>
-</li>
-<li>Table linking mathematical terms to physical effects</li>
-<li>
-<p>Case study explanations (e.g., aurora formation)</p>
-</li>
-<li>
-<p><strong>Extensions</strong>:</p>
-</li>
-<li>Relativistic corrections framework</li>
-<li>Non-uniform field perturbation theory</li>
+<li><strong>Analytical solutions</strong> for 3+ field configurations  </li>
+<li><strong>Hand-drawn diagrams</strong> of trajectories  </li>
+<li><strong>Physical interpretation</strong> of all terms  </li>
+<li><strong>Real-world system</strong> examples  </li>
 </ol>
-<h2 id="execution-framework">Execution Framework</h2>
-<ol>
-<li><strong>Coordinate Systems</strong>:</li>
-<li>Frenet-Serret frame for curved 𝐁</li>
-<li>
-<p>Field-aligned coordinates</p>
-</li>
-<li>
-<p><strong>Dimensionless Parameters</strong>:
-   [
-   \epsilon = \frac{E}{v_0 B}, \quad \rho = \frac{r_L}{L}
-   ]
-   where L is system scale length</p>
-</li>
-<li>
-<p><strong>Validation Checks</strong>:</p>
-</li>
-<li>Energy conservation proofs</li>
-<li>Limit case comparisons (E→0, B→0)</li>
-</ol>
-<p>This theoretical approach provides complete analytical understanding without computational tools, focusing on fundamental physics and mathematical modeling.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
