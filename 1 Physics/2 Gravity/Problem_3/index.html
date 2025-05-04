@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Trajectories of Freely Released Payloads Near Earth - Physics and Mathematics</title>
+<title>Kepler's Third Law: Orbital Period and Radius Relationship - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Trajectories of Freely Released Payloads Near Earth";
+        var mkdocs_page_name = "Kepler\u0027s Third Law: Orbital Period and Radius Relationship";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_3.md";
         var mkdocs_page_url = null;
       </script>
@@ -58,53 +58,21 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Escape Velocities and Cosmic Velocities</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Trajectories of Freely Released Payloads Near Earth</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Kepler's Third Law: Orbital Period and Radius Relationship</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#fundamental-orbital-mechanics">Fundamental Orbital Mechanics</a>
+<li class="toctree-l3"><a class="reference internal" href="#1-derivation-of-the-relationship">1. Derivation of the Relationship</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-astronomical-implications">2. Astronomical Implications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-real-world-examples">3. Real-World Examples</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#classification-of-trajectories">Classification of Trajectories</a>
+<li class="toctree-l4"><a class="reference internal" href="#earth-moon-system">Earth-Moon System:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#solar-system-planets">Solar System Planets:</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#key-parameters">Key Parameters</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#determining-factors">Determining Factors</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#critical-velocity-thresholds">Critical Velocity Thresholds</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#numerical-analysis-approach">Numerical Analysis Approach</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#recommended-methods">Recommended Methods</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#trajectory-visualization-concepts">Trajectory Visualization Concepts</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#suggested-plots">Suggested Plots</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#mission-applications">Mission Applications</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#practical-scenarios">Practical Scenarios</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#historical-examples">Historical Examples</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#theoretical-extensions">Theoretical Extensions</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#advanced-considerations">Advanced Considerations</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#educational-demonstrations">Educational Demonstrations</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#classroom-activities">Classroom Activities</a>
-</li>
-</ul>
+<li class="toctree-l3"><a class="reference internal" href="#4-computational-model">4. Computational Model</a>
 </li>
 </ul>
 </li>
@@ -209,7 +177,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Trajectories of Freely Released Payloads Near Earth</li>
+<li class="breadcrumb-item active">Kepler's Third Law: Orbital Period and Radius Relationship</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -217,209 +185,122 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="trajectories-of-freely-released-payloads-near-earth">Trajectories of Freely Released Payloads Near Earth</h1>
-<h2 id="fundamental-orbital-mechanics">Fundamental Orbital Mechanics</h2>
-<h3 id="classification-of-trajectories">Classification of Trajectories</h3>
-<ol>
-<li><strong>Circular Orbit:</strong></li>
-<li>Perfect balance between velocity and gravity</li>
-<li>Constant altitude and speed</li>
-<li>
-<p>Required velocity: ~7.8 km/s at 200 km altitude</p>
-</li>
-<li>
-<p><strong>Elliptical Orbit:</strong></p>
-</li>
-<li>Intermediate energy between circular and escape</li>
-<li>Perigee and apogee distances vary</li>
-<li>
-<p>Velocity between first and second cosmic velocities</p>
-</li>
-<li>
-<p><strong>Parabolic Trajectory:</strong></p>
-</li>
-<li>Exact escape velocity achieved</li>
-<li>Open-ended orbit (escape path)</li>
-<li>
-<p>Velocity equals second cosmic velocity (~11.2 km/s at surface)</p>
-</li>
-<li>
-<p><strong>Hyperbolic Trajectory:</strong></p>
-</li>
-<li>Exceeds escape velocity</li>
-<li>Excess kinetic energy results in hyperbolic excess velocity</li>
-<li>Used for interplanetary missions</li>
-</ol>
-<h2 id="key-parameters">Key Parameters</h2>
-<h3 id="determining-factors">Determining Factors</h3>
+<h1 id="keplers-third-law-orbital-period-and-radius-relationship">Kepler's Third Law: Orbital Period and Radius Relationship</h1>
+<h2 id="1-derivation-of-the-relationship">1. Derivation of the Relationship</h2>
+<p>For a circular orbit, the centripetal force is provided by gravity:</p>
+<div class="arithmatex">\[
+\frac{GMm}{r^2} = \frac{mv^2}{r}
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( G \)</span> = gravitational constant
+- <span class="arithmatex">\( M \)</span> = mass of central body
+- <span class="arithmatex">\( m \)</span> = mass of orbiting body
+- <span class="arithmatex">\( r \)</span> = orbital radius
+- <span class="arithmatex">\( v \)</span> = orbital velocity</p>
+<p>The orbital period <span class="arithmatex">\( T \)</span> is related to velocity by:</p>
+<div class="arithmatex">\[
+v = \frac{2\pi r}{T}
+\]</div>
+<p>Substituting and simplifying:</p>
+<div class="arithmatex">\[
+\frac{GM}{r^2} = \frac{(2\pi r/T)^2}{r}
+\]</div>
+<div class="arithmatex">\[
+\frac{GM}{r^2} = \frac{4\pi^2 r}{T^2}
+\]</div>
+<p>Rearranging gives Kepler's Third Law:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2}{GM} r^3
+\]</div>
+<p>Thus, the square of the orbital period is proportional to the cube of the orbital radius.</p>
+<h2 id="2-astronomical-implications">2. Astronomical Implications</h2>
+<p>This relationship has profound implications:
+- <strong>Mass determination</strong>: By measuring <span class="arithmatex">\( T \)</span> and <span class="arithmatex">\( r \)</span> of orbiting bodies, we can calculate the mass of the central object
+- <strong>Distance scaling</strong>: Allows calculation of relative distances in planetary systems
+- <strong>Exoplanet studies</strong>: Used to characterize planets around other stars
+- <strong>Satellite operations</strong>: Essential for placing satellites in correct orbits</p>
+<h2 id="3-real-world-examples">3. Real-World Examples</h2>
+<h3 id="earth-moon-system">Earth-Moon System:</h3>
+<ul>
+<li>Orbital radius: 384,400 km</li>
+<li>Orbital period: 27.3 days</li>
+<li>Using Kepler's Law, we can verify these values are consistent</li>
+</ul>
+<h3 id="solar-system-planets">Solar System Planets:</h3>
+<p>The following table shows how <span class="arithmatex">\( T^2 \)</span> is proportional to <span class="arithmatex">\( r^3 \)</span>:</p>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Effect on Trajectory</th>
+<th>Planet</th>
+<th>Orbital Radius (AU)</th>
+<th>Orbital Period (years)</th>
+<th><span class="arithmatex">\( r^3 \)</span></th>
+<th><span class="arithmatex">\( T^2 \)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Initial Velocity</td>
-<td>Determines orbit shape</td>
+<td>Mercury</td>
+<td>0.39</td>
+<td>0.24</td>
+<td>0.059</td>
+<td>0.058</td>
 </tr>
 <tr>
-<td>Release Altitude</td>
-<td>Affects gravitational strength</td>
+<td>Venus</td>
+<td>0.72</td>
+<td>0.62</td>
+<td>0.373</td>
+<td>0.384</td>
 </tr>
 <tr>
-<td>Flight Path Angle</td>
-<td>Influences orbit eccentricity</td>
+<td>Earth</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.000</td>
+<td>1.000</td>
 </tr>
 <tr>
-<td>Atmospheric Drag</td>
-<td>Causes orbital decay (LEO)</td>
+<td>Mars</td>
+<td>1.52</td>
+<td>1.88</td>
+<td>3.512</td>
+<td>3.534</td>
 </tr>
 </tbody>
 </table>
-<h3 id="critical-velocity-thresholds">Critical Velocity Thresholds</h3>
-<ol>
-<li><strong>Suborbital:</strong></li>
-<li>Velocity &lt; 7.8 km/s</li>
-<li>
-<p>Ballistic arc returning to Earth</p>
-</li>
-<li>
-<p><strong>Orbital:</strong></p>
-</li>
-<li>7.8 km/s &lt; v &lt; 11.2 km/s</li>
-<li>
-<p>Closed elliptical or circular orbit</p>
-</li>
-<li>
-<p><strong>Escape:</strong></p>
-</li>
-<li>v ≥ 11.2 km/s</li>
-<li>Parabolic or hyperbolic departure</li>
-</ol>
-<h2 id="numerical-analysis-approach">Numerical Analysis Approach</h2>
-<h3 id="recommended-methods">Recommended Methods</h3>
-<ol>
-<li>
-<p><strong>Equation of Motion:</strong>
-   [
-   \frac{d^2\mathbf{r}}{dt^2} = -\frac{GM}{r^3}\mathbf{r}
-   ]</p>
-</li>
-<li>
-<p><strong>Conserved Quantities:</strong></p>
-</li>
-<li>Specific orbital energy</li>
-<li>Angular momentum</li>
-<li>
-<p>Laplace-Runge-Lenz vector</p>
-</li>
-<li>
-<p><strong>Solution Techniques:</strong></p>
-</li>
-<li>Runge-Kutta integration</li>
-<li>Verlet algorithm</li>
-<li>Symplectic integrators</li>
-</ol>
-<h2 id="trajectory-visualization-concepts">Trajectory Visualization Concepts</h2>
-<h3 id="suggested-plots">Suggested Plots</h3>
-<ol>
-<li><strong>2D Trajectory Map:</strong></li>
-<li>X-Y plot showing Earth and path</li>
-<li>
-<p>Color-coded velocity along trajectory</p>
-</li>
-<li>
-<p><strong>3D Orbit Visualization:</strong></p>
-</li>
-<li>Earth sphere with trajectory curve</li>
-<li>
-<p>Optional atmospheric layer</p>
-</li>
-<li>
-<p><strong>Energy Diagram:</strong></p>
-</li>
-<li>Kinetic vs potential energy over time</li>
-<li>Total energy conservation check</li>
-</ol>
-<h2 id="mission-applications">Mission Applications</h2>
-<h3 id="practical-scenarios">Practical Scenarios</h3>
-<ol>
-<li><strong>Payload Deployment:</strong></li>
-<li>ISS releases at ~7.7 km/s (circular orbit)</li>
-<li>
-<p>CubeSat ejection velocities</p>
-</li>
-<li>
-<p><strong>Reentry Planning:</strong></p>
-</li>
-<li>Deorbit burns create suborbital trajectories</li>
-<li>
-<p>Heat shield requirements analysis</p>
-</li>
-<li>
-<p><strong>Interplanetary Transfers:</strong></p>
-</li>
-<li>Earth escape trajectories</li>
-<li>Gravity assist maneuvers</li>
-</ol>
-<h3 id="historical-examples">Historical Examples</h3>
-<ol>
-<li><strong>Space Shuttle Payloads:</strong></li>
-<li>Typical release at ~7.8 km/s</li>
-<li>
-<p>Hubble deployment (1990)</p>
-</li>
-<li>
-<p><strong>Apollo Lunar Missions:</strong></p>
-</li>
-<li>Trans-lunar injection (~10.8 km/s)</li>
-<li>Near-escape velocity trajectories</li>
-</ol>
-<h2 id="theoretical-extensions">Theoretical Extensions</h2>
-<h3 id="advanced-considerations">Advanced Considerations</h3>
-<ol>
-<li><strong>Perturbation Effects:</strong></li>
-<li>Non-spherical Earth gravity</li>
-<li>Atmospheric drag</li>
-<li>
-<p>Third-body effects (Moon/Sun)</p>
-</li>
-<li>
-<p><strong>Optimal Control:</strong></p>
-</li>
-<li>Minimum-energy transfers</li>
-<li>
-<p>Powered flight guidance</p>
-</li>
-<li>
-<p><strong>Relativistic Corrections:</strong></p>
-</li>
-<li>Necessary for GPS satellites</li>
-<li>Time dilation effects</li>
-</ol>
-<h2 id="educational-demonstrations">Educational Demonstrations</h2>
-<h3 id="classroom-activities">Classroom Activities</h3>
-<ol>
-<li><strong>Trajectory Mapping:</strong></li>
-<li>Plot different initial conditions</li>
-<li>
-<p>Identify orbit types visually</p>
-</li>
-<li>
-<p><strong>Energy Calculations:</strong></p>
-</li>
-<li>Verify conservation principles</li>
-<li>
-<p>Compare potential/kinetic energy</p>
-</li>
-<li>
-<p><strong>Mission Design:</strong></p>
-</li>
-<li>Simulate satellite deployments</li>
-<li>Plan lunar transfer trajectories</li>
-</ol>
+<h2 id="4-computational-model">4. Computational Model</h2>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.constants import G</p>
+<p>def calculate_period(r, M):
+    """Calculate orbital period for circular orbit"""
+    return np.sqrt(4 * np.pi<strong>2 * r</strong>3 / (G * M))</p>
+<h1 id="earth-parameters">Earth parameters</h1>
+<p>M_earth = 5.972e24  # kg
+earth_radius = 6.371e6  # m</p>
+<h1 id="generate-orbital-radii-from-leo-to-geo">Generate orbital radii from LEO to GEO</h1>
+<p>radii = np.linspace(earth_radius + 160e3, 42164e3, 100)  # 160km to GEO</p>
+<h1 id="calculate-periods">Calculate periods</h1>
+<p>periods = calculate_period(radii, M_earth)</p>
+<h1 id="convert-to-hours-for-better-readability">Convert to hours for better readability</h1>
+<p>periods_hours = periods / 3600</p>
+<h1 id="plot">Plot</h1>
+<p>plt.figure(figsize=(10, 6))
+plt.plot(radii/1000, periods_hours)
+plt.title("Kepler's Third Law Verification")
+plt.xlabel('Orbital Radius (km)')
+plt.ylabel('Orbital Period (hours)')
+plt.grid(True)
+plt.show()</p>
+<h1 id="verify-with-known-values">Verify with known values</h1>
+<p>leo_radius = earth_radius + 400e3  # 400km altitude
+geo_radius = 42164e3  # GEO altitude</p>
+<p>leo_period = calculate_period(leo_radius, M_earth)/3600
+geo_period = calculate_period(geo_radius, M_earth)/3600</p>
+<p>print(f"LEO (400km) period: {leo_period:.2f} hours")
+print(f"GEO period: {geo_period:.2f} hours (should be 24 hours)")</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
