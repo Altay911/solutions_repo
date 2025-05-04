@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Electromagnetism: Lorentz Force Analysis - Physics and Mathematics</title>
+<title>Electromagnetism: Simulating the Lorentz Force - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Electromagnetism: Lorentz Force Analysis";
+        var mkdocs_page_name = "Electromagnetism: Simulating the Lorentz Force";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,31 +70,13 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism: Lorentz Force Analysis</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism: Simulating the Lorentz Force</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#fundamental-equation">Fundamental Equation</a>
+<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#key-cases-solutions">Key Cases &amp; Solutions</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#1-pure-magnetic-field-b-only">1. Pure Magnetic Field (𝐁 only)</a>
+<li class="toctree-l3"><a class="reference internal" href="#objectives">Objectives</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#2-crossed-fields-e-b">2. Crossed Fields (𝐄 ⊥ 𝐁)</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#reference-table">Reference Table</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#step-by-step-derivations">Step-by-Step Derivations</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#circular-motion-proof">Circular Motion Proof</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#eb-drift-proof">E×B Drift Proof</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#applications">Applications</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
+<li class="toctree-l3"><a class="reference internal" href="#python-simulation">Python Simulation</a>
 </li>
 </ul>
 </li>
@@ -187,7 +169,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Electromagnetism: Lorentz Force Analysis</li>
+<li class="breadcrumb-item active">Electromagnetism: Simulating the Lorentz Force</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -195,97 +177,58 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="electromagnetism-lorentz-force-analysis">Electromagnetism: Lorentz Force Analysis</h1>
-<p><strong>Pure theoretical approach - No simulations required</strong> </p>
-<h2 id="fundamental-equation">Fundamental Equation</h2>
-<p>The Lorentz force governs charged particle motion:<br/>
-[
-\mathbf{F} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})
-]</p>
-<h2 id="key-cases-solutions">Key Cases &amp; Solutions</h2>
-<h3 id="1-pure-magnetic-field-b-only">1. Pure Magnetic Field (𝐁 only)</h3>
-<p><strong>Trajectory</strong>: Circular/helical motion<br/>
-- <strong>Larmor radius</strong>:<br/>
-  [
-  r_L = \frac{mv_\perp}{|q|B}
-  ]<br/>
-- <strong>Cyclotron frequency</strong>:<br/>
-  [
-  \omega_c = \frac{|q|B}{m}
-  ]  </p>
-<h3 id="2-crossed-fields-e-b">2. Crossed Fields (𝐄 ⊥ 𝐁)</h3>
-<p><strong>Trajectory</strong>: Cycloid + Drift<br/>
-- <strong>E×B drift velocity</strong>:<br/>
-  [
-  \mathbf{v}_E = \frac{\mathbf{E} \times \mathbf{B}}{B^2}
-  ]<br/>
-- <strong>Position functions</strong>:<br/>
-  [
-  x(t) = v_E t - r_L \sin(\omega_c t)
-  ]
-  [
-  y(t) = r_L \cos(\omega_c t)
-  ]</p>
-<h2 id="reference-table">Reference Table</h2>
-<table>
-<thead>
-<tr>
-<th>Quantity</th>
-<th>Formula</th>
-<th>Units</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Larmor radius</td>
-<td>( r_L = \frac{mv_\perp}{</td>
-<td>q</td>
-</tr>
-<tr>
-<td>Gyration period</td>
-<td><span class="arithmatex">\( T_c = \frac{2\pi}{\omega_c} \)</span></td>
-<td>seconds</td>
-</tr>
-<tr>
-<td>Drift velocity</td>
-<td><span class="arithmatex">\( v_E = E/B \)</span></td>
-<td>m/s</td>
-</tr>
-</tbody>
-</table>
-<h2 id="step-by-step-derivations">Step-by-Step Derivations</h2>
-<h3 id="circular-motion-proof">Circular Motion Proof</h3>
+<h1 id="electromagnetism-simulating-the-lorentz-force">Electromagnetism: Simulating the Lorentz Force</h1>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>The Lorentz force, given by <span class="arithmatex">\(\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}\)</span>, describes the motion of charged particles in electric (<span class="arithmatex">\(\mathbf{E}\)</span>) and magnetic (<span class="arithmatex">\(\mathbf{B}\)</span>) fields. This simulation explores the trajectories of charged particles under various field configurations to understand phenomena like circular motion, helical paths, and drift velocities.</p>
+<hr/>
+<h2 id="objectives">Objectives</h2>
 <ol>
-<li>Centripetal force = Lorentz force:<br/>
-   [
-   \frac{mv_\perp^2}{r} = qv_\perp B
-   ]  </li>
-<li>Solve for radius:<br/>
-   [
-   r_L = \frac{mv_\perp}{qB}
-   ]</li>
+<li><strong>Explore Applications</strong>: Investigate systems where the Lorentz force is critical (e.g., cyclotrons, mass spectrometers).  </li>
+<li><strong>Simulate Particle Motion</strong>: Visualize trajectories under:  </li>
+<li>Uniform magnetic fields.  </li>
+<li>Combined electric and magnetic fields.  </li>
+<li>Crossed fields.  </li>
+<li><strong>Parameter Exploration</strong>: Study the effects of field strengths (<span class="arithmatex">\(E, B\)</span>), initial velocity (<span class="arithmatex">\(v\)</span>), and particle properties (<span class="arithmatex">\(q, m\)</span>).  </li>
+<li><strong>Visualization</strong>: Generate 2D/3D plots highlighting key phenomena like the Larmor radius and drift velocity.  </li>
 </ol>
-<h3 id="eb-drift-proof">E×B Drift Proof</h3>
-<ol>
-<li>Time-average of oscillatory terms → 0  </li>
-<li>Residual motion:<br/>
-   [
-   \mathbf{v}_E = \frac{\mathbf{E} \times \mathbf{B}}{B^2}
-   ]</li>
-</ol>
-<h2 id="applications">Applications</h2>
-<ul>
-<li><strong>Particle accelerators</strong>: Cyclotron resonance at <span class="arithmatex">\( \omega = \omega_c \)</span> </li>
-<li><strong>Mass spectrometry</strong>: Spatial separation by <span class="arithmatex">\( r_L \)</span> </li>
-<li><strong>Plasma confinement</strong>: Drift currents in tokamaks  </li>
-</ul>
-<h2 id="deliverables">Deliverables</h2>
-<ol>
-<li><strong>Analytical solutions</strong> for 3+ field configurations  </li>
-<li><strong>Hand-drawn diagrams</strong> of trajectories  </li>
-<li><strong>Physical interpretation</strong> of all terms  </li>
-<li><strong>Real-world system</strong> examples  </li>
-</ol>
+<hr/>
+<h2 id="python-simulation">Python Simulation</h2>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D</p>
+<p>def lorentz_force(q, E, v, B):
+    """Compute the Lorentz force on a charged particle."""
+    return q * E + q * np.cross(v, B)</p>
+<p>def simulate_trajectory(q, m, E, B, v0, dt=0.01, steps=1000):
+    """Simulate particle trajectory using the Runge-Kutta method."""
+    r = np.zeros((steps, 3))
+    v = np.zeros((steps, 3))
+    r[0], v[0] = np.array([0, 0, 0]), v0</p>
+<pre><code>for i in range(1, steps):
+    F = lorentz_force(q, E, v[i-1], B)
+    a = F / m
+    v[i] = v[i-1] + a * dt
+    r[i] = r[i-1] + v[i] * dt
+
+return r
+</code></pre>
+<h1 id="example-uniform-magnetic-field-bz-with-initial-velocity-vx-0-0">Example: Uniform magnetic field (Bz) with initial velocity (vx, 0, 0)</h1>
+<p>q, m = 1.6e-19, 9.1e-31  # Charge of electron, mass of electron
+E = np.array([0, 0, 0])
+B = np.array([0, 0, 1e-3])  # 1 mT in z-direction
+v0 = np.array([1e6, 0, 0])  # Initial velocity: 1e6 m/s along x</p>
+<p>trajectory = simulate_trajectory(q, m, E, B, v0)</p>
+<h1 id="plotting">Plotting</h1>
+<p>fig = plt.figure(figsize=(10, 6))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], label='Particle Path')
+ax.set_xlabel('X (m)')
+ax.set_ylabel('Y (m)')
+ax.set_zlabel('Z (m)')
+ax.set_title('Particle Trajectory in Uniform Magnetic Field')
+plt.legend()
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
