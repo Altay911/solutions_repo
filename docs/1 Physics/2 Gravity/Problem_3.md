@@ -1,94 +1,398 @@
-# Projection 3: Trajectories of a Freely Released Payload Near Earth
+Problem 3: Trajectories of a Freely Released Payload Near Earth
+Analysis of Possible Trajectories
+When a payload is released near Earth, its trajectory is determined by its initial velocity and position relative to Earth's gravitational field. The possible trajectories are:
 
-## Motivation
-When a payload is released from a moving rocket near Earth, its trajectory is determined by initial conditions (position, velocity, altitude) and Earth's gravitational pull. Understanding these trajectories is crucial for applications like satellite deployment, space missions, and reentry scenarios. This project combines orbital mechanics and numerical methods to simulate and analyze payload motion.
+Elliptical Orbit: If the payload's velocity is below escape velocity but sufficient to overcome atmospheric drag (at higher altitudes), it will enter an elliptical orbit around Earth.
 
----
+Circular Orbit: A special case of elliptical orbit where the initial velocity is exactly perpendicular to the gravitational force at the right magnitude for a circular path.
 
-## Task 1: Trajectory Analysis
-Possible trajectories of a payload under Earth's gravity depend on its initial velocity \( v \):  
-- **Elliptical Orbit:** \( v < v_{\text{escape}} \) (bound trajectory).  
-- **Parabolic Trajectory:** \( v = v_{\text{escape}} \) (marginally unbound).  
-- **Hyperbolic Trajectory:** \( v > v_{\text{escape}} \) (unbound, escape velocity).  
+Parabolic Trajectory: If the payload reaches exactly escape velocity, it will follow a parabolic path, theoretically never returning.
 
-**Escape Velocity:**  
-\[
-v_{\text{escape}} = \sqrt{\frac{2GM_{\text{Earth}}}{r}}
-\]  
-Where \( r \) is the distance from Earth's center.
+Hyperbolic Trajectory: For velocities exceeding escape velocity, the payload will follow a hyperbolic path and escape Earth's gravity.
 
----
+Suborbital/Reentry: If the velocity is too low to maintain orbit, the payload will follow a suborbital trajectory and reenter Earth's atmosphere.
 
-## Task 2: Numerical Analysis
-The payload's motion is governed by Newton's law of gravitation:  
-\[
-\frac{d^2 \mathbf{r}}{dt^2} = -\frac{GM_{\text{Earth}}}{r^3} \mathbf{r}
-\]  
-We solve this ODE numerically using the **Runge-Kutta 4th-order (RK4)** method.
+Key Physics Principles
+Newton's Law of Gravitation:
 
----
+F
+=
+G
+m
+1
+m
+2
+r
+2
+F=G 
+r 
+2
+ 
+m 
+1
+​
+ m 
+2
+​
+ 
+​
+ 
+Governs the attractive force between Earth and the payload.
 
-## Task 3: Trajectory Scenarios
-- **Orbital Insertion:** Sub-escape velocity → elliptical orbit.  
-- **Reentry:** Low velocity with atmospheric drag → decayed orbit.  
-- **Escape:** Hyperbolic trajectory if \( v \geq v_{\text{escape}} \).
+Kepler's Laws:
 
----
+Orbits are conic sections (ellipses, parabolas, or hyperbolas).
 
-## Task 4: Computational Tool (Python Implementation)
+Equal areas are swept in equal times (angular momentum conservation).
 
-### Code
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.constants import G
-from scipy.integrate import solve_ivp
+Orbital period squared is proportional to semi-major axis cubed (for closed orbits).
 
-# Constants
-M_earth = 5.972e24  # kg
-R_earth = 6.371e6   # m
+Escape Velocity:
 
-def equations_of_motion(t, y):
-    """ODE system for payload motion: dy/dt = [velocity, acceleration]."""
-    r = np.array(y[:3])       # First 3 elements are position (x,y,z)
-    v = np.array(y[3:6])      # Next 3 elements are velocity (vx,vy,vz)
-    r_norm = np.linalg.norm(r)
-    a = -G * M_earth * r / r_norm**3
-    return np.concatenate((v, a))  # Return [vx,vy,vz,ax,ay,az]
+v
+escape
+=
+2
+G
+M
+r
+v 
+escape
+​
+ = 
+r
+2GM
+​
+ 
+​
+ 
+The minimum speed needed to break free from Earth's gravity.
 
-def simulate_trajectory(initial_pos, initial_vel, t_span=(0, 10000), dt=10):
-    """Simulate payload trajectory using RK4."""
-    sol = solve_ivp(
-        equations_of_motion,
-        t_span,
-        np.concatenate((initial_pos, initial_vel)),
-        t_eval=np.arange(t_span[0], t_span[1], dt),
-        method='RK45'
-    )
-    return sol.y[:3, :]  # Return position vectors
+Numerical Approach (Conceptual)
+To simulate the payload's motion, we would numerically solve the equations of motion derived from Newton's laws:
 
-# Example: Payload released at 500 km altitude
-altitude = 500e3  # 500 km
-initial_pos = np.array([R_earth + altitude, 0, 0])
-initial_vel = np.array([0, 7.5e3, 0])  # 7.5 km/s (elliptical orbit)
+Equations of Motion:
 
-trajectory = simulate_trajectory(initial_pos, initial_vel)
+d
+2
+r
+⃗
+d
+t
+2
+=
+−
+G
+M
+r
+3
+r
+⃗
+dt 
+2
+ 
+d 
+2
+  
+r
+ 
+​
+ =− 
+r 
+3
+ 
+GM
+​
+  
+r
+ 
+Where 
+r
+⃗
+r
+  is the position vector of the payload.
 
-# Visualization
-fig = plt.figure(figsize=(10, 8))
-ax = fig.add_subplot(111, projection='3d')
-ax.plot(trajectory[0], trajectory[1], trajectory[2], 'b-', label='Payload Trajectory')
+Numerical Integration:
 
-# Draw Earth as a sphere
-u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
-x = R_earth * np.cos(u)*np.sin(v)
-y = R_earth * np.sin(u)*np.sin(v)
-z = R_earth * np.cos(v)
-ax.plot_surface(x, y, z, color='green', alpha=0.5, label='Earth')
+Discretize time into small steps 
+Δ
+t
+Δt.
 
-ax.set_xlabel('X [m]')
-ax.set_ylabel('Y [m]')
-ax.set_zlabel('Z [m]')
-ax.set_title('Payload Trajectory Near Earth')
-ax.legend()
-plt.tight_layout()
-plt.show()
+Use methods like Euler or Runge-Kutta to update velocity and position iteratively:
+
+v
+⃗
+n
++
+1
+=
+v
+⃗
+n
++
+a
+⃗
+n
+Δ
+t
+,
+r
+⃗
+n
++
+1
+=
+r
+⃗
+n
++
+v
+⃗
+n
+Δ
+t
+v
+  
+n+1
+​
+ = 
+v
+  
+n
+​
+ + 
+a
+  
+n
+​
+ Δt, 
+r
+  
+n+1
+​
+ = 
+r
+  
+n
+​
+ + 
+v
+  
+n
+​
+ Δt
+where 
+a
+⃗
+n
+=
+−
+G
+M
+r
+n
+3
+r
+⃗
+n
+a
+  
+n
+​
+ =− 
+r 
+n
+3
+​
+ 
+GM
+​
+  
+r
+  
+n
+​
+ .
+
+Initial Conditions:
+
+Set initial altitude (
+h
+h), speed (
+v
+0
+v 
+0
+​
+ ), and flight path angle (
+θ
+θ) relative to local horizontal.
+
+Convert to Cartesian coordinates for simulation:
+
+r
+⃗
+0
+=
+(
+R
+E
++
+h
+,
+0
+)
+,
+v
+⃗
+0
+=
+(
+v
+0
+cos
+⁡
+θ
+,
+v
+0
+sin
+⁡
+θ
+)
+r
+  
+0
+​
+ =(R 
+E
+​
+ +h,0), 
+v
+  
+0
+​
+ =(v 
+0
+​
+ cosθ,v 
+0
+​
+ sinθ)
+where 
+R
+E
+R 
+E
+​
+  is Earth's radius.
+
+Trajectory Scenarios
+Orbital Insertion:
+
+Initial 
+v
+0
+v 
+0
+​
+  close to circular orbit velocity (
+v
+circ
+=
+G
+M
+r
+v 
+circ
+​
+ = 
+r
+GM
+​
+ 
+​
+ ) results in stable orbits.
+
+Elliptical if 
+v
+0
+≠
+v
+circ
+v 
+0
+​
+ 
+
+=v 
+circ
+​
+  or 
+θ
+≠
+0
+θ
+
+=0.
+
+Reentry:
+
+Suborbital velocities (
+v
+0
+≪
+v
+circ
+v 
+0
+​
+ ≪v 
+circ
+​
+ ) cause the payload to fall back to Earth.
+
+Escape:
+
+Hyperbolic trajectories occur when 
+v
+0
+≥
+v
+escape
+v 
+0
+​
+ ≥v 
+escape
+​
+ .
+
+Deliverables Outline
+Markdown Document:
+
+Explanation of physics principles (gravity, Kepler's laws).
+
+Discussion of trajectory types and conditions.
+
+Pseudocode for numerical simulation (if implementing later).
+
+Graphical Representations:
+
+Sample plots (conceptual) of:
+
+Elliptical vs. circular orbits.
+
+Escape and reentry trajectories.
+
+Effect of varying initial velocity/angle.
+
+Applications:
+
+Payload deployment in missions.
+
+Reentry vehicle design.
+
+Escape trajectories for interplanetary probes.
+
