@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 3 - Physics and Mathematics</title>
+<title>Problem 3: Trajectories of a Freely Released Payload Near Earth - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 3";
+        var mkdocs_page_name = "Problem 3: Trajectories of a Freely Released Payload Near Earth";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_3.md";
         var mkdocs_page_url = null;
       </script>
@@ -58,8 +58,18 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Escape Velocities and Cosmic Velocities</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3: Trajectories of a Freely Released Payload Near Earth</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#analysis-of-possible-trajectories">Analysis of Possible Trajectories</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#key-physics-principles">Key Physics Principles</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-approach-conceptual">Numerical Approach (Conceptual)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#trajectory-scenarios">Trajectory Scenarios</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +173,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Problem 3</li>
+<li class="breadcrumb-item active">Problem 3: Trajectories of a Freely Released Payload Near Earth</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,333 +181,111 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<p>Problem 3: Trajectories of a Freely Released Payload Near Earth
-Analysis of Possible Trajectories
-When a payload is released near Earth, its trajectory is determined by its initial velocity and position relative to Earth's gravitational field. The possible trajectories are:</p>
-<p>Elliptical Orbit: If the payload's velocity is below escape velocity but sufficient to overcome atmospheric drag (at higher altitudes), it will enter an elliptical orbit around Earth.</p>
-<p>Circular Orbit: A special case of elliptical orbit where the initial velocity is exactly perpendicular to the gravitational force at the right magnitude for a circular path.</p>
-<p>Parabolic Trajectory: If the payload reaches exactly escape velocity, it will follow a parabolic path, theoretically never returning.</p>
-<p>Hyperbolic Trajectory: For velocities exceeding escape velocity, the payload will follow a hyperbolic path and escape Earth's gravity.</p>
-<p>Suborbital/Reentry: If the velocity is too low to maintain orbit, the payload will follow a suborbital trajectory and reenter Earth's atmosphere.</p>
-<p>Key Physics Principles
-Newton's Law of Gravitation:</p>
-<h1 id="f">F</h1>
-<p>G
-m
-1
-m
-2
-r
-2
-F=G 
-r 
-2</p>
-<p>m 
-1
-​
- m 
-2
-​</p>
-<p>​</p>
-<p>Governs the attractive force between Earth and the payload.</p>
-<p>Kepler's Laws:</p>
-<p>Orbits are conic sections (ellipses, parabolas, or hyperbolas).</p>
-<p>Equal areas are swept in equal times (angular momentum conservation).</p>
-<p>Orbital period squared is proportional to semi-major axis cubed (for closed orbits).</p>
-<p>Escape Velocity:</p>
-<p>v
-escape
-=
-2
-G
-M
-r
-v 
-escape
-​
- = 
-r
-2GM
-​</p>
-<p>​</p>
-<p>The minimum speed needed to break free from Earth's gravity.</p>
-<p>Numerical Approach (Conceptual)
-To simulate the payload's motion, we would numerically solve the equations of motion derived from Newton's laws:</p>
-<p>Equations of Motion:</p>
-<p>d
-2
-r
-⃗
-d
-t
-2
-=
-−
-G
-M
-r
-3
-r
-⃗
-dt 
-2</p>
-<p>d 
-2</p>
-<p>r</p>
-<p>​
- =− 
-r 
-3</p>
-<p>GM
-​</p>
-<p>r</p>
-<p>Where 
-r
-⃗
-r
-  is the position vector of the payload.</p>
-<p>Numerical Integration:</p>
-<p>Discretize time into small steps 
-Δ
-t
-Δt.</p>
-<p>Use methods like Euler or Runge-Kutta to update velocity and position iteratively:</p>
-<p>v
-⃗
-n
-+
-1
-=
-v
-⃗
-n
-+
-a
-⃗
-n
-Δ
-t
-,
-r
-⃗
-n
-+
-1
-=
-r
-⃗
-n
-+
-v
-⃗
-n
-Δ
-t
-v</p>
-<p>n+1
-​
- = 
-v</p>
-<p>n
-​
- + 
-a</p>
-<p>n
-​
- Δt, 
-r</p>
-<p>n+1
-​
- = 
-r</p>
-<p>n
-​
- + 
-v</p>
-<p>n
-​
- Δt
-where 
-a
-⃗
-n
-=
-−
-G
-M
-r
-n
-3
-r
-⃗
-n
-a</p>
-<p>n
-​
- =− 
-r 
-n
-3
-​</p>
-<p>GM
-​</p>
-<p>r</p>
-<p>n
-​
- .</p>
-<p>Initial Conditions:</p>
-<p>Set initial altitude (
-h
-h), speed (
-v
-0
-v 
-0
-​
- ), and flight path angle (
-θ
-θ) relative to local horizontal.</p>
-<p>Convert to Cartesian coordinates for simulation:</p>
-<p>r
-⃗
-0
-=
-(
-R
-E
-+
-h
-,
-0
-)
-,
-v
-⃗
-0
-=
-(
-v
-0
-cos
-⁡
-θ
-,
-v
-0
-sin
-⁡
-θ
-)
-r</p>
-<p>0
-​
- =(R 
-E
-​
- +h,0), 
-v</p>
-<p>0
-​
- =(v 
-0
-​
- cosθ,v 
-0
-​
- sinθ)
-where 
-R
-E
-R 
-E
-​
-  is Earth's radius.</p>
-<p>Trajectory Scenarios
-Orbital Insertion:</p>
-<p>Initial 
-v
-0
-v 
-0
-​
-  close to circular orbit velocity (
-v
-circ
-=
-G
-M
-r
-v 
-circ
-​
- = 
-r
-GM
-​</p>
-<p>​
- ) results in stable orbits.</p>
-<p>Elliptical if 
-v
-0
-≠
-v
-circ
-v 
-0
-​</p>
-<p>
-=v 
-circ
-​
-  or 
-θ
-≠
-0
-θ
-
-=0.</p>
-<p>Reentry:</p>
-<p>Suborbital velocities (
-v
-0
-≪
-v
-circ
-v 
-0
-​
- ≪v 
-circ
-​
- ) cause the payload to fall back to Earth.</p>
-<p>Escape:</p>
-<p>Hyperbolic trajectories occur when 
-v
-0
-≥
-v
-escape
-v 
-0
-​
- ≥v 
-escape
-​
- .</p>
-<p>Deliverables Outline
-Markdown Document:</p>
-<p>Explanation of physics principles (gravity, Kepler's laws).</p>
-<p>Discussion of trajectory types and conditions.</p>
-<p>Pseudocode for numerical simulation (if implementing later).</p>
-<p>Graphical Representations:</p>
-<p>Sample plots (conceptual) of:</p>
-<p>Elliptical vs. circular orbits.</p>
-<p>Escape and reentry trajectories.</p>
-<p>Effect of varying initial velocity/angle.</p>
-<p>Applications:</p>
-<p>Payload deployment in missions.</p>
-<p>Reentry vehicle design.</p>
-<p>Escape trajectories for interplanetary probes.</p>
+<h1 id="problem-3-trajectories-of-a-freely-released-payload-near-earth">Problem 3: Trajectories of a Freely Released Payload Near Earth</h1>
+<h2 id="analysis-of-possible-trajectories">Analysis of Possible Trajectories</h2>
+<p>When a payload is released near Earth, its trajectory depends on initial velocity and position. The possible trajectories are:</p>
+<ol>
+<li><strong>Elliptical Orbit</strong>: Velocity below escape velocity but sufficient to orbit.</li>
+<li><strong>Circular Orbit</strong>: Perfectly balanced velocity for a circular path.</li>
+<li><strong>Parabolic Trajectory</strong>: Exactly at escape velocity.</li>
+<li><strong>Hyperbolic Trajectory</strong>: Velocity exceeds escape velocity.</li>
+<li><strong>Suborbital/Reentry</strong>: Velocity too low to maintain orbit.</li>
+</ol>
+<h2 id="key-physics-principles">Key Physics Principles</h2>
+<ul>
+<li>
+<p><strong>Newton's Law of Gravitation</strong>:
+  [
+  F = G \frac{m_1 m_2}{r^2}
+  ]</p>
+</li>
+<li>
+<p><strong>Escape Velocity</strong>:
+  [
+  v_{\text{escape}} = \sqrt{\frac{2GM}{r}}
+  ]</p>
+</li>
+<li>
+<p><strong>Circular Orbit Velocity</strong>:
+  [
+  v_{\text{circ}} = \sqrt{\frac{GM}{r}}
+  ]</p>
+</li>
+</ul>
+<h2 id="numerical-approach-conceptual">Numerical Approach (Conceptual)</h2>
+<ol>
+<li>
+<p><strong>Equations of Motion</strong>:
+   [
+   \frac{d^2 \vec{r}}{dt^2} = -\frac{GM}{r^3} \vec{r}
+   ]</p>
+</li>
+<li>
+<p><strong>Initial Conditions</strong>:</p>
+</li>
+<li>Altitude (<span class="arithmatex">\(h\)</span>)</li>
+<li>Speed (<span class="arithmatex">\(v_0\)</span>)</li>
+<li>
+<p>Flight path angle (<span class="arithmatex">\(\theta\)</span>)</p>
+</li>
+<li>
+<p><strong>Iterative Solution</strong>:</p>
+</li>
+<li>Update velocity and position at each time step <span class="arithmatex">\(\Delta t\)</span>:
+     [
+     \vec{v}<em>{n+1} = \vec{v}_n + \vec{a}_n \Delta t
+     ]
+     [
+     \vec{r}</em>{n+1} = \vec{r}_n + \vec{v}_n \Delta t
+     ]</li>
+</ol>
+<h2 id="trajectory-scenarios">Trajectory Scenarios</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Condition</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stable Orbit</td>
+<td><span class="arithmatex">\(v_0 \approx v_{\text{circ}}\)</span></td>
+<td>Elliptical/Circular</td>
+</tr>
+<tr>
+<td>Reentry</td>
+<td><span class="arithmatex">\(v_0 \ll v_{\text{circ}}\)</span></td>
+<td>Suborbital</td>
+</tr>
+<tr>
+<td>Escape</td>
+<td><span class="arithmatex">\(v_0 \geq v_{\text{escape}}\)</span></td>
+<td>Hyperbolic</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deliverables">Deliverables</h2>
+<ol>
+<li><strong>Physics Explanation</strong>:</li>
+<li>Gravitational forces</li>
+<li>
+<p>Orbital mechanics</p>
+</li>
+<li>
+<p><strong>Visualizations</strong>:</p>
+</li>
+<li>Trajectory plots</li>
+<li>
+<p>Velocity vs. altitude</p>
+</li>
+<li>
+<p><strong>Applications</strong>:</p>
+</li>
+<li>Payload deployment</li>
+<li>Reentry vehicles</li>
+</ol>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
