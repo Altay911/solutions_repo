@@ -38,7 +38,6 @@ We solve this ODE numerically using the **Runge-Kutta 4th-order (RK4)** method.
 ## Task 4: Computational Tool (Python Implementation)
 
 ### Code
-```python
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import G
@@ -50,11 +49,11 @@ R_earth = 6.371e6   # m
 
 def equations_of_motion(t, y):
     """ODE system for payload motion: dy/dt = [velocity, acceleration]."""
-    r = np.array(y[:3])
-    v = np.array(y[3:])
+    r = np.array(y[:3])       # First 3 elements are position (x,y,z)
+    v = np.array(y[3:6])      # Next 3 elements are velocity (vx,vy,vz)
     r_norm = np.linalg.norm(r)
     a = -G * M_earth * r / r_norm**3
-    return np.concatenate((v, a))
+    return np.concatenate((v, a))  # Return [vx,vy,vz,ax,ay,az]
 
 def simulate_trajectory(initial_pos, initial_vel, t_span=(0, 10000), dt=10):
     """Simulate payload trajectory using RK4."""
@@ -78,10 +77,18 @@ trajectory = simulate_trajectory(initial_pos, initial_vel)
 fig = plt.figure(figsize=(10, 8))
 ax = fig.add_subplot(111, projection='3d')
 ax.plot(trajectory[0], trajectory[1], trajectory[2], 'b-', label='Payload Trajectory')
-ax.scatter(0, 0, 0, color='green', s=100, label='Earth')
+
+# Draw Earth as a sphere
+u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
+x = R_earth * np.cos(u)*np.sin(v)
+y = R_earth * np.sin(u)*np.sin(v)
+z = R_earth * np.cos(v)
+ax.plot_surface(x, y, z, color='green', alpha=0.5, label='Earth')
+
 ax.set_xlabel('X [m]')
 ax.set_ylabel('Y [m]')
 ax.set_zlabel('Z [m]')
 ax.set_title('Payload Trajectory Near Earth')
 ax.legend()
+plt.tight_layout()
 plt.show()
