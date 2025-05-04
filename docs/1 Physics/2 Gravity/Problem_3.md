@@ -65,43 +65,50 @@ The following table shows how \( T^2 \) is proportional to \( r^3 \):
 | Mars   | 1.52                | 1.88                   | 3.512    | 3.534    |
 
 ## 4. Computational Model
-
+# Kepler's Third Law Computational Model
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import G
 
-def calculate_period(r, M):
-    """Calculate orbital period for circular orbit"""
-    return np.sqrt(4 * np.pi**2 * r**3 / (G * M))
+def orbital_period(radius, central_mass):
+    """Calculate orbital period for circular orbit using Kepler's Third Law"""
+    return 2 * np.pi * np.sqrt(radius**3 / (G * central_mass))
 
-# Earth parameters
-M_earth = 5.972e24  # kg
-earth_radius = 6.371e6  # m
+# Constants for Earth
+EARTH_MASS = 5.972e24  # kg
+EARTH_RADIUS = 6.371e6  # meters
 
-# Generate orbital radii from LEO to GEO
-radii = np.linspace(earth_radius + 160e3, 42164e3, 100)  # 160km to GEO
+# Create range of orbital radii (from 160km to GEO)
+altitudes = np.linspace(160e3, 42164e3 - EARTH_RADIUS, 100)  # in meters
+radii = EARTH_RADIUS + altitudes  # actual orbital radii
 
-# Calculate periods
-periods = calculate_period(radii, M_earth)
+# Calculate periods in seconds then convert to hours
+periods_seconds = orbital_period(radii, EARTH_MASS)
+periods_hours = periods_seconds / 3600
 
-# Convert to hours for better readability
-periods_hours = periods / 3600
-
-# Plot
+# Create the plot
 plt.figure(figsize=(10, 6))
-plt.plot(radii/1000, periods_hours)
-plt.title("Kepler's Third Law Verification")
-plt.xlabel('Orbital Radius (km)')
-plt.ylabel('Orbital Period (hours)')
-plt.grid(True)
+plt.plot(radii/1000, periods_hours, 'b-', linewidth=2)
+plt.title("Orbital Period vs. Radius (Kepler's Third Law)", fontsize=14)
+plt.xlabel('Orbital Radius (km)', fontsize=12)
+plt.ylabel('Orbital Period (hours)', fontsize=12)
+plt.grid(True, which='both', linestyle='--', alpha=0.7)
+plt.tight_layout()
+
+# Add some reference points
+plt.plot(radii[0]/1000, periods_hours[0], 'ro', label='LEO (160km)')
+plt.plot(radii[-1]/1000, periods_hours[-1], 'go', label='GEO (35,786km)')
+plt.legend()
+
 plt.show()
 
-# Verify with known values
-leo_radius = earth_radius + 400e3  # 400km altitude
-geo_radius = 42164e3  # GEO altitude
+# Verification with known values
+def print_verification(altitude_km):
+    r = EARTH_RADIUS + altitude_km * 1000
+    T = orbital_period(r, EARTH_MASS)/3600
+    print(f"Altitude {altitude_km} km: Period = {T:.2f} hours")
 
-leo_period = calculate_period(leo_radius, M_earth)/3600
-geo_period = calculate_period(geo_radius, M_earth)/3600
-
-print(f"LEO (400km) period: {leo_period:.2f} hours")
-print(f"GEO period: {geo_period:.2f} hours (should be 24 hours)")
+print("\nVerification:")
+print_verification(400)  # ISS orbit
+print_verification(35786)  # GEO
+print_verification(384400)  # Moon orbit (~27.3 days expected)
