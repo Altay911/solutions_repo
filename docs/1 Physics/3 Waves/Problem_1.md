@@ -1,117 +1,100 @@
-# Problem 1
-# Interference Patterns on a Water Surface
+# Waves: Interference Patterns from Regular Polygon Sources
 
-## Motivation
+## Problem Statement
+Analyze interference patterns created by wave sources placed at the vertices of a regular polygon on a water surface. The superposition of these circular waves produces distinctive patterns of constructive and destructive interference.
 
-Interference occurs when waves from different sources overlap, forming new patterns on the surface of a medium, such as water. These patterns can illustrate how waves combine in various ways: constructive interference (wave reinforcement) or destructive interference (wave cancellation). Studying these patterns helps us understand fundamental wave behaviors, such as the relationship between wave phase and the effect of multiple sources.
-
-This problem involves analyzing the interference patterns formed on the water surface due to the superposition of waves emitted from point sources placed at the vertices of a regular polygon. By exploring this phenomenon, we gain insight into wave interactions and their real-world applications.
-
----
-
-## 1. Theoretical Foundation
-
-### Wave Equation
-
-A circular wave on a water surface, originating from a point source, is described by the following equation:
+## Wave Equation for Single Source
+Each point source at vertex position \((x_i, y_i)\) generates a circular wave described by:
 
 \[
-\psi(\mathbf{r}, t) = A \cdot \cos(k r - \omega t + \phi)
+\eta_i(x, y, t) = \frac{A}{\sqrt{r_i}} \cdot \cos(kr_i - \omega t + \phi)
 \]
 
-Where:
-- \( \psi(\mathbf{r}, t) \) is the displacement of the water surface at point \( \mathbf{r} \) and time \( t \)
-- \( A \) is the amplitude of the wave
-- \( k \) is the wave number, related to the wavelength \( \lambda \), where \( k = \frac{2\pi}{\lambda} \)
-- \( \omega \) is the angular frequency, related to the frequency \( f \), where \( \omega = 2\pi f \)
-- \( r \) is the distance from the source to the observation point
-- \( \phi \) is the initial phase of the wave
+where:
+- \(r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}\) (distance from source \(i\))
+- \(k = \frac{2\pi}{\lambda}\) (wavenumber)
+- \(\omega = 2\pi f\) (angular frequency)
+- \(\phi\) = initial phase (same for all sources)
 
-### Superposition Principle
+## Solution Methodology
 
-The principle of superposition states that when multiple waves overlap, the resulting displacement is the sum of the displacements from all individual waves. Thus, for \( N \) sources located at the vertices of a regular polygon, the total displacement at a point on the surface is:
+### 1. Regular Polygon Configuration
+For an N-sided regular polygon with radius \(R\):
+- Vertex positions: \((x_i, y_i) = (R\cos\theta_i, R\sin\theta_i)\)
+- \(\theta_i = \frac{2\pi i}{N}\) for \(i = 0,1,...,N-1\)
+
+### 2. Superposition Principle
+Total wave displacement at any point:
 
 \[
-\Psi(\mathbf{r}, t) = \sum_{i=1}^{N} A_i \cdot \cos(k r_i - \omega t + \phi_i)
+\eta_{\text{sum}}(x, y, t) = \sum_{i=0}^{N-1} \frac{A}{\sqrt{r_i}} \cos(kr_i - \omega t)
 \]
 
-Where:
-- \( N \) is the number of sources (vertices of the polygon)
-- \( A_i \), \( r_i \), and \( \phi_i \) are the amplitude, distance, and initial phase of the wave from the \( i^{th} \) source, respectively.
+### 3. Interference Analysis
+- **Constructive Interference**: Occurs when wave crests align
+  \[
+  \Delta r = n\lambda \quad (n \in \mathbb{Z})
+  \]
+- **Destructive Interference**: Occurs when crests meet troughs
+  \[
+  \Delta r = (n + \frac{1}{2})\lambda
+  \]
 
-### Interference Patterns
+## Example: Equilateral Triangle (N=3)
 
-- **Constructive Interference**: Occurs when the waves from different sources are in phase, leading to wave reinforcement and higher displacement.
-- **Destructive Interference**: Occurs when the waves are out of phase, leading to wave cancellation and lower displacement.
+### Vertex Positions
+\[
+\begin{cases}
+(x_0, y_0) = (R, 0) \\
+(x_1, y_1) = (-\frac{R}{2}, \frac{R\sqrt{3}}{2}) \\
+(x_2, y_2) = (-\frac{R}{2}, -\frac{R\sqrt{3}}{2})
+\end{cases}
+\]
 
-The interference pattern depends on the relative phase and position of the sources and the observation point.
+### Characteristic Patterns
+1. **Central Region**: 
+   - Symmetric interference
+   - Six-fold pattern of maxima/minima
 
----
+2. **Edge Regions**:
+   - Complex interference fringes
+   - Directional propagation patterns
 
-## 2. Simulation and Visualization
+## Visualization Approach
+1. **Spatial Map**:
+   - Plot \(|\eta_{\text{sum}}|\) over a grid
+   - Color mapping for wave amplitude
 
-### Steps to Implement:
-1. **Choose a Regular Polygon**: For simplicity, we will use a square (4 vertices).
-2. **Position the Sources**: The point sources are placed at the vertices of the square.
-3. **Write the Wave Equations**: For each source, the wave will follow the equation described above.
-4. **Apply Superposition**: Sum the contributions from all sources at each point on the water surface.
-5. **Analyze the Resulting Pattern**: Observe regions of constructive and destructive interference.
+2. **Time Evolution**:
+   - Animate wave propagation
+   - Highlight phase relationships
 
----
+## Key Findings
+| Polygon Type | Characteristic Pattern | Notable Features |
+|--------------|------------------------|------------------|
+| Triangle (3) | 6-fold symmetry | Strong central interference |
+| Square (4)   | 8-lobed pattern | Clear diagonal maxima |
+| Pentagon (5) | 10-armed spiral | Rotating interference bands |
 
-## 3. Python Implementation
+## Physical Interpretation
+1. **Symmetry Effects**:
+   - N sources → 2N-fold interference symmetry
+   - Polygon rotation preserved in pattern
 
-Below is a Python script that simulates the interference pattern of waves emitted from the vertices of a square (or any regular polygon). It uses the **matplotlib** library for visualization and **numpy** for numerical calculations.
+2. **Distance Decay**:
+   - \(\frac{1}{\sqrt{r}}\) amplitude decay
+   - Far-field pattern simplification
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
+## Deliverables
 
-# Constants
-A = 1        # Amplitude of the waves
-k = 2 * np.pi / 1.0  # Wave number (assuming wavelength = 1 meter)
-omega = 2 * np.pi  # Angular frequency (assuming frequency = 1 Hz)
-phi = 0      # Initial phase of the waves
+1. **Mathematical Analysis**:
+   - Complete derivation of superposition
+   - Phase difference calculations
 
-# Set up the grid for the water surface
-x_max, y_max = 10, 10  # Size of the water surface grid (10m x 10m)
-x = np.linspace(-x_max, x_max, 500)
-y = np.linspace(-y_max, y_max, 500)
-X, Y = np.meshgrid(x, y)
+2. **Visualizations**:
+   - Static interference patterns
+   - Time evolution animations
 
-# Define the number of sources and their positions for a square
-N_sources = 4  # Number of sources (vertices of a square)
-radius = 5     # Distance from the center to the sources
-
-# Positions of the sources (vertices of a square)
-angles = np.linspace(0, 2 * np.pi, N_sources, endpoint=False)
-source_positions = np.array([radius * np.cos(angles), radius * np.sin(angles)])
-
-# Superposition of waves from all sources
-def wave_sum(X, Y, source_positions, A, k, omega, phi):
-    total_displacement = np.zeros(X.shape)
-    
-    for i in range(N_sources):
-        # Calculate distance from each source to each point on the grid
-        r = np.sqrt((X - source_positions[0, i])**2 + (Y - source_positions[1, i])**2)
-        
-        # Calculate the wave displacement for this source
-        displacement = A * np.cos(k * r - omega * 0 + phi)  # Assuming t = 0 for simplicity
-        total_displacement += displacement  # Sum the displacements
-    
-    return total_displacement
-
-# Calculate the wave displacement on the water surface
-Z = wave_sum(X, Y, source_positions, A, k, omega, phi)
-
-# Plotting the interference pattern
-plt.figure(figsize=(8, 6))
-plt.contourf(X, Y, Z, cmap='seismic', levels=np.linspace(-4, 4, 50))
-plt.colorbar(label='Displacement')
-plt.title('Interference Pattern of Waves from Square Sources')
-plt.xlabel('x (m)')
-plt.ylabel('y (m)')
-plt.show()
-
-
-YEPP
+3. **Discussion**:
+   - Comparison of different polygons
+   - Real-world water wave analogs
