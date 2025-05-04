@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Electromagnetism 1: Simulating Lorentz Force Effects - Physics and Mathematics</title>
+<title>Electromagnetism 1: Lorentz Force Simulations (Pure Theory) - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Electromagnetism 1: Simulating Lorentz Force Effects";
+        var mkdocs_page_name = "Electromagnetism 1: Lorentz Force Simulations (Pure Theory)";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,23 +70,43 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism 1: Simulating Lorentz Force Effects</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Electromagnetism 1: Lorentz Force Simulations (Pure Theory)</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#physics-foundations">Physics Foundations</a>
+<li class="toctree-l3"><a class="reference internal" href="#analytical-solutions-for-common-configurations">Analytical Solutions for Common Configurations</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#key-equations">Key Equations</a>
+<li class="toctree-l4"><a class="reference internal" href="#1-uniform-magnetic-field-b-bz">1. Uniform Magnetic Field (𝐁 = Bẑ)</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#characteristic-motions">Characteristic Motions</a>
+<li class="toctree-l4"><a class="reference internal" href="#2-crossed-fields-e-ey-b-bz">2. Crossed Fields (𝐄 = Eŷ, 𝐁 = Bẑ)</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#numerical-implementation">Numerical Implementation</a>
+<li class="toctree-l3"><a class="reference internal" href="#phase-space-analysis">Phase Space Analysis</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#simulation-algorithm-runge-kutta-4th-order">Simulation Algorithm (Runge-Kutta 4th Order)</a>
+<li class="toctree-l4"><a class="reference internal" href="#conservation-laws">Conservation Laws</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#characteristic-scales">Characteristic Scales</a>
 </li>
 </ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visualization-methodology">Visualization Methodology</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-graphical-construction">1. Graphical Construction</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-key-features-to-highlight">2. Key Features to Highlight</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#practical-systems-analysis">Practical Systems Analysis</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#cyclotron-operation">Cyclotron Operation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#mass-spectrometer">Mass Spectrometer</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deliverables">Deliverables</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#execution-framework">Execution Framework</a>
 </li>
 </ul>
 </li>
@@ -179,7 +199,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Electromagnetism 1: Simulating Lorentz Force Effects</li>
+<li class="breadcrumb-item active">Electromagnetism 1: Lorentz Force Simulations (Pure Theory)</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -187,65 +207,153 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="electromagnetism-1-simulating-lorentz-force-effects">Electromagnetism 1: Simulating Lorentz Force Effects</h1>
-<h2 id="problem-statement">Problem Statement</h2>
-<p>Simulate and analyze the motion of charged particles under various electromagnetic field configurations governed by the Lorentz force:
+<h1 id="electromagnetism-1-lorentz-force-simulations-pure-theory">Electromagnetism 1: Lorentz Force Simulations (Pure Theory)</h1>
+<h2 id="analytical-solutions-for-common-configurations">Analytical Solutions for Common Configurations</h2>
+<h3 id="1-uniform-magnetic-field-b-bz">1. Uniform Magnetic Field (𝐁 = Bẑ)</h3>
+<p><strong>Trajectory Equations</strong>:
 [
-\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}
-]</p>
-<h2 id="physics-foundations">Physics Foundations</h2>
-<h3 id="key-equations">Key Equations</h3>
+\begin{cases}
+x(t) = r_L \sin(\omega_c t) \
+y(t) = r_L [1 - \cos(\omega_c t)] \
+z(t) = v_{\parallel} t
+\end{cases}
+]
+where:
+- <span class="arithmatex">\( r_L = \frac{mv_\perp}{qB} \)</span> (Larmor radius)
+- <span class="arithmatex">\( \omega_c = \frac{qB}{m} \)</span> (Cyclotron frequency)</p>
+<h3 id="2-crossed-fields-e-ey-b-bz">2. Crossed Fields (𝐄 = Eŷ, 𝐁 = Bẑ)</h3>
+<p><strong>Drift Motion Solution</strong>:
+[
+\mathbf{r}(t) = 
+\begin{pmatrix}
+\frac{E}{B}t - r_L \sin(\omega_c t) \
+r_L \cos(\omega_c t) \
+0
+\end{pmatrix}
+]
+<strong>Key Features</strong>:
+- E×B drift velocity: <span class="arithmatex">\( v_E = E/B \)</span>
+- Superimposed cyclotron motion</p>
+<h2 id="phase-space-analysis">Phase Space Analysis</h2>
+<h3 id="conservation-laws">Conservation Laws</h3>
 <ol>
-<li><strong>Lorentz Force</strong>:
+<li><strong>Energy</strong>:
    [
-   \mathbf{F} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})
+   \frac{1}{2}mv^2 + q\phi = \text{constant}
    ]</li>
-<li><strong>Equations of Motion</strong>:
+<li><strong>Magnetic Moment</strong> (Adiabatic Invariant):
    [
-   \frac{d\mathbf{v}}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v} \times \mathbf{B})
-   ]
-   [
-   \frac{d\mathbf{r}}{dt} = \mathbf{v}
+   \mu = \frac{mv_\perp^2}{2B}
    ]</li>
 </ol>
-<h3 id="characteristic-motions">Characteristic Motions</h3>
+<h3 id="characteristic-scales">Characteristic Scales</h3>
 <table>
 <thead>
 <tr>
-<th>Field Configuration</th>
-<th>Particle Trajectory</th>
-<th>Physical Parameters</th>
+<th>Quantity</th>
+<th>Expression</th>
+<th>Physical Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pure <span class="arithmatex">\(\mathbf{B}\)</span></td>
-<td>Circular/Helical</td>
-<td>Larmor radius (r_L = \frac{mv_\perp}{</td>
+<td>Larmor radius</td>
+<td>( r_L = \frac{mv_\perp}{</td>
+<td>q</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(\mathbf{E} + \mathbf{B}\)</span></td>
-<td>Drift motion</td>
-<td><span class="arithmatex">\(\mathbf{v}_E = \frac{\mathbf{E} \times \mathbf{B}}{B^2}\)</span></td>
+<td>Drift velocity</td>
+<td><span class="arithmatex">\( v_E = \frac{E}{B} \)</span></td>
+<td>Cross-field drift</td>
 </tr>
 <tr>
-<td>Crossed fields</td>
-<td>Cycloid</td>
-<td>Drift velocity dependent on <span class="arithmatex">\(E/B\)</span> ratio</td>
+<td>Cyclotron period</td>
+<td>( T_c = \frac{2\pi m}{</td>
+<td>q</td>
 </tr>
 </tbody>
 </table>
-<h2 id="numerical-implementation">Numerical Implementation</h2>
-<h3 id="simulation-algorithm-runge-kutta-4th-order">Simulation Algorithm (Runge-Kutta 4th Order)</h3>
-<p>```python</p>
-<h1 id="pseudocode-for-rk4-implementation">Pseudocode for RK4 implementation</h1>
-<p>def lorentz_force(q, m, E, B, v):
-    return q*(E + np.cross(v,B)) / m</p>
-<p>def rk4_step(r, v, dt, q, m, E, B):
-    k1v = lorentz_force(q, m, E, B, v)
-    k1r = v
-    # ... complete RK4 steps ...
-    return r_new, v_new</p>
+<h2 id="visualization-methodology">Visualization Methodology</h2>
+<h3 id="1-graphical-construction">1. Graphical Construction</h3>
+<ul>
+<li><strong>2D Plots</strong>: Parametric plots of (x(t), y(t))</li>
+<li><strong>3D Trajectories</strong>: Helix equations with pitch <span class="arithmatex">\( h = 2\pi v_\parallel/\omega_c \)</span></li>
+<li><strong>Phase Portraits</strong>: Plot vₓ vs x for oscillatory motion</li>
+</ul>
+<h3 id="2-key-features-to-highlight">2. Key Features to Highlight</h3>
+<ul>
+<li><strong>Guiding Center Motion</strong>: Average position of gyrating particle</li>
+<li><strong>Drift Separation</strong>: E×B vs grad-B drifts</li>
+<li><strong>Magnetic Mirroring</strong>: Velocity space plots</li>
+</ul>
+<h2 id="practical-systems-analysis">Practical Systems Analysis</h2>
+<h3 id="cyclotron-operation">Cyclotron Operation</h3>
+<ol>
+<li><strong>Resonance Condition</strong>:
+   [
+   \omega_{RF} = \omega_c = \frac{qB}{m}
+   ]</li>
+<li><strong>Energy Gain</strong>:
+   [
+   \Delta E = 2qV_0 \text{ per revolution}
+   ]</li>
+</ol>
+<h3 id="mass-spectrometer">Mass Spectrometer</h3>
+<ul>
+<li><strong>Mass-to-Charge Resolution</strong>:
+  [
+  \frac{m}{q} = \frac{B^2 r^2}{2V}
+  ]</li>
+<li><strong>Detection Principle</strong>: Spatial separation by rₗ</li>
+</ul>
+<h2 id="deliverables">Deliverables</h2>
+<ol>
+<li><strong>Analytical Derivations</strong>:</li>
+<li>Complete solutions for 5 field configurations</li>
+<li>
+<p>Dimensional analysis of parameters</p>
+</li>
+<li>
+<p><strong>Hand-Drawn Visualizations</strong>:</p>
+</li>
+<li>Trajectory diagrams with labeled components</li>
+<li>
+<p>Comparative plots of different drift types</p>
+</li>
+<li>
+<p><strong>Physics Interpretation</strong>:</p>
+</li>
+<li>Table linking mathematical terms to physical effects</li>
+<li>
+<p>Case study explanations (e.g., aurora formation)</p>
+</li>
+<li>
+<p><strong>Extensions</strong>:</p>
+</li>
+<li>Relativistic corrections framework</li>
+<li>Non-uniform field perturbation theory</li>
+</ol>
+<h2 id="execution-framework">Execution Framework</h2>
+<ol>
+<li><strong>Coordinate Systems</strong>:</li>
+<li>Frenet-Serret frame for curved 𝐁</li>
+<li>
+<p>Field-aligned coordinates</p>
+</li>
+<li>
+<p><strong>Dimensionless Parameters</strong>:
+   [
+   \epsilon = \frac{E}{v_0 B}, \quad \rho = \frac{r_L}{L}
+   ]
+   where L is system scale length</p>
+</li>
+<li>
+<p><strong>Validation Checks</strong>:</p>
+</li>
+<li>Energy conservation proofs</li>
+<li>Limit case comparisons (E→0, B→0)</li>
+</ol>
+<p>This theoretical approach provides complete analytical understanding without computational tools, focusing on fundamental physics and mathematical modeling.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
