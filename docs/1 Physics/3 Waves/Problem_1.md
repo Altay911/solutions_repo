@@ -30,15 +30,7 @@ Total wave displacement at any point:
 \eta_{\text{sum}}(x, y, t) = \sum_{i=0}^{N-1} \frac{A}{\sqrt{r_i}} \cos(kr_i - \omega t)
 \]
 
-### 3. Interference Analysis
-- **Constructive Interference**: Occurs when wave crests align
-  \[
-  \Delta r = n\lambda \quad (n \in \mathbb{Z})
-  \]
-- **Destructive Interference**: Occurs when crests meet troughs
-  \[
-  \Delta r = (n + \frac{1}{2})\lambda
-  \]
+
 
 ## Example: Equilateral Triangle (N=3)
 
