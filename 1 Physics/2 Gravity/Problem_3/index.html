@@ -216,8 +216,7 @@ We solve this ODE numerically using the <strong>Runge-Kutta 4th-order (RK4)</str
 <hr/>
 <h2 id="task-4-computational-tool-python-implementation">Task 4: Computational Tool (Python Implementation)</h2>
 <h3 id="code">Code</h3>
-<p>```python
-import numpy as np
+<p>import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import G
 from scipy.integrate import solve_ivp</p>
@@ -226,11 +225,11 @@ from scipy.integrate import solve_ivp</p>
 R_earth = 6.371e6   # m</p>
 <p>def equations_of_motion(t, y):
     """ODE system for payload motion: dy/dt = [velocity, acceleration]."""
-    r = np.array(y[:3])
-    v = np.array(y[3:])
+    r = np.array(y[:3])       # First 3 elements are position (x,y,z)
+    v = np.array(y[3:6])      # Next 3 elements are velocity (vx,vy,vz)
     r_norm = np.linalg.norm(r)
     a = -G * M_earth * r / r_norm**3
-    return np.concatenate((v, a))</p>
+    return np.concatenate((v, a))  # Return [vx,vy,vz,ax,ay,az]</p>
 <p>def simulate_trajectory(initial_pos, initial_vel, t_span=(0, 10000), dt=10):
     """Simulate payload trajectory using RK4."""
     sol = solve_ivp(
@@ -249,13 +248,19 @@ initial_vel = np.array([0, 7.5e3, 0])  # 7.5 km/s (elliptical orbit)</p>
 <h1 id="visualization">Visualization</h1>
 <p>fig = plt.figure(figsize=(10, 8))
 ax = fig.add_subplot(111, projection='3d')
-ax.plot(trajectory[0], trajectory[1], trajectory[2], 'b-', label='Payload Trajectory')
-ax.scatter(0, 0, 0, color='green', s=100, label='Earth')
-ax.set_xlabel('X [m]')
+ax.plot(trajectory[0], trajectory[1], trajectory[2], 'b-', label='Payload Trajectory')</p>
+<h1 id="draw-earth-as-a-sphere">Draw Earth as a sphere</h1>
+<p>u, v = np.mgrid[0:2<em>np.pi:20j, 0:np.pi:10j]
+x = R_earth * np.cos(u)</em>np.sin(v)
+y = R_earth * np.sin(u)*np.sin(v)
+z = R_earth * np.cos(v)
+ax.plot_surface(x, y, z, color='green', alpha=0.5, label='Earth')</p>
+<p>ax.set_xlabel('X [m]')
 ax.set_ylabel('Y [m]')
 ax.set_zlabel('Z [m]')
 ax.set_title('Payload Trajectory Near Earth')
 ax.legend()
+plt.tight_layout()
 plt.show()</p>
 </div>
 </div><footer>
