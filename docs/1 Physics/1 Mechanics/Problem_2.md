@@ -148,5 +148,5 @@ Where:
 $$ Q = \frac{\omega_0}{2\beta} $$
 
 
-Higher Q means sharper resonance peak
+
 ![alt text](pendulum_time_series.png)
