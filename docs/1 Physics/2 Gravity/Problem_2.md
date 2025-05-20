@@ -17,7 +17,7 @@
 
 **Physical Meaning:** Combines Earth's escape velocity with the Sun's gravitational influence at Earth's orbital distance.
 
-
+![alt text](<download (3).png>)
 ### Parameter Dependencies
 
 | Parameter | Effect on Velocities | Relationship |
@@ -85,7 +85,7 @@
    - Alternative technologies (ion drives, light sails) for high \( v_3 \)
 
 ## Historical Context
-
+![alt text](<download (4).png>)
 ### Milestone Achievements
 
 | Year | Mission | Velocity Achieved | Significance |
