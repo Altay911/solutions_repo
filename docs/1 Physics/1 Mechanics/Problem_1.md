@@ -68,3 +68,5 @@ $$ H = \frac{v_0^2 \sin^2\theta}{2g} $$
 3. **Parameter sensitivity:**
    - How range changes with $v_0$
    - Effect of initial height $y_0$
+
+   ![Range vs. Angle Plot](range_vs_angle.png)
