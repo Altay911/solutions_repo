@@ -70,6 +70,7 @@ $$ T^2 = \left( \frac{4\pi^2}{GM} \right) r^3 $$
 
 ## Extensions to Real Systems
 
+![alt text](<download (1).png>)
 ### Elliptical Orbits
 
 1. **Modified Law:**
@@ -106,3 +107,4 @@ $$ T^2 = \frac{4\pi^2 a^3}{G(M_1+M_2)} $$
 
 3. **Non-Point Masses:**
    - Tidal forces and oblateness affect orbits
+![alt text](<download (2).png>)
