@@ -69,4 +69,4 @@ $$ H = \frac{v_0^2 \sin^2\theta}{2g} $$
    - How range changes with $v_0$
    - Effect of initial height $y_0$
 
-   ![Range vs. Angle Plot](range_vs_angle.png)
+![Range vs. Angle Plot](pics/range_vs_angle.png)
