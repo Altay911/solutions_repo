@@ -1,7 +1,5 @@
 # Lorentz Force Simulation Analysis
 
-## Date: May 26, 2025, 03:27 PM CEST
-
 ### Introduction
 
 The Lorentz force governs the motion of charged particles in the presence of electric and magnetic fields, expressed as **F = qE + q(v × B)**, where *q* is the particle's charge, *E* is the electric field, *v* is the particle's velocity, and *B* is the magnetic field. This force is fundamental to many physical systems, such as particle accelerators, plasma confinement, and astrophysical phenomena. The objective of this analysis is to explore the motion of a charged particle under different field configurations, discuss the resulting trajectories, and relate these findings to practical applications.
