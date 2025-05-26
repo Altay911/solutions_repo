@@ -1,83 +1,31 @@
 # Lorentz Force Simulation Analysis
-## Date: May 26, 2025, 03:21 PM CEST
+
+## Date: May 26, 2025, 03:27 PM CEST
 
 ### Introduction
-The Lorentz force, given by \(\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}\), governs the motion of charged particles in electric (\(\mathbf{E}\)) and magnetic (\(\mathbf{B}\)) fields. This simulation explores its effects on particle trajectories under different field configurations, with applications in plasma physics, particle accelerators, and astrophysics.
 
-### Simulation Implementation
-Below is the Python code used to simulate and analyze the motion of a charged particle (e.g., an electron) under various field conditions.
+The Lorentz force governs the motion of charged particles in the presence of electric and magnetic fields, expressed as **F = qE + q(v × B)**, where *q* is the particle's charge, *E* is the electric field, *v* is the particle's velocity, and *B* is the magnetic field. This force is fundamental to many physical systems, such as particle accelerators, plasma confinement, and astrophysical phenomena. The objective of this analysis is to explore the motion of a charged particle under different field configurations, discuss the resulting trajectories, and relate these findings to practical applications.
 
-```python
-import numpy as np
+### Theoretical Background
 
-# Constants
-q = -1.6e-19  # Charge of electron (Coulombs)
-m = 9.11e-31  # Mass of electron (kg)
-dt = 1e-9     # Time step (seconds)
-n_steps = 10000  # Number of time steps
+The Lorentz force combines two components:
+- **Electric Force**: *qE*, which accelerates the particle in the direction of the electric field.
+- **Magnetic Force**: *q(v × B)*, which acts perpendicular to both the velocity and magnetic field, causing circular or helical motion when the velocity has a component perpendicular to *B*.
 
-# Helper function to compute Lorentz force
-def lorentz_force(v, E, B):
-    return q * (E + np.cross(v, B))
+Key phenomena include:
+- **Circular Motion**: In a uniform magnetic field with velocity perpendicular to *B*, the particle moves in a circle with a radius known as the Larmor radius, given by *r = (m v_⊥) / (|q| B)*, where *m* is the mass and *v_⊥* is the velocity component perpendicular to *B*.
+- **Drift Motion**: In crossed electric and magnetic fields (*E* perpendicular to *B*), the particle exhibits a drift velocity *v_drift = (E × B) / B²*, perpendicular to both fields, alongside circular motion.
+- **Helical Motion**: If the velocity has components both parallel and perpendicular to *B*, the particle follows a helical path.
 
-# 1. Uniform Magnetic Field (Circular Motion)
-B1 = np.array([0, 0, 1.0])  # B-field along z-axis (Tesla)
-E1 = np.array([0, 0, 0])    # No electric field
-v1 = np.array([1e5, 0, 0])  # Initial velocity along x-axis (m/s)
-r1 = np.array([0, 0, 0])    # Initial position (m)
+### Simulated Scenarios
 
-positions1 = np.zeros((n_steps, 3))
-positions1[0] = r1
-velocities1 = np.zeros((n_steps, 3))
-velocities1[0] = v1
+Three scenarios were analyzed to understand the Lorentz force's effects on a charged particle (assumed to be an electron, *q = -1.6 × 10⁻¹⁹ C*, *m = 9.11 × 10⁻³¹ kg*):
 
-for i in range(1, n_steps):
-    v = velocities1[i-1]
-    a = lorentz_force(v, E1, B1) / m
-    velocities1[i] = v + a * dt
-    positions1[i] = positions1[i-1] + velocities1[i] * dt
+#### Scenario 1: Uniform Magnetic Field (Circular Motion)
 
-# Larmor radius calculation
-v_perp = np.sqrt(v1[0]**2 + v1[1]**2)
-larmor_radius = m * v_perp / (abs(q) * np.linalg.norm(B1))
-
-# 2. Crossed E and B Fields (Drift Motion)
-E2 = np.array([0, 1e4, 0])  # E-field along y-axis (V/m)
-B2 = np.array([0, 0, 1.0])  # B-field along z-axis (Tesla)
-v2 = np.array([1e5, 0, 0])  # Initial velocity along x-axis (m/s)
-r2 = np.array([0, 0, 0])    # Initial position (m)
-
-positions2 = np.zeros((n_steps, 3))
-positions2[0] = r2
-velocities2 = np.zeros((n_steps, 3))
-velocities2[0] = v2
-
-for i in range(1, n_steps):
-    v = velocities2[i-1]
-    a = lorentz_force(v, E2, B2) / m
-    velocities2[i] = v + a * dt
-    positions2[i] = positions2[i-1] + velocities2[i] * dt
-
-# Drift velocity calculation
-b_magnitude = np.linalg.norm(B2)
-drift_velocity = np.cross(E2, B2) / (b_magnitude**2)
-
-# 3. Combined E and B Fields (Helical Motion)
-E3 = np.array([0, 1e4, 0])  # E-field along y-axis (V/m)
-B3 = np.array([0, 0, 1.0])  # B-field along z-axis (Tesla)
-v3 = np.array([1e5, 0, 2e4])  # Initial velocity with z-component (m/s)
-r3 = np.array([0, 0, 0])     # Initial position (m)
-
-positions3 = np.zeros((n_steps, 3))
-positions3[0] = r3
-velocities3 = np.zeros((n_steps, 3))
-velocities3[0] = v3
-
-for i in range(1, n_steps):
-    v = velocities3[i-1]
-    a = lorentz_force(v, E3, B3) / m
-    velocities3[i] = v + a * dt
-    positions3[i] = positions3[i-1] + velocities3[i] * dt
+- **Setup**: A magnetic field *B = 1.0 T* along the z-axis, with no electric field (*E = 0*). The particle's initial velocity is *v = [10⁵, 0, 0] m/s* (along the x-axis, perpendicular to *B*), and it starts at the origin.
+- **Expected Behavior**: The magnetic force *q(v × B)* causes the particle to move in a circular path in the xy-plane. The Larmor radius is calculated as *r = (m v_⊥) / (|q| B) ≈ 5.69 × 10⁻⁶ m*.
+- **Results**: The particle completes circular
 
 <!DOCTYPE html>
 <html lang="en">
