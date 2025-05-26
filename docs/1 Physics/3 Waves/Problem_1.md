@@ -3,6 +3,8 @@
 ## Problem Statement
 Analyze interference patterns created by wave sources placed at the vertices of a regular polygon on a water surface. The superposition of these circular waves produces distinctive patterns of constructive and destructive interference.
 
+![alt text](18121e05-655d-42d5-ad31-0cf3010a55df.png)
+
 ## Wave Equation for Single Source
 Each point source at vertex position \((x_i, y_i)\) generates a circular wave described by:
 
@@ -17,6 +19,8 @@ where:
 - \(\phi\) = initial phase (same for all sources)
 
 ## Solution Methodology
+
+![alt text](b137592b-e3e9-4739-b23c-a69c1ab4a28d.png)4
 
 ### 1. Regular Polygon Configuration
 For an N-sided regular polygon with radius \(R\):
