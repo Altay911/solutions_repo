@@ -1,3 +1,84 @@
+# Lorentz Force Simulation Analysis
+## Date: May 26, 2025, 03:21 PM CEST
+
+### Introduction
+The Lorentz force, given by \(\mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}\), governs the motion of charged particles in electric (\(\mathbf{E}\)) and magnetic (\(\mathbf{B}\)) fields. This simulation explores its effects on particle trajectories under different field configurations, with applications in plasma physics, particle accelerators, and astrophysics.
+
+### Simulation Implementation
+Below is the Python code used to simulate and analyze the motion of a charged particle (e.g., an electron) under various field conditions.
+
+```python
+import numpy as np
+
+# Constants
+q = -1.6e-19  # Charge of electron (Coulombs)
+m = 9.11e-31  # Mass of electron (kg)
+dt = 1e-9     # Time step (seconds)
+n_steps = 10000  # Number of time steps
+
+# Helper function to compute Lorentz force
+def lorentz_force(v, E, B):
+    return q * (E + np.cross(v, B))
+
+# 1. Uniform Magnetic Field (Circular Motion)
+B1 = np.array([0, 0, 1.0])  # B-field along z-axis (Tesla)
+E1 = np.array([0, 0, 0])    # No electric field
+v1 = np.array([1e5, 0, 0])  # Initial velocity along x-axis (m/s)
+r1 = np.array([0, 0, 0])    # Initial position (m)
+
+positions1 = np.zeros((n_steps, 3))
+positions1[0] = r1
+velocities1 = np.zeros((n_steps, 3))
+velocities1[0] = v1
+
+for i in range(1, n_steps):
+    v = velocities1[i-1]
+    a = lorentz_force(v, E1, B1) / m
+    velocities1[i] = v + a * dt
+    positions1[i] = positions1[i-1] + velocities1[i] * dt
+
+# Larmor radius calculation
+v_perp = np.sqrt(v1[0]**2 + v1[1]**2)
+larmor_radius = m * v_perp / (abs(q) * np.linalg.norm(B1))
+
+# 2. Crossed E and B Fields (Drift Motion)
+E2 = np.array([0, 1e4, 0])  # E-field along y-axis (V/m)
+B2 = np.array([0, 0, 1.0])  # B-field along z-axis (Tesla)
+v2 = np.array([1e5, 0, 0])  # Initial velocity along x-axis (m/s)
+r2 = np.array([0, 0, 0])    # Initial position (m)
+
+positions2 = np.zeros((n_steps, 3))
+positions2[0] = r2
+velocities2 = np.zeros((n_steps, 3))
+velocities2[0] = v2
+
+for i in range(1, n_steps):
+    v = velocities2[i-1]
+    a = lorentz_force(v, E2, B2) / m
+    velocities2[i] = v + a * dt
+    positions2[i] = positions2[i-1] + velocities2[i] * dt
+
+# Drift velocity calculation
+b_magnitude = np.linalg.norm(B2)
+drift_velocity = np.cross(E2, B2) / (b_magnitude**2)
+
+# 3. Combined E and B Fields (Helical Motion)
+E3 = np.array([0, 1e4, 0])  # E-field along y-axis (V/m)
+B3 = np.array([0, 0, 1.0])  # B-field along z-axis (Tesla)
+v3 = np.array([1e5, 0, 2e4])  # Initial velocity with z-component (m/s)
+r3 = np.array([0, 0, 0])     # Initial position (m)
+
+positions3 = np.zeros((n_steps, 3))
+positions3[0] = r3
+velocities3 = np.zeros((n_steps, 3))
+velocities3[0] = v3
+
+for i in range(1, n_steps):
+    v = velocities3[i-1]
+    a = lorentz_force(v, E3, B3) / m
+    velocities3[i] = v + a * dt
+    positions3[i] = positions3[i-1] + velocities3[i] * dt
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +152,7 @@
       margin: 10px 0;
       font-family: monospace;
     }
+
   </style>
 </head>
 <body>
