@@ -2,6 +2,8 @@
 
 ## Analysis of Possible Trajectories
 
+
+![alt text](9b9fecd5-5d26-4285-8159-5172e689fed9.png)
 When a payload is released near Earth, its trajectory is determined by the balance between its initial velocity and Earth's gravitational pull. The possible trajectories are:
 
 1. **Elliptical Orbit**: Occurs when the payload's velocity is below escape velocity but sufficient to maintain an orbit. The shape becomes more elongated as velocity increases toward escape velocity.
@@ -37,6 +39,7 @@ F = G \frac{m_1 m_2}{r^2}
   v_{\text{escape}} = \sqrt{\frac{2GM}{r}}
   \]
 
+![alt text](9ff722e0-4eed-49fc-8a30-593381334ed3.png)
 ### Energy Considerations
 Total orbital energy determines trajectory shape:
 - Negative: Elliptical/Circular (bound orbit)
