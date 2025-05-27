@@ -1,6 +1,5 @@
 # Central Limit Theorem Simulation Analysis
 
-## Date: May 27, 2025, 12:41 PM CEST
 
 ### Introduction
 
