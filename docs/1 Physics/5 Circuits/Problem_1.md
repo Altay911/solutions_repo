@@ -55,6 +55,8 @@ The task at hand is to calculate the **equivalent resistance** of a circuit usin
 4. **Handling Nested Combinations**:
    - After reducing series or parallel combinations, the graph may still contain nested combinations. The algorithm should recursively simplify the graph, reducing it step-by-step until only a single equivalent resistance remains.
 
+![alt text](<download (7).png>)
+
 5. **Termination**:
    - The algorithm continues until the entire graph is reduced to a single node representing the total equivalent resistance.
 
