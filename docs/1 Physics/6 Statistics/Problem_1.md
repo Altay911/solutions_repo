@@ -1,7 +1,5 @@
 # Central Limit Theorem Simulation Analysis
 
-## Date: May 27, 2025, 12:36 PM CEST
-
 ### Introduction
 
 The Central Limit Theorem (CLT) is a cornerstone of probability and statistics, stating that the sampling distribution of the sample mean approaches a normal distribution as the sample size increases, regardless of the population's original distribution. This simulation explores this phenomenon using various population distributions—uniform, exponential, and binomial—to provide an intuitive understanding of the CLT through computational experiments.
