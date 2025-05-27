@@ -3,6 +3,8 @@
 ## Motivation
 Calculating the equivalent resistance is a fundamental problem in electrical circuits, essential for understanding and designing efficient systems. Traditional methods, such as iteratively applying series and parallel resistor rules, can become cumbersome when dealing with complex circuits with many components. Graph theory offers a powerful alternative, allowing for a more structured and algorithmic approach to analyzing circuits.
 
+![alt text](<download (5).png>)
+
 In this approach, the circuit is represented as a graph where:
 - **Nodes** correspond to junctions or connection points in the circuit.
 - **Edges** represent resistors with weights equal to their resistance values.
@@ -25,6 +27,7 @@ The task at hand is to calculate the **equivalent resistance** of a circuit usin
    - Test the implementation on examples like simple series and parallel combinations, nested configurations, and complex graphs with multiple cycles.
 
 ---
+![alt text](<download (6).png>)
 
 ## Option 1: Simplified Task – Algorithm Description
 
